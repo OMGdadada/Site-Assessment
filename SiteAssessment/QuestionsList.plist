@@ -1,0 +1,977 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>heading</key>
+		<string>ROOF &amp; SHINGLE</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Shingle Material:</string>
+				<key>option</key>
+				<array>
+					<string>Asphalt Shingles</string>
+					<string>Metal Standing Seam</string>
+					<string>Metal Shake</string>
+					<string>Wood Shake</string>
+					<string>Clay Tyle</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Asphalt Shingles</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>1</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Missing Shingles:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>2</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Missing Ridge Cap:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>3</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Curved Plywood:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>4</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Overall Roof Condition:</string>
+				<key>option</key>
+				<array>
+					<string>Suitable</string>
+					<string>Requires Repair</string>
+					<string>Replacement Suggested</string>
+					<string>Replacement Required</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Suitable</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>5</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Full 3D Site Imaging:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>6</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Shingle Photo-Close Up:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>7</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Shingle Photo-Top View:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>8</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Shingle Photo-Back View:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>9</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>heading</key>
+		<string>ELECTRIAL METER</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Meter Location:</string>
+				<key>option</key>
+				<array>
+					<string>Outdoor</string>
+					<string>Indoor</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Outdoor</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>10</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Connection Type:</string>
+				<key>option</key>
+				<array>
+					<string>Underground</string>
+					<string>Overhead</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Underground</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>11</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Exterior Wall Material:</string>
+				<key>option</key>
+				<array>
+					<string>Clay Brick</string>
+					<string>Vinyl Siding</string>
+					<string>Decorative Stone</string>
+					<string>Wood</string>
+					<string>Concrete</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Clay Brick</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>12</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Height:</string>
+				<key>option</key>
+				<array>
+					<string>Standard</string>
+					<string>Hige</string>
+					<string>Low</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Standard</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>13</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Gas Meter Location:</string>
+				<key>option</key>
+				<array>
+					<string>&gt;= 1M</string>
+					<string>&lt; 1M</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>&gt;= 1M</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>14</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Obstruction:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>15</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Obstruction Type:(Multi selection)</string>
+				<key>option</key>
+				<array>
+					<string>A/C Unit</string>
+					<string>Yard Gate/Door</string>
+					<string>Stair Case</string>
+					<string>Porch/Patio</string>
+					<string>Plants/Trees</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>16</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Obstruction Distance:</string>
+				<key>option</key>
+				<array>
+					<string>M</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>17</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Required:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>18</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Over Driveway:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>19</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Material:</string>
+				<key>option</key>
+				<array>
+					<string>Grass</string>
+					<string>Soil</string>
+					<string>Asphalt</string>
+					<string>Gravel</string>
+					<string>Concrete/Stone</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>20</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Obstructions:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>21</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Obstruction Type:(Multi selection)</string>
+				<key>option</key>
+				<array>
+					<string>Rocks</string>
+					<string>Stone Pathway</string>
+					<string>Plants/Trees</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>22</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Distance:</string>
+				<key>option</key>
+				<array>
+					<string>M</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>23</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Photo-Close Up:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>24</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Photo-Wide Angle:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>25</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Height Measurement Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>26</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Surrounding Area Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>27</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Meter Obstruction Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>28</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Teck Cable Route Reference Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>29</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Route Aerial Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>30</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Trenching Route Ground Photo:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>31</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>heading</key>
+		<string>MAIN BREAKER PANEL</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Breaker Panel Amp:</string>
+				<key>option</key>
+				<array>
+					<string>60AMP</string>
+					<string>100AMP</string>
+					<string>125AMP</string>
+					<string>200AMP</string>
+					<string>400AMP</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>200AMP</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>32</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Breaker Panel Location:</string>
+				<key>option</key>
+				<array>
+					<string>Basement</string>
+					<string>Garage</string>
+					<string>Closet</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Basement</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>33</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Available Breaker Slot:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>34</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Breaker Panel Obstruction:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>35</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Obstruction Type:(Multi selection)</string>
+				<key>option</key>
+				<array>
+					<string>Washer/Dryer</string>
+					<string>Work Table</string>
+					<string>Racking</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>36</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Main Breaker Panel Diagram</string>
+				<key>option</key>
+				<array>
+					<string>Please measure the distances surrounding the electrical breaker panel and clearly indicate the dimensions below:</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>37</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Main Breaker Panel Photo-Close Up:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>38</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Main Breaker Panel Photo-Wide Angle:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>39</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Main Breaker Panel Photo-Interior:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>40</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Main Breaker Panel Photo-360 Degree:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>41</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>heading</key>
+		<string>LAYOUT DIAGRAM</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Location-Electrical Meter:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>42</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Location-Gas Meter:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>43</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Location-Obstruction:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>44</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Location-Main Breaker Panel:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>45</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Distance-Electrical Meter to Front Corner of House:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>46</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Distance-Electrical Meter to Gas Meter:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>47</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Distance-Electrical Meter to Yard Door:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>48</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Distance-Electrical Meter to Obstruction:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Yes</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>49</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>heading</key>
+		<string>TRUSS &amp; RAFTER</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Roof Sheathing:</string>
+				<key>option</key>
+				<array>
+					<string>Plywood</string>
+					<string>Steel Plate</string>
+					<string>Strip Sheathing</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Plywood</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>50</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Signs of Mold:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>51</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Signs of Water Leakage:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>52</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Water Leakage Type:</string>
+				<key>option</key>
+				<array>
+					<string>Ongoing</string>
+					<string>Existing</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>Ongoing</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>53</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Signs of Damage:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>No</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>54</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Type of Damage:</string>
+				<key>option</key>
+				<array>
+					<string>Cracked Truss/Rafter</string>
+					<string>Broken Truss/Rafter</string>
+					<string>Damaged Sheathing</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<true/>
+				<key>Item</key>
+				<string>55</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Truss Spacing:</string>
+				<key>option</key>
+				<array>
+					<string>16&quot; O/C</string>
+					<string>24&quot; O/C</string>
+					<string>48&quot; O/C</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>24&quot; O/C</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>56</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Truss Member Size:</string>
+				<key>option</key>
+				<array>
+					<string>2x4</string>
+					<string>2x6</string>
+					<string>2x8</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>2x4</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>57</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Truss Type</string>
+				<key>option</key>
+				<array>
+					<string>Common</string>
+					<string>Kingpost</string>
+					<string>Simple Fink</string>
+					<string>Queen</string>
+					<string>Fink</string>
+					<string>Howe</string>
+					<string>Fan</string>
+					<string>Modified Queenpost</string>
+					<string>Double Fink</string>
+					<string>Double Howe</string>
+					<string>Other</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>58</string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>heading</key>
+		<string>EXTRA NOTES</string>
+		<key>QuestionList</key>
+		<array>
+			<dict>
+				<key>Question</key>
+				<string>Notes</string>
+				<key>option</key>
+				<array>
+					<string>Notes</string>
+				</array>
+				<key>DefaultValue</key>
+				<string>NULL</string>
+				<key>IsNoShow</key>
+				<false/>
+				<key>Item</key>
+				<string>59</string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>

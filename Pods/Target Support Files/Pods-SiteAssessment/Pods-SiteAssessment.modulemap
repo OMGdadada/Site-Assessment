@@ -1,0 +1,6 @@
+module Pods_SiteAssessment {
+  umbrella header "Pods-SiteAssessment-umbrella.h"
+
+  export *
+  module * { export * }
+}

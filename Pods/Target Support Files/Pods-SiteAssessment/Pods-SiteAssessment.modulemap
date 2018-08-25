@@ -1,4 +1,4 @@
-module Pods_SiteAssessment {
+framework module Pods_SiteAssessment {
   umbrella header "Pods-SiteAssessment-umbrella.h"
 
   export *

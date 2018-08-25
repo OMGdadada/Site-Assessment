@@ -8,24 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0860F5A321186BE000E6B5CD /* ProjectInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5A221186BE000E6B5CD /* ProjectInformation.swift */; };
-		0860F5AC211BEC2500E6B5CD /* HGImageCompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5A5211BEC2300E6B5CD /* HGImageCompleteButton.swift */; };
-		0860F5AD211BEC2500E6B5CD /* HGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5A6211BEC2300E6B5CD /* HGImagePickerController.swift */; };
-		0860F5AE211BEC2500E6B5CD /* HGImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5A7211BEC2400E6B5CD /* HGImageCollectionViewController.swift */; };
-		0860F5AF211BEC2500E6B5CD /* HGImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0860F5A8211BEC2400E6B5CD /* HGImage.xcassets */; };
-		0860F5B0211BEC2500E6B5CD /* HGImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0860F5A9211BEC2400E6B5CD /* HGImage.storyboard */; };
-		0860F5B1211BEC2500E6B5CD /* HGImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5AA211BEC2400E6B5CD /* HGImageCollectionViewCell.swift */; };
-		0860F5B2211BEC2500E6B5CD /* HGImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860F5AB211BEC2400E6B5CD /* HGImagePickerCell.swift */; };
 		08CA588D2109ACC100AF4059 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA588C2109ACC100AF4059 /* AppDelegate.swift */; };
-		08CA588F2109ACC100AF4059 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA588E2109ACC100AF4059 /* ViewController.swift */; };
-		08CA58922109ACC100AF4059 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58902109ACC100AF4059 /* Main.storyboard */; };
-		08CA58952109ACC100AF4059 /* SiteAssessment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58932109ACC100AF4059 /* SiteAssessment.xcdatamodeld */; };
 		08CA58972109ACC300AF4059 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58962109ACC300AF4059 /* Assets.xcassets */; };
 		08CA589A2109ACC300AF4059 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58982109ACC300AF4059 /* LaunchScreen.storyboard */; };
 		08CA58A22109AD0E00AF4059 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58A12109AD0E00AF4059 /* Podfile */; };
-		08CA58A42109AFB500AF4059 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58A32109AFB500AF4059 /* GoogleService-Info.plist */; };
-		08CA58AA2109B81B00AF4059 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58A92109B81B00AF4059 /* ProductListViewController.swift */; };
-		08CA58AC2109D60400AF4059 /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58AB2109D60400AF4059 /* NewProjectViewController.swift */; };
-		08CA58AE2109F90B00AF4059 /* QuestionsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58AD2109F90A00AF4059 /* QuestionsList.plist */; };
 		08CA58BA2109F92300AF4059 /* icon_xl@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58B02109F92300AF4059 /* icon_xl@2x.png */; };
 		08CA58BB2109F92300AF4059 /* icon_xl@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58B12109F92300AF4059 /* icon_xl@3x.png */; };
 		08CA58BC2109F92300AF4059 /* icon_xl.png in Resources */ = {isa = PBXBuildFile; fileRef = 08CA58B22109F92300AF4059 /* icon_xl.png */; };
@@ -50,38 +36,41 @@
 		08CA58E12109F92A00AF4059 /* KeyBoardTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D32109F92A00AF4059 /* KeyBoardTipView.swift */; };
 		08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D42109F92A00AF4059 /* KeyBoardView.swift */; };
 		08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D52109F92A00AF4059 /* KeyBoardCell.swift */; };
-		08CA58E52109F96000AF4059 /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58E42109F95F00AF4059 /* CollapsibleTableViewHeader.swift */; };
-		08CA58E72109F98A00AF4059 /* QuestionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58E62109F98A00AF4059 /* QuestionsCell.swift */; };
-		08CA58EA2109F9DC00AF4059 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58E92109F9DC00AF4059 /* UIViewController.swift */; };
-		08CA58EC210A276B00AF4059 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58EB210A276B00AF4059 /* ProjectListViewController.swift */; };
-		08CA58F0210B471500AF4059 /* UploadProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58EF210B471500AF4059 /* UploadProject.swift */; };
-		08CA58F2210EC76500AF4059 /* UploadGoogleDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58F1210EC76500AF4059 /* UploadGoogleDrive.swift */; };
-		FBB2DC71961A0AFA48742938 /* libPods-SiteAssessment.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F037A4C3CED0E523BA96A026 /* libPods-SiteAssessment.a */; };
+		1647113821315B7D0044BB0F /* HGImageCompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113121315B7D0044BB0F /* HGImageCompleteButton.swift */; };
+		1647113921315B7D0044BB0F /* HGImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1647113221315B7D0044BB0F /* HGImage.storyboard */; };
+		1647113A21315B7D0044BB0F /* HGImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113321315B7D0044BB0F /* HGImageCollectionViewController.swift */; };
+		1647113B21315B7D0044BB0F /* HGImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113421315B7D0044BB0F /* HGImageCollectionViewCell.swift */; };
+		1647113C21315B7D0044BB0F /* HGImage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1647113521315B7D0044BB0F /* HGImage.xcassets */; };
+		1647113D21315B7D0044BB0F /* HGImagePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113621315B7D0044BB0F /* HGImagePickerCell.swift */; };
+		1647113E21315B7D0044BB0F /* HGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113721315B7D0044BB0F /* HGImagePickerController.swift */; };
+		1647114521315BB20044BB0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114021315BB20044BB0F /* ViewController.swift */; };
+		1647114621315BB20044BB0F /* NewProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114121315BB20044BB0F /* NewProjectViewController.swift */; };
+		1647114721315BB20044BB0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1647114221315BB20044BB0F /* Main.storyboard */; };
+		1647114821315BB20044BB0F /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114321315BB20044BB0F /* ProductListViewController.swift */; };
+		1647114921315BB20044BB0F /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114421315BB20044BB0F /* ProjectListViewController.swift */; };
+		1647115021315C9F0044BB0F /* UploadGoogleDrive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114B21315C9F0044BB0F /* UploadGoogleDrive.swift */; };
+		1647115121315C9F0044BB0F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114C21315C9F0044BB0F /* UIViewController.swift */; };
+		1647115221315C9F0044BB0F /* UploadProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114D21315C9F0044BB0F /* UploadProject.swift */; };
+		1647115321315C9F0044BB0F /* CollapsibleTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114E21315C9F0044BB0F /* CollapsibleTableViewHeader.swift */; };
+		1647115421315C9F0044BB0F /* QuestionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647114F21315C9F0044BB0F /* QuestionsCell.swift */; };
+		1647115A21315CAA0044BB0F /* SiteAssessment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1647115621315CAA0044BB0F /* SiteAssessment.xcdatamodeld */; };
+		1647115B21315CAA0044BB0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1647115821315CAA0044BB0F /* GoogleService-Info.plist */; };
+		1647115C21315CAA0044BB0F /* QuestionsList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1647115921315CAA0044BB0F /* QuestionsList.plist */; };
+		16471185213162660044BB0F /* ProjectResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16471184213162660044BB0F /* ProjectResultViewController.swift */; };
+		1647118821316B430044BB0F /* ProjectResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */; };
+		1647118B21319F810044BB0F /* SiteRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647118A21319F810044BB0F /* SiteRootModel.m */; };
+		9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0860F5A221186BE000E6B5CD /* ProjectInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectInformation.swift; sourceTree = "<group>"; };
-		0860F5A5211BEC2300E6B5CD /* HGImageCompleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCompleteButton.swift; sourceTree = "<group>"; };
-		0860F5A6211BEC2300E6B5CD /* HGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerController.swift; sourceTree = "<group>"; };
-		0860F5A7211BEC2400E6B5CD /* HGImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewController.swift; sourceTree = "<group>"; };
-		0860F5A8211BEC2400E6B5CD /* HGImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HGImage.xcassets; sourceTree = "<group>"; };
-		0860F5A9211BEC2400E6B5CD /* HGImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HGImage.storyboard; sourceTree = "<group>"; };
-		0860F5AA211BEC2400E6B5CD /* HGImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		0860F5AB211BEC2400E6B5CD /* HGImagePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerCell.swift; sourceTree = "<group>"; };
 		08CA58892109ACC100AF4059 /* SiteAssessment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SiteAssessment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08CA588C2109ACC100AF4059 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		08CA588E2109ACC100AF4059 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		08CA58912109ACC100AF4059 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		08CA58942109ACC100AF4059 /* SiteAssessment.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SiteAssessment.xcdatamodel; sourceTree = "<group>"; };
 		08CA58962109ACC300AF4059 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08CA58992109ACC300AF4059 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		08CA589B2109ACC300AF4059 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08CA58A12109AD0E00AF4059 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		08CA58A32109AFB500AF4059 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08CA58A52109B2B800AF4059 /* SiteAssessment-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SiteAssessment-Bridging-Header.h"; sourceTree = "<group>"; };
-		08CA58A92109B81B00AF4059 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
-		08CA58AB2109D60400AF4059 /* NewProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
-		08CA58AD2109F90A00AF4059 /* QuestionsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QuestionsList.plist; sourceTree = "<group>"; };
 		08CA58B02109F92300AF4059 /* icon_xl@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_xl@2x.png"; sourceTree = "<group>"; };
 		08CA58B12109F92300AF4059 /* icon_xl@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_xl@3x.png"; sourceTree = "<group>"; };
 		08CA58B22109F92300AF4059 /* icon_xl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_xl.png; sourceTree = "<group>"; };
@@ -106,15 +95,33 @@
 		08CA58D32109F92A00AF4059 /* KeyBoardTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardTipView.swift; sourceTree = "<group>"; };
 		08CA58D42109F92A00AF4059 /* KeyBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardView.swift; sourceTree = "<group>"; };
 		08CA58D52109F92A00AF4059 /* KeyBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardCell.swift; sourceTree = "<group>"; };
-		08CA58E42109F95F00AF4059 /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
-		08CA58E62109F98A00AF4059 /* QuestionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsCell.swift; sourceTree = "<group>"; };
-		08CA58E92109F9DC00AF4059 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		08CA58EB210A276B00AF4059 /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
-		08CA58EF210B471500AF4059 /* UploadProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProject.swift; sourceTree = "<group>"; };
-		08CA58F1210EC76500AF4059 /* UploadGoogleDrive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadGoogleDrive.swift; sourceTree = "<group>"; };
+		1647113121315B7D0044BB0F /* HGImageCompleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCompleteButton.swift; sourceTree = "<group>"; };
+		1647113221315B7D0044BB0F /* HGImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HGImage.storyboard; sourceTree = "<group>"; };
+		1647113321315B7D0044BB0F /* HGImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewController.swift; sourceTree = "<group>"; };
+		1647113421315B7D0044BB0F /* HGImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		1647113521315B7D0044BB0F /* HGImage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HGImage.xcassets; sourceTree = "<group>"; };
+		1647113621315B7D0044BB0F /* HGImagePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerCell.swift; sourceTree = "<group>"; };
+		1647113721315B7D0044BB0F /* HGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImagePickerController.swift; sourceTree = "<group>"; };
+		1647114021315BB20044BB0F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1647114121315BB20044BB0F /* NewProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProjectViewController.swift; sourceTree = "<group>"; };
+		1647114221315BB20044BB0F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		1647114321315BB20044BB0F /* ProductListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
+		1647114421315BB20044BB0F /* ProjectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		1647114B21315C9F0044BB0F /* UploadGoogleDrive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadGoogleDrive.swift; sourceTree = "<group>"; };
+		1647114C21315C9F0044BB0F /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		1647114D21315C9F0044BB0F /* UploadProject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadProject.swift; sourceTree = "<group>"; };
+		1647114E21315C9F0044BB0F /* CollapsibleTableViewHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollapsibleTableViewHeader.swift; sourceTree = "<group>"; };
+		1647114F21315C9F0044BB0F /* QuestionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionsCell.swift; sourceTree = "<group>"; };
+		1647115721315CAA0044BB0F /* SiteAssessment.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SiteAssessment.xcdatamodel; sourceTree = "<group>"; };
+		1647115821315CAA0044BB0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1647115921315CAA0044BB0F /* QuestionsList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = QuestionsList.plist; sourceTree = "<group>"; };
+		16471184213162660044BB0F /* ProjectResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResultViewController.swift; sourceTree = "<group>"; };
+		1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResultTableViewCell.swift; sourceTree = "<group>"; };
+		1647118921319F810044BB0F /* SiteRootModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteRootModel.h; sourceTree = "<group>"; };
+		1647118A21319F810044BB0F /* SiteRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteRootModel.m; sourceTree = "<group>"; };
+		4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SiteAssessment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.release.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.release.xcconfig"; sourceTree = "<group>"; };
-		F037A4C3CED0E523BA96A026 /* libPods-SiteAssessment.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SiteAssessment.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBB2DC71961A0AFA48742938 /* libPods-SiteAssessment.a in Frameworks */,
+				9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,20 +142,6 @@
 				0860F5A221186BE000E6B5CD /* ProjectInformation.swift */,
 			);
 			path = Object;
-			sourceTree = "<group>";
-		};
-		0860F5A4211BEC0200E6B5CD /* HGImage */ = {
-			isa = PBXGroup;
-			children = (
-				0860F5A9211BEC2400E6B5CD /* HGImage.storyboard */,
-				0860F5A8211BEC2400E6B5CD /* HGImage.xcassets */,
-				0860F5AA211BEC2400E6B5CD /* HGImageCollectionViewCell.swift */,
-				0860F5A7211BEC2400E6B5CD /* HGImageCollectionViewController.swift */,
-				0860F5A5211BEC2300E6B5CD /* HGImageCompleteButton.swift */,
-				0860F5AB211BEC2400E6B5CD /* HGImagePickerCell.swift */,
-				0860F5A6211BEC2300E6B5CD /* HGImagePickerController.swift */,
-			);
-			name = HGImage;
 			sourceTree = "<group>";
 		};
 		08CA58802109ACC100AF4059 = {
@@ -174,23 +167,19 @@
 		08CA588B2109ACC100AF4059 /* SiteAssessment */ = {
 			isa = PBXGroup;
 			children = (
-				0860F5A4211BEC0200E6B5CD /* HGImage */,
+				1647115D21315D0C0044BB0F /* Thirdlibary */,
+				1647113021315B7D0044BB0F /* HGimage */,
 				0860F5A121186B9200E6B5CD /* Object */,
-				08CA58E82109F9AC00AF4059 /* Extension */,
+				1647112F21315AC10044BB0F /* Model */,
+				1647114A21315C9F0044BB0F /* Other */,
+				1647113F21315BB20044BB0F /* Main */,
 				08CA58C42109F92A00AF4059 /* KeyBoard */,
+				1647115521315CAA0044BB0F /* Data */,
 				08CA58AF2109F92300AF4059 /* Icon */,
 				08CA588C2109ACC100AF4059 /* AppDelegate.swift */,
-				08CA588E2109ACC100AF4059 /* ViewController.swift */,
-				08CA58902109ACC100AF4059 /* Main.storyboard */,
-				08CA58A92109B81B00AF4059 /* ProductListViewController.swift */,
-				08CA58EB210A276B00AF4059 /* ProjectListViewController.swift */,
-				08CA58AB2109D60400AF4059 /* NewProjectViewController.swift */,
 				08CA58962109ACC300AF4059 /* Assets.xcassets */,
 				08CA58982109ACC300AF4059 /* LaunchScreen.storyboard */,
 				08CA589B2109ACC300AF4059 /* Info.plist */,
-				08CA58AD2109F90A00AF4059 /* QuestionsList.plist */,
-				08CA58A32109AFB500AF4059 /* GoogleService-Info.plist */,
-				08CA58932109ACC100AF4059 /* SiteAssessment.xcdatamodeld */,
 			);
 			path = SiteAssessment;
 			sourceTree = "<group>";
@@ -257,22 +246,84 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		08CA58E82109F9AC00AF4059 /* Extension */ = {
+		1647112F21315AC10044BB0F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				08CA58E92109F9DC00AF4059 /* UIViewController.swift */,
-				08CA58E62109F98A00AF4059 /* QuestionsCell.swift */,
-				08CA58E42109F95F00AF4059 /* CollapsibleTableViewHeader.swift */,
-				08CA58EF210B471500AF4059 /* UploadProject.swift */,
-				08CA58F1210EC76500AF4059 /* UploadGoogleDrive.swift */,
+				1647118921319F810044BB0F /* SiteRootModel.h */,
+				1647118A21319F810044BB0F /* SiteRootModel.m */,
 			);
-			name = Extension;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1647113021315B7D0044BB0F /* HGimage */ = {
+			isa = PBXGroup;
+			children = (
+				1647113121315B7D0044BB0F /* HGImageCompleteButton.swift */,
+				1647113321315B7D0044BB0F /* HGImageCollectionViewController.swift */,
+				1647113421315B7D0044BB0F /* HGImageCollectionViewCell.swift */,
+				1647113621315B7D0044BB0F /* HGImagePickerCell.swift */,
+				1647113721315B7D0044BB0F /* HGImagePickerController.swift */,
+				1647113221315B7D0044BB0F /* HGImage.storyboard */,
+				1647113521315B7D0044BB0F /* HGImage.xcassets */,
+			);
+			path = HGimage;
+			sourceTree = "<group>";
+		};
+		1647113F21315BB20044BB0F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				1647118621316B1C0044BB0F /* View */,
+				1647114221315BB20044BB0F /* Main.storyboard */,
+				1647114021315BB20044BB0F /* ViewController.swift */,
+				1647114321315BB20044BB0F /* ProductListViewController.swift */,
+				1647114421315BB20044BB0F /* ProjectListViewController.swift */,
+				1647114121315BB20044BB0F /* NewProjectViewController.swift */,
+				16471184213162660044BB0F /* ProjectResultViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		1647114A21315C9F0044BB0F /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				1647114B21315C9F0044BB0F /* UploadGoogleDrive.swift */,
+				1647114C21315C9F0044BB0F /* UIViewController.swift */,
+				1647114D21315C9F0044BB0F /* UploadProject.swift */,
+				1647114E21315C9F0044BB0F /* CollapsibleTableViewHeader.swift */,
+				1647114F21315C9F0044BB0F /* QuestionsCell.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		1647115521315CAA0044BB0F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1647115621315CAA0044BB0F /* SiteAssessment.xcdatamodeld */,
+				1647115821315CAA0044BB0F /* GoogleService-Info.plist */,
+				1647115921315CAA0044BB0F /* QuestionsList.plist */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		1647115D21315D0C0044BB0F /* Thirdlibary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Thirdlibary;
+			sourceTree = "<group>";
+		};
+		1647118621316B1C0044BB0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2C9291195BD43E4958304FFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F037A4C3CED0E523BA96A026 /* libPods-SiteAssessment.a */,
+				4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -298,6 +349,7 @@
 				08CA58862109ACC100AF4059 /* Frameworks */,
 				08CA58872109ACC100AF4059 /* Resources */,
 				CBDD00D2FAA01C313B739179 /* [CP] Copy Pods Resources */,
+				089B89751EE779FA5084E406 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -349,14 +401,18 @@
 			files = (
 				08CA58BF2109F92300AF4059 /* Main_Breaker_Panel_Diagram.png in Resources */,
 				08CA58BB2109F92300AF4059 /* icon_xl@3x.png in Resources */,
+				1647113921315B7D0044BB0F /* HGImage.storyboard in Resources */,
 				08CA58BC2109F92300AF4059 /* icon_xl.png in Resources */,
 				08CA58DB2109F92A00AF4059 /* keyboard_magnifier@3x.png in Resources */,
 				08CA58D62109F92A00AF4059 /* newdelete_b@3x.png in Resources */,
 				08CA58DD2109F92A00AF4059 /* up_a@2x.png in Resources */,
+				1647114721315BB20044BB0F /* Main.storyboard in Resources */,
+				1647115C21315CAA0044BB0F /* QuestionsList.plist in Resources */,
 				08CA589A2109ACC300AF4059 /* LaunchScreen.storyboard in Resources */,
-				0860F5B0211BEC2500E6B5CD /* HGImage.storyboard in Resources */,
 				08CA58DA2109F92A00AF4059 /* keyboard_magnifier@2x.png in Resources */,
 				08CA58D92109F92A00AF4059 /* newdelete_b@2x.png in Resources */,
+				1647115B21315CAA0044BB0F /* GoogleService-Info.plist in Resources */,
+				1647113C21315B7D0044BB0F /* HGImage.xcassets in Resources */,
 				08CA58DF2109F92A00AF4059 /* newdelete_a@3x.png in Resources */,
 				08CA58DC2109F92A00AF4059 /* newdelete_a@2x.png in Resources */,
 				08CA58D72109F92A00AF4059 /* up_b@3x.png in Resources */,
@@ -364,15 +420,11 @@
 				08CA58C32109F92300AF4059 /* icon_mr.png in Resources */,
 				08CA58D82109F92A00AF4059 /* up_b@2x.png in Resources */,
 				08CA58972109ACC300AF4059 /* Assets.xcassets in Resources */,
-				0860F5AF211BEC2500E6B5CD /* HGImage.xcassets in Resources */,
 				08CA58C12109F92300AF4059 /* radio_N.png in Resources */,
 				08CA58C22109F92300AF4059 /* Truss_Type.png in Resources */,
-				08CA58A42109AFB500AF4059 /* GoogleService-Info.plist in Resources */,
 				08CA58A22109AD0E00AF4059 /* Podfile in Resources */,
 				08CA58BD2109F92300AF4059 /* icon_mr@2x.png in Resources */,
-				08CA58AE2109F90B00AF4059 /* QuestionsList.plist in Resources */,
 				08CA58BE2109F92300AF4059 /* icon_mr@3x.png in Resources */,
-				08CA58922109ACC100AF4059 /* Main.storyboard in Resources */,
 				08CA58DE2109F92A00AF4059 /* up_a@3x.png in Resources */,
 				08CA58BA2109F92300AF4059 /* icon_xl@2x.png in Resources */,
 			);
@@ -381,6 +433,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		089B89751EE779FA5084E406 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5110714C5B64806BE8327DE2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -406,12 +486,10 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment-resources.sh",
-				"${PODS_ROOT}/GTMOAuth2/Source/Touch/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GTMOAuth2ViewTouch.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,40 +505,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				0860F5A321186BE000E6B5CD /* ProjectInformation.swift in Sources */,
-				08CA58E52109F96000AF4059 /* CollapsibleTableViewHeader.swift in Sources */,
-				08CA58F0210B471500AF4059 /* UploadProject.swift in Sources */,
-				08CA58EC210A276B00AF4059 /* ProjectListViewController.swift in Sources */,
+				1647113A21315B7D0044BB0F /* HGImageCollectionViewController.swift in Sources */,
+				1647115A21315CAA0044BB0F /* SiteAssessment.xcdatamodeld in Sources */,
+				1647118B21319F810044BB0F /* SiteRootModel.m in Sources */,
+				1647115121315C9F0044BB0F /* UIViewController.swift in Sources */,
+				16471185213162660044BB0F /* ProjectResultViewController.swift in Sources */,
+				1647114821315BB20044BB0F /* ProductListViewController.swift in Sources */,
+				1647113B21315B7D0044BB0F /* HGImageCollectionViewCell.swift in Sources */,
 				08CA58E02109F92A00AF4059 /* KeyBoardModel.swift in Sources */,
-				0860F5AC211BEC2500E6B5CD /* HGImageCompleteButton.swift in Sources */,
-				08CA58EA2109F9DC00AF4059 /* UIViewController.swift in Sources */,
+				1647113E21315B7D0044BB0F /* HGImagePickerController.swift in Sources */,
+				1647115221315C9F0044BB0F /* UploadProject.swift in Sources */,
+				1647114621315BB20044BB0F /* NewProjectViewController.swift in Sources */,
+				1647113821315B7D0044BB0F /* HGImageCompleteButton.swift in Sources */,
+				1647115421315C9F0044BB0F /* QuestionsCell.swift in Sources */,
+				1647115321315C9F0044BB0F /* CollapsibleTableViewHeader.swift in Sources */,
 				08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */,
 				08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */,
 				08CA58E12109F92A00AF4059 /* KeyBoardTipView.swift in Sources */,
-				0860F5AE211BEC2500E6B5CD /* HGImageCollectionViewController.swift in Sources */,
-				08CA588F2109ACC100AF4059 /* ViewController.swift in Sources */,
+				1647114921315BB20044BB0F /* ProjectListViewController.swift in Sources */,
+				1647114521315BB20044BB0F /* ViewController.swift in Sources */,
 				08CA588D2109ACC100AF4059 /* AppDelegate.swift in Sources */,
-				08CA58AA2109B81B00AF4059 /* ProductListViewController.swift in Sources */,
-				08CA58952109ACC100AF4059 /* SiteAssessment.xcdatamodeld in Sources */,
-				0860F5B1211BEC2500E6B5CD /* HGImageCollectionViewCell.swift in Sources */,
-				08CA58E72109F98A00AF4059 /* QuestionsCell.swift in Sources */,
-				08CA58F2210EC76500AF4059 /* UploadGoogleDrive.swift in Sources */,
-				0860F5AD211BEC2500E6B5CD /* HGImagePickerController.swift in Sources */,
-				08CA58AC2109D60400AF4059 /* NewProjectViewController.swift in Sources */,
-				0860F5B2211BEC2500E6B5CD /* HGImagePickerCell.swift in Sources */,
+				1647113D21315B7D0044BB0F /* HGImagePickerCell.swift in Sources */,
+				1647115021315C9F0044BB0F /* UploadGoogleDrive.swift in Sources */,
+				1647118821316B430044BB0F /* ProjectResultTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		08CA58902109ACC100AF4059 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				08CA58912109ACC100AF4059 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		08CA58982109ACC300AF4059 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -593,7 +666,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S7E9DGW25N;
+				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -615,7 +688,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = S7E9DGW25N;
+				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -653,12 +726,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		08CA58932109ACC100AF4059 /* SiteAssessment.xcdatamodeld */ = {
+		1647115621315CAA0044BB0F /* SiteAssessment.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				08CA58942109ACC100AF4059 /* SiteAssessment.xcdatamodel */,
+				1647115721315CAA0044BB0F /* SiteAssessment.xcdatamodel */,
 			);
-			currentVersion = 08CA58942109ACC100AF4059 /* SiteAssessment.xcdatamodel */;
+			currentVersion = 1647115721315CAA0044BB0F /* SiteAssessment.xcdatamodel */;
 			path = SiteAssessment.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

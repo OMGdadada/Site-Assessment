@@ -53,12 +53,14 @@ PODS:
   - GTMSessionFetcher/Core (1.1.8)
   - GTMSessionFetcher/Full (1.1.8):
     - GTMSessionFetcher/Core (= 1.1.8)
+  - MJExtension (3.0.15.1)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Auth
   - GoogleAPIClientForREST/Drive
   - GoogleSignIn
+  - MJExtension
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -76,6 +78,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
+    - MJExtension
 
 SPEC CHECKSUMS:
   Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
@@ -92,7 +95,8 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
 
-PODFILE CHECKSUM: bbe4b586b050169d433e15ebbd76a9b17828ec40
+PODFILE CHECKSUM: c710813c009fffb586783a87fb5274ad4e9e9513
 
 COCOAPODS: 1.5.3

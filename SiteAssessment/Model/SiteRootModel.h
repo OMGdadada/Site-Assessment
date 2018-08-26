@@ -19,7 +19,7 @@
 
 @interface QuestionModel :NSObject
 @property (nonatomic ,copy) NSString *Question;
-@property (nonatomic ,copy) NSString *DefaultValue;
+@property (nonatomic ,copy) NSString *defaultValue;
 @property (nonatomic ,copy) NSString *IsNoShow;
 @property (nonatomic ,copy) NSString *Item;
 @property (nonatomic ,copy) NSArray *option;

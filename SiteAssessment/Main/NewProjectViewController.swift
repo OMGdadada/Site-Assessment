@@ -519,46 +519,39 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         
         let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
         let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
-        self.present(vc, animated: true, completion: nil)
-        return
-        var alertText = ""
-        if(NetWork == "wifi的网络" || NetWork == "2G,3G,4G...的网络"){
-            UploadProject.Uploadshared.UploadProjectdata(Project_Id!)
-            alertText = "Upload And Save data Success !"
-            if(NetWork == "wifi的网络"){
-                let projectinformation = ProjectInformation()
-                projectinformation.setValue(Project_Id, forKey: "ProjectName")
+        vc.prejectID = Project_Id
+        vc.saveResultBlock = { 
+            var alertText = ""
+            if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
+                UploadProject.Uploadshared.UploadProjectdata(self.Project_Id!)
+                alertText = "Upload And Save data Success !"
+                if(self.NetWork == "wifi的网络"){
+                    let projectinformation = ProjectInformation()
+                    projectinformation.setValue(self.Project_Id, forKey: "ProjectName")
+                    
+                    ProjectListViewController.ProjectInformationList.addEntries(from: [self.Project_Id:projectinformation])
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.Project_Id)
+                    
+                    alertText = "Upload And Save data And Img Success !"
+                }
                 
-                ProjectListViewController.ProjectInformationList.addEntries(from: [Project_Id:projectinformation])
-                UploadProject.Uploadshared.UploadProjectToGoogleDrive(Project_Id)
-                
-                alertText = "Upload And Save data And Img Success !"
+            }else{
+                alertText = "Only Save Success !"
             }
             
-        }else{
-            alertText = "Only Save Success !"
-        }
-        
-        let alertController = UIAlertController(title: alertText,
-                                                message: nil, preferredStyle: .alert)
-        //显示提示框
-        self.present(alertController, animated: true, completion: nil)
-        //两秒钟后自动消失
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-            self.presentedViewController?.dismiss(animated: false, completion: nil)
-            self.presentingViewController!.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    /*
-    // MARK: - Navigation
+            let alertController = UIAlertController(title: alertText,
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+                self.presentingViewController!.dismiss(animated: true, completion: nil)
+            }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        }
+        self.present(vc, animated: true, completion: nil)
     }
-    */
     
     func setExtraCellLineHidden(tableview:UITableView){
         let viw = UIView()

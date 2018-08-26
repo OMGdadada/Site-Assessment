@@ -13,7 +13,7 @@ class ProjectResultTableViewCell: UITableViewCell {
     
     var question:QuestionModel? {
         didSet{
-            title.text = "\(question?.question ?? "") \n YES"
+            title.text = "\(question?.question ?? "") \n \(question?.defaultValue ?? "")"
         }
     }
     

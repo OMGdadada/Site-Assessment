@@ -24,5 +24,8 @@
 @end
 
 @implementation QuestionModel
-
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{@"defaultValue":@"DefaultValue"};
+}
 @end

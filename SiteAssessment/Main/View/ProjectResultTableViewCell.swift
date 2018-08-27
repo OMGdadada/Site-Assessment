@@ -13,12 +13,13 @@ class ProjectResultTableViewCell: UITableViewCell {
     
     var question:QuestionModel? {
         didSet{
-            title.text = "\(question?.question ?? "") \n \(question?.defaultValue ?? "")"
+            if (question?.question.contains(":"))! {
+                title.text = "\(question?.question ?? "") \(question?.defaultValue ?? "")"  
+            }else{
+                title.text = "\(question?.question ?? ""): \(question?.defaultValue ?? "")"
+            }
         }
     }
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,8 +27,8 @@ class ProjectResultTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class ProjectResultViewController: UIViewController {
     typealias SaveResultBlock = (() -> Void)
+    @IBOutlet weak var saveItem: UIBarButtonItem!
     
     lazy var dataSoure:NSMutableArray = NSMutableArray.init() // 数据源
     var prejectID:String? = ""
@@ -17,7 +18,8 @@ class ProjectResultViewController: UIViewController {
     var saveResultBlock:SaveResultBlock?
     
     
-    var isHistory:Bool = false // 查看问卷 1 new 问卷跳转  0 历史问卷跳转
+    ///  查看问卷 1 new 问卷跳转  0 历史问卷跳转
+    var isHistory:Bool = false 
     
     var selectProjects:Array<Any> = Array<Any>(repeating: "NULL", count: 59) as! [String] 
     
@@ -30,10 +32,24 @@ class ProjectResultViewController: UIViewController {
         fetchWithSelectData()
         
         congifureSubView()
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func cannel(_ sender: Any) {
+        if isHistory == false {
+      
+            // 移除已经上传成功的文件
+            let ProjectName = (prejectID?.replacingOccurrences(of: ".plist", with: ""))!
+            let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName).plist"
+            let Manager = FileManager.default
+            try! Manager.removeItem(atPath: filePath)
+            let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName)"
+            let fileArray = Manager.subpaths(atPath: Folder)
+            for fn in fileArray!{
+                try! Manager.removeItem(atPath: Folder + "/\(fn)")
+            }
+                
+        }
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func save(_ sender: UIBarButtonItem) {
@@ -52,11 +68,11 @@ class ProjectResultViewController: UIViewController {
 extension ProjectResultViewController
 {
     fileprivate func congifureSubView() {
-        //
-        if self.isHistory {
-            self.navigationItem.rightBarButtonItem = nil;
+        //隐藏保存item
+        if isHistory {
+            saveItem.title = nil;
         }
-        //
+        //初始化
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
         self.tableView.tableFooterView = UIView()
@@ -191,7 +207,7 @@ extension ProjectResultViewController
                         break
                     }
                     break
-                 case 2:
+                case 2:
                     switch j {
                     case 0:
                         question.defaultValue = projects["sa_breakerPanelAmp"] as! String
@@ -212,7 +228,7 @@ extension ProjectResultViewController
                         let value:String = projects["sa_panelDistance"] as! String
                         if value != "NULL" {
                             let strs:[String] = (value.components(separatedBy: ","))
-                            question.defaultValue = "Up:\(strs[0])\n Down:\(strs[1])\n Left:\(strs[2]) \n Right:\(strs[3])"
+                            question.defaultValue = "Up:\(strs[1]),Down:\(strs[3]), Left:\(strs[0]),Right:\(strs[3])"
                         }
                         break
                     case 6:
@@ -227,7 +243,7 @@ extension ProjectResultViewController
                     case 9:
                         question.defaultValue = "Photo Uploaded"
                         break
-                  
+                        
                     default:
                         break
                     }
@@ -256,7 +272,7 @@ extension ProjectResultViewController
                         question.defaultValue = projects["sa_distanceElectricalMeterToYardDoor"] as! String
                         break
                     case 7:
-                       question.defaultValue = projects["sa_distanceElectricalMeterToObstruction"] as! String
+                        question.defaultValue = projects["sa_distanceElectricalMeterToObstruction"] as! String
                         break
                     default:
                         break
@@ -295,6 +311,9 @@ extension ProjectResultViewController
                         break
                     }
                     break
+                case 5:
+                    question.defaultValue = projects["sa_notes"] as! String
+                    break
                 default :
                     break
                     
@@ -332,6 +351,10 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // header

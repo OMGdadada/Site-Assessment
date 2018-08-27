@@ -113,7 +113,7 @@
                                 <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
                                 <items>
                                     <navigationItem title="Site Assessment" id="Tus-mW-3n0">
-                                        <barButtonItem key="leftBarButtonItem" title="cannel" id="Bup-au-b38">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="Bup-au-b38">
                                             <connections>
                                                 <action selector="cannel:" destination="6yA-wP-kRe" id="TK5-aS-GPK"/>
                                             </connections>
@@ -175,6 +175,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="saveItem" destination="yL8-aa-ona" id="SGI-Hx-o5M"/>
                         <outlet property="tableView" destination="3ql-Zz-duC" id="pUg-mw-4rt"/>
                     </connections>
                 </viewController>

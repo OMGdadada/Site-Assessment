@@ -129,11 +129,10 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                         
                     }else{
                         Label.text = "Project: \n \(ProjectName) (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%" 
-                    }
-                    
-                    if(projectInformation.schedule*100/projectInformation.Total == 100){
-                        PlistListCanBtn[indexPath.row] = false
-                        Label.text = "\(Label.text!) (上传完成)"
+                        if(projectInformation.schedule*100/projectInformation.Total == 100){
+                            PlistListCanBtn[indexPath.row] = false
+                            Label.text = "\(Label.text!) (上传完成)"
+                        }
                     }
                 }
             }
@@ -198,6 +197,7 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
           pushVC(projectID: ProjectName)  
         }
     }
+    // 开启编辑模式
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -217,7 +217,7 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
         if editingStyle == .delete {
             print("滑动删除")
             let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(PlistList[indexPath.row])")!
-            
+            // 移除已经上传成功的文件
             if(ProjectInformation["uploaded"] as? Bool == true && ProjectInformation["Datauploaded"] as? Bool == true){
                 let ProjectName = PlistList[indexPath.row].replacingOccurrences(of: ".plist", with: "")
                 let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName).plist"
@@ -239,6 +239,10 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
 // MARK: method
 extension ProjectListViewController
 {
+    
+    /// 上传问卷
+    ///
+    /// - Parameter ProjectName: 问卷ID
     fileprivate func updateProjectName(ProjectName: String) {
         let projectinformation = ProjectInformation()
         projectinformation.setValue(ProjectName, forKey: "ProjectName")
@@ -247,7 +251,7 @@ extension ProjectListViewController
         UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName)
         self.UpdateTableViewUI(ProjectName)
     }
-    
+    // 更新上传进度
     fileprivate func UpdateTableViewUI(_ ProjectId:String){
         for (index , value) in PlistList.enumerated(){
             if(value == "\(ProjectId).plist"){
@@ -262,6 +266,7 @@ extension ProjectListViewController
         let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
         let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
         vc.prejectID = projectID;
+        vc.isHistory = true
         self.showDetailViewController(vc, sender: nil)
     }
 }

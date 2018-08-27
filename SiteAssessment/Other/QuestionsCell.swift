@@ -357,7 +357,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
         if(newText == ""){
             QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
             QuestionsCell.OptionSelecred[textView.tag] = "NULL"
-            
         }
         QuestionsCell.TextBoxLabel[textView.tag] = newText
         QuestionsCell.OptionSelecred[textView.tag] = newText

@@ -507,7 +507,8 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 "sa_typeOfDamage":"\(QuestionsCell.OptionSelecred[54])",
                 "sa_trussSpacing":"\(QuestionsCell.OptionSelecred[55])",
                 "sa_trussMemberSize":"\(QuestionsCell.OptionSelecred[56])",
-                "sa_trussType":"\(QuestionsCell.OptionSelecred[57])"
+                "sa_trussType":"\(QuestionsCell.OptionSelecred[57])",
+                "sa_notes":"\(QuestionsCell.OptionSelecred[58])"
             ],
             "Img":ImgView
             ] as [String : Any]  //声明一个字典

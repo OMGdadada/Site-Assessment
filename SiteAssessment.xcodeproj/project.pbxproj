@@ -60,6 +60,10 @@
 		1647118821316B430044BB0F /* ProjectResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */; };
 		1647118B21319F810044BB0F /* SiteRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647118A21319F810044BB0F /* SiteRootModel.m */; };
 		164711922132D7F00044BB0F /* THTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164711912132D7F00044BB0F /* THTool.swift */; };
+		1647119521357EB20044BB0F /* UIImag+Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647119421357EB20044BB0F /* UIImag+Extension .swift */; };
+		16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */; };
+		16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */; };
+		16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD721359C7E0019AAD4 /* conmon.swift */; };
 		9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +125,10 @@
 		1647118921319F810044BB0F /* SiteRootModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiteRootModel.h; sourceTree = "<group>"; };
 		1647118A21319F810044BB0F /* SiteRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteRootModel.m; sourceTree = "<group>"; };
 		164711912132D7F00044BB0F /* THTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THTool.swift; sourceTree = "<group>"; };
+		1647119421357EB20044BB0F /* UIImag+Extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImag+Extension .swift"; sourceTree = "<group>"; };
+		16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResultHeadView.swift; sourceTree = "<group>"; };
+		16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectResultHeadView.xib; sourceTree = "<group>"; };
+		16AC3CD721359C7E0019AAD4 /* conmon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conmon.swift; sourceTree = "<group>"; };
 		4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SiteAssessment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.release.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.release.xcconfig"; sourceTree = "<group>"; };
@@ -319,6 +327,8 @@
 			isa = PBXGroup;
 			children = (
 				1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */,
+				16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */,
+				16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -326,6 +336,7 @@
 		1647118C2132D7D00044BB0F /* Expand */ = {
 			isa = PBXGroup;
 			children = (
+				1647119321357E890044BB0F /* Category */,
 				1647118D2132D7D00044BB0F /* Tool */,
 			);
 			path = Expand;
@@ -335,8 +346,17 @@
 			isa = PBXGroup;
 			children = (
 				164711912132D7F00044BB0F /* THTool.swift */,
+				16AC3CD721359C7E0019AAD4 /* conmon.swift */,
 			);
 			path = Tool;
+			sourceTree = "<group>";
+		};
+		1647119321357E890044BB0F /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				1647119421357EB20044BB0F /* UIImag+Extension .swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		2C9291195BD43E4958304FFC /* Frameworks */ = {
@@ -444,6 +464,7 @@
 				08CA58A22109AD0E00AF4059 /* Podfile in Resources */,
 				08CA58BD2109F92300AF4059 /* icon_mr@2x.png in Resources */,
 				08CA58BE2109F92300AF4059 /* icon_mr@3x.png in Resources */,
+				16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */,
 				08CA58DE2109F92A00AF4059 /* up_a@3x.png in Resources */,
 				08CA58BA2109F92300AF4059 /* icon_xl@2x.png in Resources */,
 			);
@@ -533,11 +554,14 @@
 				1647113B21315B7D0044BB0F /* HGImageCollectionViewCell.swift in Sources */,
 				08CA58E02109F92A00AF4059 /* KeyBoardModel.swift in Sources */,
 				1647113E21315B7D0044BB0F /* HGImagePickerController.swift in Sources */,
+				1647119521357EB20044BB0F /* UIImag+Extension .swift in Sources */,
+				16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */,
 				1647115221315C9F0044BB0F /* UploadProject.swift in Sources */,
 				164711922132D7F00044BB0F /* THTool.swift in Sources */,
 				1647114621315BB20044BB0F /* NewProjectViewController.swift in Sources */,
 				1647113821315B7D0044BB0F /* HGImageCompleteButton.swift in Sources */,
 				1647115421315C9F0044BB0F /* QuestionsCell.swift in Sources */,
+				16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */,
 				1647115321315C9F0044BB0F /* CollapsibleTableViewHeader.swift in Sources */,
 				08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */,
 				08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */,
@@ -688,6 +712,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -710,6 +735,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

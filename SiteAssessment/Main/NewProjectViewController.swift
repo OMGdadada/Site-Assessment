@@ -189,8 +189,8 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func SaveProject(_ sender: Any) {
 
-        Check_data()
-        
+       // Check_data()
+        SetProjectData()
     }
     @IBAction func CancelView(_ sender: Any) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
@@ -414,14 +414,18 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             return
         }
         
-        SetProjectData()
+        
     }
     func SetProjectData(){
         ImgView.addEntries(from: ["RoofShinglePhotoCheckList" : RoofShinglePhotoCheckList])
         ImgView.addEntries(from: ["MeterPhotoCheckList" : MeterPhotoCheckList])
         ImgView.addEntries(from: ["MainBreakerPhotoCheckList" : MainBreakerPhotoCheckList])
         ImgView.addEntries(from: ["TrussType" : TrussType])
-        QuestionsCell.OptionSelecred[36] = "\(NewProjectViewController.TLRBText[0]),\(NewProjectViewController.TLRBText[1]),\(NewProjectViewController.TLRBText[3]),\(NewProjectViewController.TLRBText[2])"
+        if (NewProjectViewController.TLRBText[0] == "NULL" || NewProjectViewController.TLRBText[1] == "NULL" || NewProjectViewController.TLRBText[2] == "NULL" || NewProjectViewController.TLRBText[3] == "NULL"){
+             QuestionsCell.OptionSelecred[36] = ""
+        }else{
+          QuestionsCell.OptionSelecred[36] = "\(NewProjectViewController.TLRBText[0]),\(NewProjectViewController.TLRBText[1]),\(NewProjectViewController.TLRBText[3]),\(NewProjectViewController.TLRBText[2])"  
+        }
         for i in 0...QuestionsCell.OptionSelecred.count{
             if (i == QuestionsCell.OptionSelecred.count){
                 break
@@ -430,7 +434,11 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 QuestionsCell.OptionSelecred[i] = ""
             }
             if(i == 16 || i == 22){
-                QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
+                if QuestionsCell.TextBoxLabel[i] != "NULL" {
+                    QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
+                }else{
+                    QuestionsCell.OptionSelecred[i] = ""  
+                }
             }else if(QuestionsCell.OptionSelecred[i] == "Other"){
                 if(QuestionsCell.TextBoxLabel[i] != "NULL"){
                     QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
@@ -1492,7 +1500,12 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print("获取到相册了")
         picker.dismiss(animated: true, completion: nil) // 选中图片, 关闭选择器...这里你也可以 picker.dismissViewControllerAnimated 这样调用...但是效果都是一样的...
-        var tempImage:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        
+        let tempImage:UIImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        if picker.sourceType == .camera {
+            UIImageWriteToSavedPhotosAlbum(tempImage, nil, nil, nil)
+        }
+        
         /*
         tempImage.compressImage(100, completion: { (image, compressRatio) in
             if let imageData = UIImageJPEGRepresentation(image, compressRatio) {
@@ -1513,9 +1526,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 tempImageSLT = UIImage(data: imageData)!
             }
         })
-        
-        
-        
         
         var Nums = 0
         var PickerImage_Name = ""
@@ -1766,66 +1776,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
 
 }
 
-extension UIImage {
-    
-    enum CompressImageErrors: Error {
-        case invalidExSize
-        case sizeImpossibleToReach
-    }
-    
-    func compressImage(_ expectedSizeKb: Int, completion : (UIImage,CGFloat) -> Void ) {
-        
-        let minimalCompressRate :CGFloat = 0.4 // min compressRate to be checked later
-        
-        let expectedSizeBytes = expectedSizeKb * 1024
-        let imageToBeHandled: UIImage = self
-        var actualHeight : CGFloat = self.size.height
-        var actualWidth : CGFloat = self.size.width
-        var maxHeight : CGFloat = 841 //A4 default size I'm thinking about a document
-        var maxWidth : CGFloat = 594
-        var imgRatio : CGFloat = actualWidth/actualHeight
-        let maxRatio : CGFloat = maxWidth/maxHeight
-        var compressionQuality : CGFloat = 1
-        var imageData:Data = UIImageJPEGRepresentation(imageToBeHandled, compressionQuality)!
-        while imageData.count > expectedSizeBytes {
-            
-            if (actualHeight > maxHeight || actualWidth > maxWidth){
-                if(imgRatio < maxRatio){
-                    imgRatio = maxHeight / actualHeight;
-                    actualWidth = imgRatio * actualWidth;
-                    actualHeight = maxHeight;
-                }
-                else if(imgRatio > maxRatio){
-                    imgRatio = maxWidth / actualWidth;
-                    actualHeight = imgRatio * actualHeight;
-                    actualWidth = maxWidth;
-                }
-                else{
-                    actualHeight = maxHeight;
-                    actualWidth = maxWidth;
-                    compressionQuality = 1;
-                }
-            }
-            let rect = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight)
-            UIGraphicsBeginImageContext(rect.size);
-            imageToBeHandled.draw(in: rect)
-            let img = UIGraphicsGetImageFromCurrentImageContext();
-            UIGraphicsEndImageContext();
-            if let imgData = UIImageJPEGRepresentation(img!, compressionQuality) {
-                if imgData.count > expectedSizeBytes {
-                    if compressionQuality > minimalCompressRate {
-                        compressionQuality -= 0.1
-                    } else {
-                        maxHeight = maxHeight * 0.9
-                        maxWidth = maxWidth * 0.9
-                    }
-                }
-                imageData = imgData
-            }
-        }
-        completion(UIImage(data: imageData)!, compressionQuality)
-    }
-}
 
 extension NewProjectViewController: CollapsibleTableViewHeaderDelegate {
     func toggleSection(_ header: CollapsibleTableViewHeader, section: Int) {

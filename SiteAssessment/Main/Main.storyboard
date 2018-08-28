@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +32,7 @@
         <!--Product List View Controller-->
         <scene sceneID="gcY-CM-Q0g">
             <objects>
-                <viewController id="Dow-Ca-kLh" customClass="ProductListViewController" customModule="SiteAssessment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductListViewController" id="Dow-Ca-kLh" customClass="ProductListViewController" customModule="SiteAssessment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TRV-Fq-tGw">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -64,7 +65,7 @@
                                                 <action selector="CancelView:" destination="quA-gF-pOb" id="dJO-N5-XcF"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save" id="U1e-IE-aob">
+                                        <barButtonItem key="rightBarButtonItem" title="Review" id="U1e-IE-aob">
                                             <connections>
                                                 <action selector="SaveProject:" destination="quA-gF-pOb" id="VdF-dA-7qo"/>
                                             </connections>
@@ -112,7 +113,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1t-g5-Sl2">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
                                 <items>
-                                    <navigationItem title="Site Assessment" id="Tus-mW-3n0">
+                                    <navigationItem title="Review" id="Tus-mW-3n0">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="Bup-au-b38">
                                             <connections>
                                                 <action selector="cannel:" destination="6yA-wP-kRe" id="TK5-aS-GPK"/>
@@ -126,31 +127,53 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3ql-Zz-duC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3ql-Zz-duC">
                                 <rect key="frame" x="0.0" y="108" width="1024" height="1258"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectResultTableViewCell" rowHeight="50" id="F4S-b5-Icj" customClass="ProjectResultTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="50"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="1024" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F4S-b5-Icj" id="ohA-ze-J7E">
                                             <rect key="frame" x="0.0" y="0.0" width="1024" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWP-fM-mXS">
-                                                    <rect key="frame" x="12" y="15" width="42" height="19.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="12" y="15" width="39.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-8y-QX5">
+                                                    <rect key="frame" x="512" y="15.5" width="39.5" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOp-UP-Xby">
+                                                    <rect key="frame" x="512" y="0.0" width="0.5" height="50"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="0.5" id="uvb-a7-LQe"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="eWP-fM-mXS" firstAttribute="leading" secondItem="ohA-ze-J7E" secondAttribute="leading" constant="12" id="3Vu-39-7Ze"/>
-                                                <constraint firstAttribute="bottom" secondItem="eWP-fM-mXS" secondAttribute="bottom" constant="15" id="5ry-Yl-CRp"/>
+                                                <constraint firstItem="eWP-fM-mXS" firstAttribute="top" secondItem="MZ8-8y-QX5" secondAttribute="top" id="4fv-n7-0D1"/>
                                                 <constraint firstItem="eWP-fM-mXS" firstAttribute="top" secondItem="ohA-ze-J7E" secondAttribute="top" constant="15" id="DUb-Tg-Bvs"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="MZ8-8y-QX5" secondAttribute="trailing" id="K4s-ck-Q0w"/>
+                                                <constraint firstItem="MZ8-8y-QX5" firstAttribute="leading" secondItem="IOp-UP-Xby" secondAttribute="leading" id="kwr-jB-b2W"/>
+                                                <constraint firstAttribute="bottom" secondItem="MZ8-8y-QX5" secondAttribute="bottom" constant="14.5" id="s50-gE-JOq"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="IOp-UP-Xby" firstAttribute="height" secondItem="F4S-b5-Icj" secondAttribute="height" id="9Qc-ff-4PL"/>
+                                            <constraint firstItem="IOp-UP-Xby" firstAttribute="centerX" secondItem="F4S-b5-Icj" secondAttribute="centerX" id="HZq-Yp-iso"/>
+                                            <constraint firstItem="IOp-UP-Xby" firstAttribute="centerY" secondItem="F4S-b5-Icj" secondAttribute="centerY" id="lxA-pO-8Ni"/>
+                                        </constraints>
                                         <connections>
+                                            <outlet property="detail" destination="MZ8-8y-QX5" id="q2x-aa-H4I"/>
                                             <outlet property="title" destination="eWP-fM-mXS" id="h6i-3N-twY"/>
                                         </connections>
                                     </tableViewCell>

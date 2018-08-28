@@ -31,9 +31,15 @@ class ViewController: UIViewController,GIDSignInUIDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowProductList"{
+            let controller = segue.destination as! ProductListViewController
+            controller.user = sender as? GIDGoogleUser
+        }
+    }
 
 }
-extension ViewController: GIDSignInDelegate {
+extension ViewController: GIDSignInDelegate{
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if error != nil {
@@ -42,15 +48,13 @@ extension ViewController: GIDSignInDelegate {
             return
         } else {
             //ViewController.user = user
-            //print(user.profile.)
-            self.performSegue(withIdentifier: "ShowProductList", sender: user)
-            //service.authorizer = user.authentication.fetcherAuthorizer()
-        }
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowProductList"{
-            let controller = segue.destination as! ProductListViewController
-            controller.user = sender as? GIDGoogleUser
+            print("didSignInFor")
+            let storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc:ProductListViewController = storyboard.instantiateViewController(withIdentifier: "ProductListViewController") as! ProductListViewController
+            vc.user = user;
+            present(vc, animated: true, completion: nil)
         }
     }
 }
+
+

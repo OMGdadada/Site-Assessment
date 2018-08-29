@@ -93,7 +93,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     var imagePicker:UIImagePickerController = UIImagePickerController()
     
     
-    static var TLRBText : [String] = Array<Any>(repeating: "NULL", count: 4) as! [String]
+    static var TLRBText : [String] = Array<Any>(repeating: "", count: 4) as! [String]
     var RoofShinglePhotoCheckList:NSMutableArray = []
     var MeterPhotoCheckList:NSMutableArray = []
     var MainBreakerPhotoCheckList:NSMutableArray = []
@@ -149,9 +149,9 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         
         NewProjectViewController.selected = ["0","0","0","0","0","0"]
         TABLEVIEW.tableFooterView = UIView()
-        NewProjectViewController.TLRBText =  Array<Any>(repeating: "NULL", count: 4) as! [String]
-        QuestionsCell.OptionSelecred = Array<Any>(repeating: "NULL", count: 59) as! [String]
-        QuestionsCell.TextBoxLabel = Array<Any>(repeating: "NULL", count: 59) as! [String]
+        NewProjectViewController.TLRBText =  Array<Any>(repeating: "", count: 4) as! [String]
+        QuestionsCell.OptionSelecred = Array<Any>(repeating: "", count: 59) as! [String]
+        QuestionsCell.TextBoxLabel = Array<Any>(repeating: "", count: 59) as! [String]
         // Do any additional setup after loading the view.
         //ImgView.addEntries(from: RoofShinglePhotoCheckList)
         manager?.listener = { status in var statusStr: String?
@@ -199,7 +199,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         print("网络状态:\(NetWork)")
         for (index , item) in QuestionsCell.OptionSelecred.enumerated(){
             print(item)
-            if(item == "NULL"){
+            if(item == ""){
                 if(index == 15 || index == 16 || index == 18 || index == 19 || index == 20 || index == 21 || index == 22 || index == 35 || index == 54 || index == 36 || index == 58){
                     if((index == 15 || index == 16 ) && QuestionsCell.OptionSelecred[14] == "Yes"){
                         let alertController = UIAlertController(title: "The problem:\(index+1) is not filled out",
@@ -417,11 +417,12 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     func SetProjectData(){
+        
         ImgView.addEntries(from: ["RoofShinglePhotoCheckList" : RoofShinglePhotoCheckList])
         ImgView.addEntries(from: ["MeterPhotoCheckList" : MeterPhotoCheckList])
         ImgView.addEntries(from: ["MainBreakerPhotoCheckList" : MainBreakerPhotoCheckList])
         ImgView.addEntries(from: ["TrussType" : TrussType])
-        if (NewProjectViewController.TLRBText[0] == "NULL" || NewProjectViewController.TLRBText[1] == "NULL" || NewProjectViewController.TLRBText[2] == "NULL" || NewProjectViewController.TLRBText[3] == "NULL"){
+        if (NewProjectViewController.TLRBText[0] == "" || NewProjectViewController.TLRBText[1] == "" || NewProjectViewController.TLRBText[2] == "" || NewProjectViewController.TLRBText[3] == ""){
              QuestionsCell.OptionSelecred[36] = ""
         }else{
           QuestionsCell.OptionSelecred[36] = "\(NewProjectViewController.TLRBText[0]),\(NewProjectViewController.TLRBText[1]),\(NewProjectViewController.TLRBText[3]),\(NewProjectViewController.TLRBText[2])"  
@@ -430,23 +431,23 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             if (i == QuestionsCell.OptionSelecred.count){
                 break
             }
-            if(QuestionsCell.OptionSelecred[i] == "NULL"){
+            if(QuestionsCell.OptionSelecred[i] == ""){
                 QuestionsCell.OptionSelecred[i] = ""
             }
             if(i == 16 || i == 22){
-                if QuestionsCell.TextBoxLabel[i] != "NULL" {
+                if QuestionsCell.TextBoxLabel[i] != "" {
                     QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
                 }else{
                     QuestionsCell.OptionSelecred[i] = ""  
                 }
             }else if(QuestionsCell.OptionSelecred[i] == "Other"){
-                if(QuestionsCell.TextBoxLabel[i] != "NULL"){
+                if(QuestionsCell.TextBoxLabel[i] != ""){
                     QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
                 }else{
                     QuestionsCell.OptionSelecred[i] = ""
                 }
             }else if(i == 58){
-                if(QuestionsCell.TextBoxLabel[i] != "NULL"){
+                if(QuestionsCell.TextBoxLabel[i] != ""){
                     QuestionsCell.OptionSelecred[i] = QuestionsCell.TextBoxLabel[i]
                 }else{
                     QuestionsCell.OptionSelecred[i] = ""
@@ -474,13 +475,13 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 "sa_gasMeterLocation":"\(QuestionsCell.OptionSelecred[13])",
                 "sa_meterObstruction":"\(QuestionsCell.OptionSelecred[14])",
                 "sa_obstructionType1":"\(QuestionsCell.OptionSelecred[15])",
-                "sa_obstructionDistance":"\(QuestionsCell.TextBoxLabel[16])",
+                "sa_obstructionDistance":"\(QuestionsCell.OptionSelecred[16])",
                 "sa_trenchingRequired":"\(QuestionsCell.OptionSelecred[17])",
                 "sa_trenchingOverDriveway":"\(QuestionsCell.OptionSelecred[18])",
                 "sa_trenchingMaterial":"\(QuestionsCell.OptionSelecred[19])",
                 "sa_trenchingObstructions":"\(QuestionsCell.OptionSelecred[20])",
                 "sa_trenchingObstructionType":"\(QuestionsCell.OptionSelecred[21])",
-                "sa_trenchingDistance":"\(QuestionsCell.TextBoxLabel[22])",
+                "sa_trenchingDistance":"\(QuestionsCell.OptionSelecred[22])",
                 "sa_meterPhotoCloseUp":"\(QuestionsCell.OptionSelecred[23])",
                 "sa_meterPhotoWideAngle":"\(QuestionsCell.OptionSelecred[24])",
                 "sa_meterHeightMeasurementPhoto":"\(QuestionsCell.OptionSelecred[25])",
@@ -692,16 +693,16 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             LeftText.tag = 2000
             RightText.tag = 3000
             buttomText.tag = 4000
-            if(NewProjectViewController.TLRBText[(TopText.tag/1000)-1] != "NULL"){
+            if(NewProjectViewController.TLRBText[(TopText.tag/1000)-1] != ""){
                 TopText.text = NewProjectViewController.TLRBText[(TopText.tag/1000)-1]
             }
-            if(NewProjectViewController.TLRBText[(LeftText.tag/1000)-1] != "NULL"){
+            if(NewProjectViewController.TLRBText[(LeftText.tag/1000)-1] != ""){
                 LeftText.text = NewProjectViewController.TLRBText[(LeftText.tag/1000)-1]
             }
-            if(NewProjectViewController.TLRBText[(RightText.tag/1000)-1] != "NULL"){
+            if(NewProjectViewController.TLRBText[(RightText.tag/1000)-1] != ""){
                 RightText.text = NewProjectViewController.TLRBText[(RightText.tag/1000)-1]
             }
-            if(NewProjectViewController.TLRBText[(buttomText.tag/1000)-1] != "NULL"){
+            if(NewProjectViewController.TLRBText[(buttomText.tag/1000)-1] != ""){
                 buttomText.text = NewProjectViewController.TLRBText[(buttomText.tag/1000)-1]
             }
             
@@ -1218,7 +1219,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 sdwsa = sdwsa + 70 + textlArr[indexPath.row] + 300
             }else{
                 if(Item == "16" || Item == "22" || Item == "36"){
-                    if(QuestionsCell.OptionSelecred[Int(Item!)!-1] != "NULL"){
+                    if(QuestionsCell.OptionSelecred[Int(Item!)!-1] != ""){
                         //print(Item == "16" && (Int(QuestionsCell.OptionSelecred[Int(Item!)!-1])! > 31))
                         if(Item == "16" && (Int(QuestionsCell.OptionSelecred[Int(Item!)!-1])! > 31)){
                             sdwsa = sdwsa + 70 + textlArr[indexPath.row] + 300
@@ -1260,7 +1261,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[14] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[15] = "NULL"
+                        QuestionsCell.OptionSelecred[15] = ""
                         sdwsa = 0
                     }
                     break
@@ -1275,7 +1276,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[18] = "NULL"
+                        QuestionsCell.OptionSelecred[18] = ""
                         sdwsa = 0
                     }
                     break
@@ -1283,7 +1284,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[19] = "NULL"
+                        QuestionsCell.OptionSelecred[19] = ""
                         sdwsa = 0
                     }
                     break
@@ -1291,7 +1292,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[20] = "NULL"
+                        QuestionsCell.OptionSelecred[20] = ""
                         sdwsa = 0
                     }
                     break
@@ -1299,7 +1300,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[20] == "Yes" && QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[21] = "NULL"
+                        QuestionsCell.OptionSelecred[21] = ""
                         sdwsa = 0
                     }
                     break
@@ -1314,7 +1315,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[34] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[35] = "NULL"
+                        QuestionsCell.OptionSelecred[35] = ""
                         sdwsa = 0
                     }
                     break
@@ -1322,7 +1323,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[23] = "NULL"
+                        QuestionsCell.OptionSelecred[23] = ""
                         Pickerimage24.removeAll()
                         Pickerimage24_Nums = 0
                         sdwsa = 0
@@ -1332,7 +1333,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[24] = "NULL"
+                        QuestionsCell.OptionSelecred[24] = ""
                         Pickerimage25.removeAll()
                         Pickerimage25_Nums = 0
                         sdwsa = 0
@@ -1342,7 +1343,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[25] = "NULL"
+                        QuestionsCell.OptionSelecred[25] = ""
                         Pickerimage26.removeAll()
                         Pickerimage26_Nums = 0
                         sdwsa = 0
@@ -1352,7 +1353,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[26] = "NULL"
+                        QuestionsCell.OptionSelecred[26] = ""
                         Pickerimage27.removeAll()
                         Pickerimage27_Nums = 0
                         sdwsa = 0
@@ -1362,7 +1363,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[27] = "NULL"
+                        QuestionsCell.OptionSelecred[27] = ""
                         Pickerimage28.removeAll()
                         Pickerimage28_Nums = 0
                         sdwsa = 0
@@ -1372,7 +1373,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[28] = "NULL"
+                        QuestionsCell.OptionSelecred[28] = ""
                         Pickerimage29.removeAll()
                         Pickerimage29_Nums = 0
                         sdwsa = 0
@@ -1382,7 +1383,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[29] = "NULL"
+                        QuestionsCell.OptionSelecred[29] = ""
                         Pickerimage30.removeAll()
                         Pickerimage30_Nums = 0
                         sdwsa = 0
@@ -1392,7 +1393,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[17] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[30] = "NULL"
+                        QuestionsCell.OptionSelecred[30] = ""
                         Pickerimage31.removeAll()
                         Pickerimage31_Nums = 0
                         sdwsa = 0
@@ -1402,7 +1403,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                     if(QuestionsCell.OptionSelecred[53] == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
-                        QuestionsCell.OptionSelecred[54] = "NULL"
+                        QuestionsCell.OptionSelecred[54] = ""
                         sdwsa = 0
                     }
                     break
@@ -1796,10 +1797,10 @@ extension NewProjectViewController:UITextFieldDelegate {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
         if(textField.tag>999){
-            if(newText == ""){
-                NewProjectViewController.TLRBText[(textField.tag/1000)-1] = "NULL"
-                
-            }
+//            if(newText == ""){
+//                NewProjectViewController.TLRBText[(textField.tag/1000)-1] = "NULL"
+//                
+//            }
             NewProjectViewController.TLRBText[(textField.tag/1000)-1] = newText
         }
         return true

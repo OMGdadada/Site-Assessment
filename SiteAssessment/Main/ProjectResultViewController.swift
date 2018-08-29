@@ -9,6 +9,7 @@
 import UIKit
 
 let projectResultHeadView:String = "ProjectResultHeadView"
+
 class ProjectResultViewController: UIViewController {
     typealias SaveResultBlock = (() -> Void)
     @IBOutlet weak var saveItem: UIBarButtonItem!
@@ -37,29 +38,17 @@ class ProjectResultViewController: UIViewController {
     }
     
     @IBAction func cannel(_ sender: Any) {
-        if isHistory == false {
-      
-//            // 移除已经上传成功的文件
-//            let ProjectName = (prejectID?.replacingOccurrences(of: ".plist", with: ""))!
-//            let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName).plist"
-//            let Manager = FileManager.default
-//            try! Manager.removeItem(atPath: filePath)
-//            let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName)"
-//            let fileArray = Manager.subpaths(atPath: Folder)
-//            for fn in fileArray!{
-//                try! Manager.removeItem(atPath: Folder + "/\(fn)")
-//            }
-                
-        }
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func save(_ sender: UIBarButtonItem) {
         if count > 0 {
-            
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            if saveResultBlock != nil{
+                saveResultBlock!()
+            } 
         }
-//        if saveResultBlock != nil{
-//            saveResultBlock!()
-//        }
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -109,46 +98,81 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {        
-//        let model: SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
-//        let questions:QuestionModel = model.questionList[indexPath.row]
-//        if indexPath.section == 1 {
-//            if indexPath.row == 5 {
-//                if questions.defaultValue == "NO" {
-//                    if indexPath.row == 6 || indexPath.row == 7 {
-//                        return 0
-//                    }
-//                } 
-//            }
-//        } 
+        let model: SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
+        let questions:QuestionModel = model.questionList[indexPath.row]
+        if(questions.isNoShow){
+            switch indexPath.section {
+            case 0:
+                break
+            case 1:
+                let five:QuestionModel = model.questionList[5]
+                let eight:QuestionModel = model.questionList[8]
+                let oneone:QuestionModel = model.questionList[11]
+                if five.defaultValue == "No" || five.defaultValue == "Incomplete" {
+                    if indexPath.row == 6 ||  indexPath.row == 7 {
+                        return 0
+                    } 
+                }
+                if eight.defaultValue == "No" || eight.defaultValue == "Incomplete" {
+                    if indexPath.row == 9 || indexPath.row == 10 || indexPath.row == 11 || indexPath.row == 13 || indexPath.row == 14 || indexPath.row == 15 || indexPath.row == 16 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 21  {
+                        return 0
+                    }
+                    
+                }
+                if oneone.defaultValue == "No" || oneone.defaultValue == "Incomplete"  {
+                    if indexPath.row == 12  {
+                        return 0
+                    }
+                }
+                break
+            case 2:
+                let three:QuestionModel = model.questionList[3]
+                if three.defaultValue == "No" || three.defaultValue == "Incomplete" {
+                    if indexPath.row == 4 {
+                        return 0 
+                    }
+                }
+                break
+            case 4:
+                let four:QuestionModel = model.questionList[4]
+                if four.defaultValue == "No" || four.defaultValue == "Incomplete" {
+                    if indexPath.row == 5 {
+                        return 0 
+                    }
+                }
+                break
+            default:break
+            }
+        }
         return UITableViewAutomaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    // header
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        }
         
-        let model:SiteRootModel = dataSoure[section] as! SiteRootModel
-        let header:ProjectResultHeadView = tableView.dequeueReusableHeaderFooterView(withIdentifier: projectResultHeadView) as! ProjectResultHeadView
-        header.backgroundColor = UIColor.white
-        header.headTitle.text = model.heading
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.01
-    }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+        
+        // header
+        
+        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            
+            let model:SiteRootModel = dataSoure[section] as! SiteRootModel
+            let header:ProjectResultHeadView = tableView.dequeueReusableHeaderFooterView(withIdentifier: projectResultHeadView) as! ProjectResultHeadView
+            header.backgroundColor = UIColor.white
+            header.headTitle.text = model.heading
+            return header
+        }
+        
+        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+            return 70
+        }
+        
+        func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+            return 0.01
+        }
 }
 
 // MARK: 获取数据
-
+    
 extension ProjectResultViewController
 {
     // 获取问卷数据
@@ -211,7 +235,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_overallRoofCondition"] as! String 
                         }
-                  
+                        
                         break
                     case 5:
                         if (projects["sa_full3DSiteImaging"] as! String == "") {
@@ -250,6 +274,7 @@ extension ProjectResultViewController
                     }
                     break
                 case 1:
+                    
                     switch j {
                     case 0:
                         if (projects["sa_meterLocation"] as! String == "") {
@@ -302,9 +327,11 @@ extension ProjectResultViewController
                         }
                         break
                     case 6:
-                        if (projects["sa_obstructionType1"] as! String == "") {
+                        if (projects["sa_obstructionType1"] as! String == "" ) {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_meterObstruction"] as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_obstructionType1"] as! String
                         }
@@ -312,11 +339,13 @@ extension ProjectResultViewController
                     case 7:
                         if (projects["sa_obstructionDistance"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_meterObstruction"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_obstructionDistance"] as! String
                         }
-
+                        
                         break
                     case 8:
                         if (projects["sa_trenchingRequired"] as! String == "") {
@@ -330,16 +359,20 @@ extension ProjectResultViewController
                     case 9:
                         if (projects["sa_trenchingOverDriveway"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_trenchingOverDriveway"] as! String
                         }
-                       
+                        
                         break
                     case 10:
                         if (projects["sa_trenchingMaterial"] as! String == "") {
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                             question.defaultValue = "Incomplete"
-                            count = count + 1
                         }else{
                             question.defaultValue = projects["sa_trenchingMaterial"] as! String
                         }
@@ -347,8 +380,10 @@ extension ProjectResultViewController
                         break
                     case 11:
                         if (projects["sa_trenchingObstructions"] as! String == "") {
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                             question.defaultValue = "Incomplete"
-                            count = count + 1
                         }else{
                             question.defaultValue = projects["sa_trenchingObstructions"] as! String
                         }
@@ -356,7 +391,9 @@ extension ProjectResultViewController
                     case 12:
                         if (projects["sa_trenchingObstructionType"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" && projects["sa_trenchingObstructions"]  as! String == "YES"{
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_trenchingObstructionType"] as! String
                         }
@@ -365,16 +402,20 @@ extension ProjectResultViewController
                     case 13:
                         if (projects["sa_trenchingDistance"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_trenchingDistance"] as! String
                         }
-                     
+                        
                         break
                     case 14:
                         if (projects["sa_meterPhotoCloseUp"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
@@ -383,25 +424,31 @@ extension ProjectResultViewController
                     case 15:
                         if (projects["sa_meterPhotoWideAngle"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
-                
+                        
                         break
                     case 16:
                         if (projects["sa_meterHeightMeasurementPhoto"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
-                     
+                        
                         break
                     case 17:
                         if (projects["sa_meterSurroundingAreaPhoto"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
@@ -409,7 +456,9 @@ extension ProjectResultViewController
                     case 18:
                         if (projects["sa_meterObstructionPhoto"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
@@ -417,7 +466,9 @@ extension ProjectResultViewController
                     case 19:
                         if (projects["sa_teckCableRouteReferencePhoto"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
@@ -425,15 +476,19 @@ extension ProjectResultViewController
                     case 20:
                         if (projects["sa_trenchingRouteAerialPhoto"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
                         break
                     case 21:
                         if (projects["sa_trenchingRouteGroundPhoto"] as! String == "") {
+                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                             question.defaultValue = "Incomplete"
-                            count = count + 1
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
@@ -451,7 +506,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_breakerPanelAmp"] as! String
                         }
-                      
+                        
                         break
                     case 1:
                         if (projects["sa_breakerPanelLocation"] as! String == "") {
@@ -482,7 +537,9 @@ extension ProjectResultViewController
                     case 4:
                         if (projects["sa_obstructionType"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_breakerPanelObstruction"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_obstructionType"] as! String
                         }
@@ -508,7 +565,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
-
+                        
                         break
                     case 7:
                         if (projects["sa_mainBreakerPanelPhotoWideAngle"] as! String == "") {
@@ -517,7 +574,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
-
+                        
                         break
                     case 8:
                         if (projects["sa_mainBreakerPanelPhotoInterior"] as! String == "") {
@@ -526,7 +583,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = "Photo Uploaded"
                         }
-
+                        
                         break
                     case 9:
                         if (projects["sa_mainBreakerPanelPhoto360Degree"] as! String == "") {
@@ -550,7 +607,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_locationElectricalMeter"] as! String
                         }
-                       
+                        
                         break
                     case 1:
                         if (projects["sa_locationGasMeter"] as! String == "") {
@@ -568,7 +625,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_locationObstruction"] as! String
                         }
-                      
+                        
                         break
                     case 3:
                         if (projects["sa_locationMainBreakerPanel"] as! String == "") {
@@ -577,7 +634,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_locationMainBreakerPanel"] as! String
                         }
-                  
+                        
                         break
                     case 4:
                         if (projects["sa_distanceElectricalMeterToFrontCornerOfHouse"] as! String == "") {
@@ -595,7 +652,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_distanceElectricalMeterToGasMeter"] as! String
                         }
-                       
+                        
                         break
                     case 6:
                         if (projects["sa_distanceElectricalMeterToYardDoor"] as! String == "") {
@@ -613,7 +670,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_distanceElectricalMeterToObstruction"] as! String
                         }
-                       
+                        
                         break
                     default:
                         break
@@ -628,7 +685,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_roofSheathing"] as! String
                         }
-                       
+                        
                         break
                     case 1:
                         if (projects["sa_signsOfMold"] as! String == "") {
@@ -669,11 +726,13 @@ extension ProjectResultViewController
                     case 5:
                         if (projects["sa_typeOfDamage"] as! String == "") {
                             question.defaultValue = "Incomplete"
-                            count = count + 1
+                            if  projects["sa_signsOfDamage"]  as! String == "Yes" {
+                                count = count + 1
+                            }
                         }else{
                             question.defaultValue = projects["sa_typeOfDamage"] as! String
                         }
-                     
+                        
                         break
                     case 6:
                         if (projects["sa_trussSpacing"] as! String == "") {
@@ -691,7 +750,7 @@ extension ProjectResultViewController
                         }else{
                             question.defaultValue = projects["sa_trussMemberSize"] as! String
                         }
-                    
+                        
                         break
                     case 8:
                         if (projects["sa_trussType"] as! String == "") {
@@ -724,7 +783,7 @@ extension ProjectResultViewController
             saveItem.title = "Missing(\(count))"
             saveItem.tintColor = UIColor.orange 
         }
-       
+        
         tableView.reloadData()
     }
 }

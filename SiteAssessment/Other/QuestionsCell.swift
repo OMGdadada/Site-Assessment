@@ -17,8 +17,8 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     let radio_N:UIImage = UIImage(named: "radio_N")!
     let radio_Y:UIImage = UIImage(named: "radio_Y")!
     //var	ischeck = false
-    static var OptionSelecred : [String] = Array<Any>(repeating: "NULL", count: 59) as! [String]
-    static var TextBoxLabel : [String] = Array<Any>(repeating: "NULL", count: 59) as! [String]
+    static var OptionSelecred : [String] = Array<Any>(repeating: "", count: 59) as! [String]
+    static var TextBoxLabel : [String] = Array<Any>(repeating: "", count: 59) as! [String]
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -96,12 +96,12 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
         }else{
             labelc.frame = CGRect(x: 15, y: 10 + hs, width: Int(Screen_W - 20), height: 60)
             labelc.font = UIFont.systemFont(ofSize: 22)
-            if(QuestionsCell.OptionSelecred[Int(Item)! - 1] != "NULL"){
+            if(QuestionsCell.OptionSelecred[Int(Item)! - 1] != ""){
                 if(Item != "17" && Item != "23"){
                     labelc.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
                     labelc.textColor = UIColor.white
                 }else{
-                    if(QuestionsCell.TextBoxLabel[Int(Item)! - 1] != "NULL"){
+                    if(QuestionsCell.TextBoxLabel[Int(Item)! - 1] != ""){
                         labelc.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
                         labelc.textColor = UIColor.white
                     }
@@ -155,7 +155,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                 
                 TextBox.tag = Int(QuestionItem)! - 1
                 TextBox.placeholder = "Please Enter the Numbers"
-                if(QuestionsCell.TextBoxLabel[TextBox.tag] != "NULL"){
+                if(QuestionsCell.TextBoxLabel[TextBox.tag] != ""){
                     TextBox.text = QuestionsCell.TextBoxLabel[TextBox.tag]
                 }
                 
@@ -186,7 +186,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                 TextBox.font = UIFont.systemFont(ofSize: 22)
                 TextBox.layer.borderWidth = 1.0
                 TextBox.tag = Int(QuestionItem)! - 1
-                if(QuestionsCell.TextBoxLabel[TextBox.tag] != "NULL"){
+                if(QuestionsCell.TextBoxLabel[TextBox.tag] != ""){
                     TextBox.text = QuestionsCell.TextBoxLabel[TextBox.tag]
                 }
                 TextBox.delegate = self
@@ -203,7 +203,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                 
                 //print(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1])
                 if(QuestionItem == "16" || QuestionItem == "22" || QuestionItem == "36"){
-                    if(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1] != "NULL"){
+                    if(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1] != ""){
                         
                         let SOPtion_10 = Int(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1])
                         let SOPtion_2 = String(SOPtion_10!,radix:2)
@@ -250,7 +250,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                     TextBox.layer.borderWidth = 1.0
                     TextBox.keyboardType = UIKeyboardType.default
                     TextBox.tag = Int(QuestionItem)! - 1
-                    if(QuestionsCell.TextBoxLabel[TextBox.tag] != "NULL"){
+                    if(QuestionsCell.TextBoxLabel[TextBox.tag] != ""){
                         TextBox.text = QuestionsCell.TextBoxLabel[TextBox.tag]
                     }
                     TextBox.delegate = self
@@ -277,7 +277,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
             }
         }
         if(Question_Item == 16 || Question_Item == 22 || Question_Item == 36){
-            if(QuestionsCell.OptionSelecred[Question_Item-1] == "NULL" || QuestionsCell.OptionSelecred[Question_Item-1] == "0"){
+            if(QuestionsCell.OptionSelecred[Question_Item-1] == "" || QuestionsCell.OptionSelecred[Question_Item-1] == "0"){
                 QuestionsCell.OptionSelecred[Question_Item-1] = String(Option_2)
             }else{
                 
@@ -343,10 +343,10 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        if(newText == ""){
-            QuestionsCell.TextBoxLabel[textField.tag] = "NULL"
-            QuestionsCell.OptionSelecred[textField.tag] = "NULL"
-        }
+//        if(newText == ""){
+//            QuestionsCell.TextBoxLabel[textField.tag] = ""
+//            QuestionsCell.OptionSelecred[textField.tag] = ""
+//        }
         QuestionsCell.TextBoxLabel[textField.tag] = newText
         QuestionsCell.OptionSelecred[textField.tag] = newText
         return true
@@ -354,10 +354,10 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        if(newText == ""){
-            QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
-            QuestionsCell.OptionSelecred[textView.tag] = "NULL"
-        }
+//        if(newText == ""){
+//            QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
+//            QuestionsCell.OptionSelecred[textView.tag] = "NULL"
+//        }
         QuestionsCell.TextBoxLabel[textView.tag] = newText
         QuestionsCell.OptionSelecred[textView.tag] = newText
         return true

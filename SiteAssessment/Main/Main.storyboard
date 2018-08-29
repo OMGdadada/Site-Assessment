@@ -131,11 +131,11 @@
                                 <rect key="frame" x="0.0" y="108" width="1024" height="1258"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectResultTableViewCell" rowHeight="50" id="F4S-b5-Icj" customClass="ProjectResultTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="1024" height="50"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectResultTableViewCell" rowHeight="72" id="F4S-b5-Icj" customClass="ProjectResultTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="1024" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F4S-b5-Icj" id="ohA-ze-J7E">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="71.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWP-fM-mXS">
@@ -145,13 +145,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-8y-QX5">
-                                                    <rect key="frame" x="512" y="15.5" width="39.5" height="19.5"/>
+                                                    <rect key="frame" x="512" y="33" width="39.5" height="23.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOp-UP-Xby">
-                                                    <rect key="frame" x="512" y="0.0" width="0.5" height="50"/>
+                                                    <rect key="frame" x="512" y="0.0" width="0.5" height="72"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="0.5" id="uvb-a7-LQe"/>
@@ -160,11 +160,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="eWP-fM-mXS" firstAttribute="leading" secondItem="ohA-ze-J7E" secondAttribute="leading" constant="12" id="3Vu-39-7Ze"/>
-                                                <constraint firstItem="eWP-fM-mXS" firstAttribute="top" secondItem="MZ8-8y-QX5" secondAttribute="top" id="4fv-n7-0D1"/>
                                                 <constraint firstItem="eWP-fM-mXS" firstAttribute="top" secondItem="ohA-ze-J7E" secondAttribute="top" constant="15" id="DUb-Tg-Bvs"/>
+                                                <constraint firstAttribute="bottom" secondItem="MZ8-8y-QX5" secondAttribute="bottom" constant="15" id="G4x-Nf-X82"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="MZ8-8y-QX5" secondAttribute="trailing" id="K4s-ck-Q0w"/>
+                                                <constraint firstItem="MZ8-8y-QX5" firstAttribute="top" secondItem="eWP-fM-mXS" secondAttribute="top" constant="18" id="V83-Sd-HDv"/>
                                                 <constraint firstItem="MZ8-8y-QX5" firstAttribute="leading" secondItem="IOp-UP-Xby" secondAttribute="leading" id="kwr-jB-b2W"/>
-                                                <constraint firstAttribute="bottom" secondItem="MZ8-8y-QX5" secondAttribute="bottom" constant="14.5" id="s50-gE-JOq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>

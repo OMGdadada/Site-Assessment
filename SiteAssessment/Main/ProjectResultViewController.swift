@@ -81,7 +81,14 @@ extension ProjectResultViewController
 extension  ProjectResultViewController : UITableViewDataSource , UITableViewDelegate
 {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSoure.count;
+        if dataSoure.count > 0 {
+            let model:SiteRootModel = dataSoure[5] as! SiteRootModel
+            let one:QuestionModel = model.questionList[0]
+            if one.defaultValue == "Incomplete" {
+                return dataSoure.count - 1
+            }
+        }
+        return dataSoure.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,34 +152,34 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
             }
         }
         return UITableViewAutomaticDimension
-        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // header
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
-        // header
-        
-        func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-            
-            let model:SiteRootModel = dataSoure[section] as! SiteRootModel
-            let header:ProjectResultHeadView = tableView.dequeueReusableHeaderFooterView(withIdentifier: projectResultHeadView) as! ProjectResultHeadView
-            header.backgroundColor = UIColor.white
-            header.headTitle.text = model.heading
-            return header
-        }
-        
-        func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-            return 70
-        }
-        
-        func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-            return 0.01
-        }
+        let model:SiteRootModel = dataSoure[section] as! SiteRootModel
+        let header:ProjectResultHeadView = tableView.dequeueReusableHeaderFooterView(withIdentifier: projectResultHeadView) as! ProjectResultHeadView
+        header.backgroundColor = UIColor.white
+        header.headTitle.text = model.heading
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
 }
 
 // MARK: 获取数据
-    
+
 extension ProjectResultViewController
 {
     // 获取问卷数据
@@ -768,20 +775,18 @@ extension ProjectResultViewController
                 case 5:
                     if (projects["sa_notes"] as! String == "") {
                         question.defaultValue = "Incomplete"
-                        count = count + 1
                     }else{
                         question.defaultValue = projects["sa_notes"] as! String
                     }
                     break
                 default :
                     break
-                    
                 }
             }
         }
         if  count > 0 {
             saveItem.title = "Missing(\(count))"
-            saveItem.tintColor = UIColor.orange 
+            saveItem.tintColor = UIColor.red 
         }
         
         tableView.reloadData()

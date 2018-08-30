@@ -511,11 +511,11 @@
 				<string>Breaker Panel Amp:</string>
 				<key>option</key>
 				<array>
-					<string>60AMP</string>
-					<string>100AMP</string>
-					<string>125AMP</string>
-					<string>200AMP</string>
-					<string>400AMP</string>
+					<string>60</string>
+					<string>100</string>
+					<string>125</string>
+					<string>200</string>
+					<string>400</string>
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
@@ -897,9 +897,9 @@
 				<string>Truss Spacing:</string>
 				<key>option</key>
 				<array>
-					<string>16&quot; O/C</string>
-					<string>24&quot; O/C</string>
-					<string>48&quot; O/C</string>
+					<string>16</string>
+					<string>24</string>
+					<string>48</string>
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>

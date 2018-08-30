@@ -175,6 +175,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             }
             print(statusStr! as Any)
         }
+        TABLEVIEW.reloadData()
         manager?.startListening()
         self.imageManager = PHCachingImageManager()
         self.resetCachedAssets()
@@ -814,9 +815,10 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                         Img_Btn.addTarget(self, action:#selector(tapped(_:)), for:.touchUpInside)
                         Img_Btn.backgroundColor = UIColor(red: 239/256, green: 239/256, blue: 239/256, alpha: 1)
                         cell?.addSubview(Img_Btn)
+                        textlArr[indexPath.row] = CGFloat(((Option.count-1)/2)*60+80)
                     }
                     
-                    textlArr[indexPath.row] = CGFloat(((Option.count-1)/2)*60+80)
+                    
                     if(Pickerimage58_Nums == 1){
                         let Image:UIImageView = UIImageView(frame: CGRect(x:(UIScreen.main.bounds.width/3)*CGFloat(0%3)+10, y : 840+(UIScreen.main.bounds.width/3)*CGFloat(0/3)+10, width: (UIScreen.main.bounds.width/3)-20, height: (UIScreen.main.bounds.width/3)-20))
                         Image.image = Pickerimage58[0].image
@@ -1209,13 +1211,13 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             let Ar_QuestionList = Ar_r["QuestionList"] as! NSMutableArray
             let Ar = Ar_QuestionList[indexPath.row] as! Dictionary<String, Any>
             let Item = Ar["Item"] as? String
-            if(Item == "6" || Item == "24" || Item == "38" || Item == "42" ){
+            if(Item == "6" || Item == "24" || Item == "38"  ){
                 sdwsa = 70
             }else if(Item == "58"){
                 sdwsa = 370
             }
             if(QuestionsCell.OptionSelecred[Int(Item!)!-1] == "Other"){
-                //print(QuestionsCell.OptionSelecred[indexPath.row])
+                print(QuestionsCell.OptionSelecred[indexPath.row])
                 sdwsa = sdwsa + 70 + textlArr[indexPath.row] + 300
             }else{
                 if(Item == "16" || Item == "22" || Item == "36"){
@@ -1248,7 +1250,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             var Question_Item = Int((Ar["Item"] as? String)!)!-1
             if(Question_Item == 5 || Question_Item == 23 || Question_Item == 37 || Question_Item == 41){
                 sdwsa = 70
-            }
+            } 
             if(Question_Item == 58){
                 sdwsa = 370
                 sdwsa = sdwsa + 70 + textlArr[indexPath.row]

@@ -18,6 +18,7 @@ class ProjectListViewController: UIViewController{
     var user:GIDGoogleUser!
     var PlistList = NSMutableArray () as! [String]
     var PlistListCanBtn = NSMutableArray () as! [Bool]
+    var projectname : String?
     
     static var ProjectInformationList = NSMutableDictionary()
     @IBOutlet weak var ProjectListView: UITableView!
@@ -155,46 +156,22 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
         let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(PlistList[indexPath.row])")!
         print(ProjectInformation)
         if PlistListCanBtn[indexPath.row] == true {
-            THTool.alert(title: "Whether to view", 
-                         message: nil, 
-                         confirm: "Update", 
-                         cannel: "View", 
-                         selfVC: self,
-                         completion: { type in
-                            switch type {
-                            case .defualt:
-                                if(self.NetWork == "wifi的网络"){
-                                    self.updateProjectName(ProjectName: ProjectName)
-                                }else if(self.NetWork == "2G,3G,4G...的网络"){
-                                    THTool.alert(title: "系统提示", 
-                                                 message: "您当前正在使用数据网络，确认上传么",
-                                                 confirm: "好的",
-                                                 cannel:  "取消", 
-                                                 selfVC: self,
-                                                 completion: { type in
-                                                    switch type {
-                                                    case .defualt: self.updateProjectName(ProjectName: ProjectName)
-                                                        break
-                                                    case .cannel:
-                                                        break
-                                                    }
-                                                    
-                                    })
-                                }else{
-                                    let alertController = UIAlertController(title: "系统提示",
-                                                                            message: "您当前为无网络状态无法上传", preferredStyle: .alert)
-                                    let cancelAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
-                                    alertController.addAction(cancelAction)
-                                    self.present(alertController, animated: true, completion: nil)
-                                }
-                                break
-                            case .cannel:
-                                self.pushVC(projectID: ProjectName)
-                                break
+            THTool.aheet(title: "Whether to view", 
+                         message: nil,
+                         items: ["update" ,"view","cannel"], 
+                         itemView: tableView,
+                         indexPath: indexPath,
+                         selfVC: self) { index in
+                            if index == 0 {
+                                self.network(ProjectName: ProjectName)
+                            }else if index == 1 {
+                                self.projectname = ProjectName;
+                                self.pushVC(projectID: ProjectName ,update: false) 
                             }
-            })
+            }
         }else{ 
-          pushVC(projectID: ProjectName)  
+            self.projectname = ProjectName;
+            pushVC(projectID: ProjectName ,update: true)  
         }
     }
     // 开启编辑模式
@@ -239,6 +216,32 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
 // MARK: method
 extension ProjectListViewController
 {
+    fileprivate func network(ProjectName:String) {
+        if(self.NetWork == "wifi的网络"){
+            self.updateProjectName(ProjectName: ProjectName)
+        }else if(self.NetWork == "2G,3G,4G...的网络"){
+            THTool.alert(title: "系统提示", 
+                         message: "您当前正在使用数据网络，确认上传么",
+                         confirm: "好的",
+                         cannel:  "取消", 
+                         selfVC: self,
+                         completion: { type in
+                            switch type {
+                            case .defualt: self.updateProjectName(ProjectName: ProjectName)
+                                break
+                            case .cannel:
+                                break
+                            }
+                            
+            })
+        }else{
+            let alertController = UIAlertController(title: "系统提示",
+                                                    message: "您当前为无网络状态无法上传", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "好的", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
     
     /// 上传问卷
     ///
@@ -258,15 +261,19 @@ extension ProjectListViewController
                 ProjectListView.reloadRows(at: [[0,index]], with: .automatic)
             }
         }
-   }
+    }
     
     /// 跳转
-    fileprivate func pushVC(projectID:String)
+    fileprivate func pushVC(projectID:String , update:Bool)
     {
         let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
         let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
         vc.prejectID = projectID;
+        vc.saveResultBlock = {
+            self.updateProjectName(ProjectName: self.projectname!)
+        }
         vc.isHistory = true
+        vc.isUpdate = update
         self.showDetailViewController(vc, sender: nil)
     }
 }

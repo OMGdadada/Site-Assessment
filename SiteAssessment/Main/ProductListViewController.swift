@@ -99,6 +99,7 @@ class ProductListViewController: UIViewController {
                                                 message: "Please enter new project id", preferredStyle: .alert)
         alertController.addTextField {
             (textField: UITextField!) -> Void in
+            textField.keyboardType = UIKeyboardType.numberPad;
             textField.placeholder = "Project Id"
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

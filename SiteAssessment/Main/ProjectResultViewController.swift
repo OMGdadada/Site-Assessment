@@ -16,6 +16,7 @@ class ProjectResultViewController: UIViewController {
     
     lazy var dataSoure:NSMutableArray = NSMutableArray.init() // 数据源
     var prejectID:String? = ""
+    var isUpdate:Bool = false;
     
     var saveResultBlock:SaveResultBlock?
     
@@ -41,12 +42,19 @@ class ProjectResultViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func save(_ sender: UIBarButtonItem) {
+        if isUpdate {
+            return
+        }
         if count > 0 {
+            
             self.dismiss(animated: true, completion: nil)
         }else{
             if saveResultBlock != nil{
                 saveResultBlock!()
             } 
+            if isHistory {
+                self.dismiss(animated: true, completion: nil) 
+            }
         }
         
     }
@@ -63,6 +71,9 @@ extension ProjectResultViewController
     fileprivate func congifureSubView() {
         //隐藏保存item
         if isHistory {
+            saveItem.title = "Submit";
+        }
+        if isUpdate {
             saveItem.title = nil;
         }
         //初始化
@@ -560,7 +571,7 @@ extension ProjectResultViewController
                             let value:String = projects["sa_panelDistance"] as! String
                             if value != "NULL" {
                                 let strs:[String] = (value.components(separatedBy: ","))
-                                question.defaultValue = "Up:\(strs[1]),Down:\(strs[3]), Left:\(strs[0]),Right:\(strs[3])"
+                                question.defaultValue = "Up:\(strs[1]), Left:\(strs[0]), Down:\(strs[3]), Right:\(strs[2])"
                             }
                         }
                         

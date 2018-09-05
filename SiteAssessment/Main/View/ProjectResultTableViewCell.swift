@@ -24,22 +24,7 @@ class ProjectResultTableViewCell: UITableViewCell {
             }else{
                 detail.textColor = UIColor.black
             }
-            if question?.question == "Truss Spacing:" {
-                if question?.defaultValue != "Incomplete" {
-                    detail.text = "\(question?.defaultValue ?? "")“ O/C"
-                }else{
-                     detail.text =  question?.defaultValue ?? " "
-                }
-            }else if question?.question == "Breaker Panel Amp:" {
-                if question?.defaultValue != "Incomplete" {
-                    detail.text = "\(question?.defaultValue ?? "")AMP"
-                }else{
-                    detail.text =  question?.defaultValue ?? " "
-                }
-            }else{
-                detail.text =  question?.defaultValue ?? " " 
-            }
-           
+            detail.text =  question?.defaultValue ?? " "
         }
     }
     override func awakeFromNib() {

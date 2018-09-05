@@ -49,4 +49,37 @@ class THTool: NSObject {
         }))
         (selfVC as! UIViewController).present(alertController, animated: true, completion: nil)
     }
+    
+    /// 下面弹出提示框
+    ///
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 副标题
+    ///   - items: item集合
+    ///   - selfVC: viewcontroller
+    ///   - completion: 回调
+    class func aheet(title:String? , 
+                     message:String?,
+                     items:Array<String>,
+                     itemView:UITableView,
+                     indexPath:IndexPath,
+                     selfVC:Any,
+                     completion:((_ index:Int) -> Void)?)
+    {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        for item in 0..<items.count {
+            alertController.addAction(UIAlertAction(title: items[item], style: .default, handler: {
+                action in
+                print("点击了\(item)")
+                completion!(item)
+            }))
+        }
+
+        //alertController.addAction(UIAlertAction(title: "取消", style: .cancel,
+                                               // handler: nil))
+        alertController.popoverPresentationController?.sourceView = (selfVC as! UIViewController).view
+        alertController.popoverPresentationController?.sourceRect = (itemView.cellForRow(at: indexPath)?.frame)!
+        (selfVC as! UIViewController).present(alertController, animated: true, completion: nil)
+    }
 }

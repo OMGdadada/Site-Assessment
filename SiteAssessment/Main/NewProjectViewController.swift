@@ -1139,6 +1139,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             
         }else{
             cell?.setinitlabel(lableStr: text,Item: Item!)
+            cell?.delageta = self;
             cell?.setTabelCheckbox(option: Option as! Array<Any>,QuestionItem: Item!)
             textlArr[indexPath.row] = CGFloat(((Option.count-1)/2)*60+80)
             if selectedCellIndexPaths.contains(indexPath as NSIndexPath) {
@@ -1809,3 +1810,9 @@ extension NewProjectViewController:UITextFieldDelegate {
     }
 }
 
+extension NewProjectViewController : QuestionsCellDelagate
+{
+    func textFiledChnage(textFied: UITextField, indexPath: IndexPath) {
+        TABLEVIEW.reloadRows(at: [indexPath], with: .automatic)
+    }
+}

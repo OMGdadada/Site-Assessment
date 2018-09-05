@@ -508,7 +508,7 @@
 		<array>
 			<dict>
 				<key>Question</key>
-				<string>Breaker Panel Amp:</string>
+				<string>Breaker Panel Amp(AMP):</string>
 				<key>option</key>
 				<array>
 					<string>60</string>
@@ -894,7 +894,7 @@
 			</dict>
 			<dict>
 				<key>Question</key>
-				<string>Truss Spacing:</string>
+				<string>Truss Spacing(&quot; O/C):</string>
 				<key>option</key>
 				<array>
 					<string>16</string>
@@ -903,7 +903,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>24&quot; O/C</string>
+				<string>24</string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>

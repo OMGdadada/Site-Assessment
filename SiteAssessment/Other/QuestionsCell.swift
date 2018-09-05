@@ -7,8 +7,16 @@
 //
 
 import UIKit
+public protocol QuestionsCellDelagate :NSObjectProtocol {
+    /// uitextFiled  发生改变
+    ///
+    /// - Parameter textFied: 文本框
+    func textFiledChnage(textFied:UITextField ,indexPath:IndexPath)
+}
 
 class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
+    var delageta:QuestionsCellDelagate?
+    
     let Screen_W = UIScreen.main.bounds.width
     let Screen_H = UIScreen.main.bounds.height
     var labelc : UILabel!
@@ -202,11 +210,12 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                 btn.setTitleColor(UIColor.black, for: .normal)
                 
                 //print(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1])
-                if(QuestionItem == "16" || QuestionItem == "22" || QuestionItem == "36"){
+                if(QuestionItem == "16" || QuestionItem == "22"){
+                  // || QuestionItem == "36"
                     if(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1] != ""){
                         
                         let SOPtion_10 = Int(QuestionsCell.OptionSelecred[Int(QuestionItem)!-1])
-                        let SOPtion_2 = String(SOPtion_10!,radix:2)
+                        let SOPtion_2 =  String(SOPtion_10!,radix:2)
                         var x=1
                         for char in SOPtion_2.reversed(){
                             if(x == i){
@@ -276,7 +285,8 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                 Option_2 = Option_2*2
             }
         }
-        if(Question_Item == 16 || Question_Item == 22 || Question_Item == 36){
+       // || Question_Item == 36
+        if(Question_Item == 16 || Question_Item == 22 ){
             if(QuestionsCell.OptionSelecred[Question_Item-1] == "" || QuestionsCell.OptionSelecred[Question_Item-1] == "0"){
                 QuestionsCell.OptionSelecred[Question_Item-1] = String(Option_2)
             }else{
@@ -343,28 +353,36 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-//        if(newText == ""){
-//            QuestionsCell.TextBoxLabel[textField.tag] = ""
-//            QuestionsCell.OptionSelecred[textField.tag] = ""
-//        }
+        //        if(newText == ""){
+        //            QuestionsCell.TextBoxLabel[textField.tag] = ""
+        //            QuestionsCell.OptionSelecred[textField.tag] = ""
+        //        }
         QuestionsCell.TextBoxLabel[textField.tag] = newText
         QuestionsCell.OptionSelecred[textField.tag] = newText
         return true
     }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField.tag == 16 {
+            delageta?.textFiledChnage(textFied: textField, indexPath: IndexPath(item: 7, section: 1))
+        }else if textField.tag == 21 {
+            delageta?.textFiledChnage(textFied: textField, indexPath: IndexPath(item: 12, section: 1))
+        }
+    }
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
-//        if(newText == ""){
-//            QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
-//            QuestionsCell.OptionSelecred[textView.tag] = "NULL"
-//        }
+        //        if(newText == ""){
+        //            QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
+        //            QuestionsCell.OptionSelecred[textView.tag] = "NULL"
+        //        }
         QuestionsCell.TextBoxLabel[textView.tag] = newText
         QuestionsCell.OptionSelecred[textView.tag] = newText
         return true
     }
     
-        
-        
+    
+    
 }
 extension NSRange {
     func toRange(string: String) -> Range<String.Index> {

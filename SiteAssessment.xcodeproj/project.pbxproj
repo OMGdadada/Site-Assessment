@@ -707,10 +707,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QSR8TSX4AA;
+				DEVELOPMENT_TEAM = BN4H5C83Z9;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -730,10 +730,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QSR8TSX4AA;
+				DEVELOPMENT_TEAM = BN4H5C83Z9;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = (

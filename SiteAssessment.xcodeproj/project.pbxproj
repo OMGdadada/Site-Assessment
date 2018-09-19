@@ -61,6 +61,8 @@
 		1647118B21319F810044BB0F /* SiteRootModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1647118A21319F810044BB0F /* SiteRootModel.m */; };
 		164711922132D7F00044BB0F /* THTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164711912132D7F00044BB0F /* THTool.swift */; };
 		1647119521357EB20044BB0F /* UIImag+Extension .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647119421357EB20044BB0F /* UIImag+Extension .swift */; };
+		166ABF512152951200023F6C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166ABF502152951100023F6C /* UIKit.framework */; };
+		166ABF532152951A00023F6C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166ABF522152951A00023F6C /* Foundation.framework */; };
 		16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */; };
 		16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */; };
 		16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD721359C7E0019AAD4 /* conmon.swift */; };
@@ -130,6 +132,8 @@
 		1647118A21319F810044BB0F /* SiteRootModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SiteRootModel.m; sourceTree = "<group>"; };
 		164711912132D7F00044BB0F /* THTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = THTool.swift; sourceTree = "<group>"; };
 		1647119421357EB20044BB0F /* UIImag+Extension .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImag+Extension .swift"; sourceTree = "<group>"; };
+		166ABF502152951100023F6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		166ABF522152951A00023F6C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResultHeadView.swift; sourceTree = "<group>"; };
 		16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectResultHeadView.xib; sourceTree = "<group>"; };
 		16AC3CD721359C7E0019AAD4 /* conmon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conmon.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				166ABF532152951A00023F6C /* Foundation.framework in Frameworks */,
+				166ABF512152951200023F6C /* UIKit.framework in Frameworks */,
 				9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +380,8 @@
 		2C9291195BD43E4958304FFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				166ABF522152951A00023F6C /* Foundation.framework */,
+				166ABF502152951100023F6C /* UIKit.framework */,
 				4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */,
 			);
 			name = Frameworks;
@@ -543,7 +551,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -714,8 +722,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

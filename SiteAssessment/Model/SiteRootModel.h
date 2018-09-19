@@ -20,6 +20,7 @@
 @property (nonatomic ,copy) NSString *defaultValue;
 @property (nonatomic ,assign) BOOL isReply; // 是否回答  0 不是  1 是
 @property (nonatomic ,assign) BOOL isShow; // 是否回答  0 不是  1 是
+@property (nonatomic ,assign) BOOL isInit; // 是否回答  0 不是  1 是
 @property (nonatomic ,assign) BOOL IsNoShow;
 @property (nonatomic ,copy) NSString *Item;
 @property (nonatomic ,copy) NSArray *option;

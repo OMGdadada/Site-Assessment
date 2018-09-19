@@ -25,7 +25,7 @@ protocol TCheckBoxTableViewCellDelagate :NSObjectProtocol {
     /// - Parameters:
     ///   - cell: 当前cell
     ///   - question_item: 按钮tag
-    func didClick(cell:TCheckBoxTableViewCell ,question_item:NSInteger)
+    func didClick(cell:TCheckBoxTableViewCell ,itemStr:String? ,itemTag:NSInteger)
 }
 
 class TCheckBoxTableViewCell: UITableViewCell {
@@ -37,7 +37,7 @@ class TCheckBoxTableViewCell: UITableViewCell {
     var textView:UITextView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setinittitle()
+        
         selectionStyle = .none
     }
     
@@ -56,7 +56,7 @@ class TCheckBoxTableViewCell: UITableViewCell {
         if(Question_Item == 59){
             Question_Item = 58
         }
-        delageta?.didClick(cell: self, question_item: Question_Item)
+        delageta?.didClick(cell: self, itemStr: button.currentTitle ,itemTag: Question_Item)
     }
 }
 extension TCheckBoxTableViewCell {
@@ -67,7 +67,7 @@ extension TCheckBoxTableViewCell {
         titlelable.lineBreakMode = NSLineBreakMode.byWordWrapping
         titlelable.font = UIFont.systemFont(ofSize: 22)
         //titlelable.textAlignment = NSTextAlignment.center
-        self.contentView.addSubview(titlelable)
+        contentView.addSubview(titlelable)
         
         textFiled = UITextField()
         textFiled.font = UIFont.systemFont(ofSize: 18)
@@ -90,12 +90,22 @@ extension TCheckBoxTableViewCell {
     }
     
     func setTabelCheckbox(model:QuestionModel) {
-        
+        setinittitle()
+        titlelable.frame = CGRect(x: 15, y: 10 , width: Int(Screen_W - 20), height: 60)
+        titlelable.text = model.question;
+        if(model.isReply){
+            if(model.item != "17" && model.item != "23"){
+                titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+                titlelable.textColor = UIColor.white
+            }else{
+                if(model.isReply){
+                    titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+                }
+            }
+        }
         if !model.isShow {
             return
         }
-        titlelable.frame = CGRect(x: 15, y: 10 , width: Int(Screen_W - 20), height: 60)
-        titlelable.text = model.question;
         var hs = 0
         if(model.item == "6" || model.item == "24" || model.item == "38" || model.item == "42"){
             hs = 70

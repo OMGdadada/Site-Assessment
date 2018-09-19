@@ -359,10 +359,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        //        if(newText == ""){
-        //            QuestionsCell.TextBoxLabel[textView.tag] = "NULL"
-        //            QuestionsCell.OptionSelecred[textView.tag] = "NULL"
-        //        }
         QuestionsCell.TextBoxLabel[textView.tag] = newText
         QuestionsCell.OptionSelecred[textView.tag] = newText
         return true

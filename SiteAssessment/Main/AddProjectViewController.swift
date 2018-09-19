@@ -22,6 +22,8 @@ class AddProjectViewController: UIViewController {
     var NetWork = "不可用的网络(未连接)"
     var Project_Id:String!
     var dataSoure = NSMutableArray()
+    var currentIndexpath:IndexPath?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,18 +82,26 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:TCheckBoxTableViewCell = tableView.dequeueReusableCell(withIdentifier: kCheckBoxTableViewCell, for: indexPath) as! TCheckBoxTableViewCell;
+        var cell:TCheckBoxTableViewCell? = tableView.dequeueReusableCell(withIdentifier: kCheckBoxTableViewCell) as? TCheckBoxTableViewCell
+        if( cell != nil ){
+            for cell in cell!.contentView.subviews {
+                cell.removeFromSuperview()
+            }
+        }
+        cell = TCheckBoxTableViewCell(style: .default, reuseIdentifier: kCheckBoxTableViewCell)
+        
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
-        cell.delageta = self;
-        cell.setTabelCheckbox(model: dto.questionList[indexPath.row])
-        return cell
+        let modle:QuestionModel = dto.questionList[indexPath.row]
+        cell?.delageta = self;
+        cell?.setTabelCheckbox(model: dto.questionList[indexPath.row])
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
         let modle:QuestionModel = dto.questionList[indexPath.row]
         if modle.isShow {
-            return 150
+            return 500
         }else{
             return 70
         }
@@ -124,9 +134,23 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
         let modle:QuestionModel = dto.questionList[indexPath.row]
         modle.isShow = !modle.isShow
-
-        //刷新cell
-        tableView.reloadRows(at: [indexPath as IndexPath], with: .automatic)
+        if self.currentIndexpath != nil && indexPath != self.currentIndexpath{
+            //刷新cell
+            let site:SiteRootModel = dataSoure[currentIndexpath!.section] as! SiteRootModel
+            let question:QuestionModel = site.questionList[currentIndexpath!.row]
+            if question.isShow {
+                question.isShow = !question.isShow
+            }
+            print("currenttttt")
+            tableView.reloadRows(at: [indexPath , currentIndexpath!], with: .automatic)
+            self.currentIndexpath = indexPath
+        }else{
+            //刷新cell
+            print("tttt")
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            self.currentIndexpath = indexPath
+        }
+        
     }
 }
 //
@@ -141,8 +165,36 @@ extension AddProjectViewController : TCheckBoxTableViewCellDelagate
         
     }
     // 点击按钮
-    func didClick(cell: TCheckBoxTableViewCell, question_item: NSInteger) {
-       
+    func didClick(cell: TCheckBoxTableViewCell, itemStr: String?, itemTag: NSInteger) {
+        var indexPath:IndexPath = tableView.indexPath(for: cell) as! IndexPath
+        let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
+        let modle:QuestionModel = dto.questionList[indexPath.row]
+        modle.isReply = true
+        modle.defaultValue = itemStr
+        
+        let indexp:IndexPath = IndexPath(item: indexPath.row + 1, section: indexPath.section)
+    
+        switch itemTag {
+        case 15:
+            tableView?.reloadRows(at: [indexp as IndexPath], with: .automatic)
+            break
+        case 18:
+            tableView?.reloadRows(at: [indexp as IndexPath], with: .automatic)
+            break
+        case 21:
+            tableView?.reloadRows(at: [indexp as IndexPath], with: .automatic)
+            break
+        case 35:
+            tableView?.reloadRows(at: [indexp as IndexPath], with: .automatic)
+            break
+        case 53    :
+            tableView?.reloadRows(at: [indexp as IndexPath], with: .automatic)
+            break
+        default:
+            break
+        }
+        //
+        tableView?.reloadRows(at: [indexPath as IndexPath], with: .automatic)
     }
 }
 //

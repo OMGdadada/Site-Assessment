@@ -20,7 +20,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Asphalt Shingles</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -35,7 +35,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -50,7 +50,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -65,7 +65,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -82,7 +82,7 @@
 					<string>Replacement Required</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Suitable</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -97,7 +97,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -112,7 +112,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -127,7 +127,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -142,7 +142,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -164,7 +164,7 @@
 					<string>Indoor</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Outdoor</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -179,7 +179,7 @@
 					<string>Overhead</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Underground</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -198,7 +198,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Clay Brick</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -215,7 +215,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Standard</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -230,7 +230,7 @@
 					<string>&lt; 1M</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>&gt;= 1M</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -245,7 +245,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -264,7 +264,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -278,7 +278,7 @@
 					<string>M</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -293,7 +293,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -305,7 +305,7 @@
 				<key>option</key>
 				<array>
 					<string>Yes</string>
-					<string>No</string>
+					<string></string>
 				</array>
 				<key>DefaultValue</key>
 				<string>No</string>
@@ -327,7 +327,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -342,7 +342,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -359,7 +359,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -373,7 +373,7 @@
 					<string>M</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -388,7 +388,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -403,7 +403,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -418,7 +418,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -433,7 +433,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -448,7 +448,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -463,7 +463,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -478,7 +478,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -493,7 +493,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -519,7 +519,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>200AMP</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -536,7 +536,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Basement</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -551,7 +551,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -566,7 +566,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -583,7 +583,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -597,7 +597,7 @@
 					<string>Please measure the distances surrounding the electrical breaker panel and clearly indicate the dimensions below:</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -612,7 +612,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -627,7 +627,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -642,7 +642,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -657,7 +657,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -679,7 +679,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -694,7 +694,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -709,7 +709,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -724,7 +724,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -739,7 +739,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -754,7 +754,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -769,7 +769,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -784,7 +784,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Yes</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -808,7 +808,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Plywood</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -823,7 +823,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -838,7 +838,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -854,7 +854,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>Ongoing</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -869,7 +869,7 @@
 					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>No</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -886,7 +886,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -903,7 +903,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>24</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -920,7 +920,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>2x4</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -944,7 +944,7 @@
 					<string>Other</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
@@ -965,7 +965,7 @@
 					<string>Notes</string>
 				</array>
 				<key>DefaultValue</key>
-				<string>NULL</string>
+				<string></string>
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>

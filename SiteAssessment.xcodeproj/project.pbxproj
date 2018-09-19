@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -64,6 +64,10 @@
 		16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */; };
 		16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */; };
 		16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD721359C7E0019AAD4 /* conmon.swift */; };
+		5ED483882151F50F00401A5F /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483872151F50F00401A5F /* AddProjectViewController.swift */; };
+		5ED4839321523A3700401A5F /* TQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4839221523A3700401A5F /* TQuestionTableViewCell.swift */; };
+		5ED483952152434400401A5F /* TCheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */; };
+		5ED48397215253B600401A5F /* TDiagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED48396215253B600401A5F /* TDiagramTableViewCell.swift */; };
 		9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +134,10 @@
 		16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectResultHeadView.xib; sourceTree = "<group>"; };
 		16AC3CD721359C7E0019AAD4 /* conmon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conmon.swift; sourceTree = "<group>"; };
 		4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SiteAssessment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ED483872151F50F00401A5F /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
+		5ED4839221523A3700401A5F /* TQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TQuestionTableViewCell.swift; sourceTree = "<group>"; };
+		5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCheckBoxTableViewCell.swift; sourceTree = "<group>"; };
+		5ED48396215253B600401A5F /* TDiagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDiagramTableViewCell.swift; sourceTree = "<group>"; };
 		69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.release.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,6 +298,7 @@
 				1647114421315BB20044BB0F /* ProjectListViewController.swift */,
 				1647114121315BB20044BB0F /* NewProjectViewController.swift */,
 				16471184213162660044BB0F /* ProjectResultViewController.swift */,
+				5ED483872151F50F00401A5F /* AddProjectViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -302,6 +311,9 @@
 				1647114D21315C9F0044BB0F /* UploadProject.swift */,
 				1647114E21315C9F0044BB0F /* CollapsibleTableViewHeader.swift */,
 				1647114F21315C9F0044BB0F /* QuestionsCell.swift */,
+				5ED4839221523A3700401A5F /* TQuestionTableViewCell.swift */,
+				5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */,
+				5ED48396215253B600401A5F /* TDiagramTableViewCell.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -412,11 +424,12 @@
 					08CA58882109ACC100AF4059 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 0940;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 08CA58842109ACC100AF4059 /* Build configuration list for PBXProject "SiteAssessment" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -530,7 +543,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -546,6 +559,8 @@
 			files = (
 				0860F5A321186BE000E6B5CD /* ProjectInformation.swift in Sources */,
 				1647113A21315B7D0044BB0F /* HGImageCollectionViewController.swift in Sources */,
+				5ED48397215253B600401A5F /* TDiagramTableViewCell.swift in Sources */,
+				5ED483952152434400401A5F /* TCheckBoxTableViewCell.swift in Sources */,
 				1647115A21315CAA0044BB0F /* SiteAssessment.xcdatamodeld in Sources */,
 				1647118B21319F810044BB0F /* SiteRootModel.m in Sources */,
 				1647115121315C9F0044BB0F /* UIViewController.swift in Sources */,
@@ -562,7 +577,9 @@
 				1647113821315B7D0044BB0F /* HGImageCompleteButton.swift in Sources */,
 				1647115421315C9F0044BB0F /* QuestionsCell.swift in Sources */,
 				16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */,
+				5ED4839321523A3700401A5F /* TQuestionTableViewCell.swift in Sources */,
 				1647115321315C9F0044BB0F /* CollapsibleTableViewHeader.swift in Sources */,
+				5ED483882151F50F00401A5F /* AddProjectViewController.swift in Sources */,
 				08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */,
 				08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */,
 				08CA58E12109F92A00AF4059 /* KeyBoardTipView.swift in Sources */,
@@ -713,16 +730,14 @@
 				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaronsolar.siteassessment.SiteAssessment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SiteAssessment-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Debug;
 		};
@@ -736,15 +751,13 @@
 				DEVELOPMENT_TEAM = QSR8TSX4AA;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.polaronsolar.siteassessment.SiteAssessment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SiteAssessment-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 			};
 			name = Release;
 		};

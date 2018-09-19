@@ -17,13 +17,10 @@ public protocol QuestionsCellDelagate :NSObjectProtocol {
 class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     var delageta:QuestionsCellDelagate?
     
-    let Screen_W = UIScreen.main.bounds.width
-    let Screen_H = UIScreen.main.bounds.height
     var labelc : UILabel!
     var imagec : UIImageView!
     var textlabel : UILabel!
-    let radio_N:UIImage = UIImage(named: "radio_N")!
-    let radio_Y:UIImage = UIImage(named: "radio_Y")!
+
     //var	ischeck = false
     static var OptionSelecred : [String] = Array<Any>(repeating: "", count: 59) as! [String]
     static var TextBoxLabel : [String] = Array<Any>(repeating: "", count: 59) as! [String]
@@ -114,7 +111,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
                         labelc.textColor = UIColor.white
                     }
                 }
-                
             }
         }
         self.contentView.addSubview(labelc)
@@ -139,9 +135,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
         textlabel.font = UIFont.systemFont(ofSize: 15)
         textlabel.numberOfLines = 0
         let attributedString = NSMutableAttributedString(string: str)
-        //let paragraphStyle = NSMutableParagraphStyle()
-        //attributedString.addAttribute(NSParagraphStyleAttributeName, value: paragraphStyle, range: NSMakeRange(0, str.characters.count))
-        //attributedString.addAttribute(  <#NSAttributedStringKey#>, value: paragraphStyle, range: NSMakeRange(0, str.characters.count))
         textlabel.attributedText = attributedString
         self.contentView.addSubview(textlabel)
         textlabel.sizeToFit()
@@ -149,7 +142,7 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
         return attributedString
         
     }
-    func setTabelCheckbox(option : Array<Any>,QuestionItem : String) -> NSMutableAttributedString{
+    func setTabelCheckbox(option : Array<Any>,QuestionItem : String) {
         var hs = 0
         if(QuestionItem == "6" || QuestionItem == "24" || QuestionItem == "38" || QuestionItem == "42"){
             hs = 70
@@ -270,8 +263,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
             }
             
         }
-        let attributedString = NSMutableAttributedString(string:"true")
-        return attributedString
     }
     @objc func tapped(_ button:UIButton) {
         var Question_Item = button.tag/10
@@ -353,10 +344,6 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        //        if(newText == ""){
-        //            QuestionsCell.TextBoxLabel[textField.tag] = ""
-        //            QuestionsCell.OptionSelecred[textField.tag] = ""
-        //        }
         QuestionsCell.TextBoxLabel[textField.tag] = newText
         QuestionsCell.OptionSelecred[textField.tag] = newText
         return true

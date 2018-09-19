@@ -87,9 +87,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var TABLEVIEW: UITableView!
     
     var textlArr : [CGFloat] = NSArray() as! [CGFloat]
-    let ico_expand:UIImage = UIImage(named: "icon_mr")!
-    let ico_expand1:UIImage = UIImage(named: "icon_xl")!
-    
     var imagePicker:UIImagePickerController = UIImagePickerController()
     
     
@@ -680,7 +677,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             cell?.contentView.addSubview(Pickerimage)
             cell?.contentView.addSubview(TopText)
             cell?.contentView.addSubview(TopM)
-            cell?.contentView.addSubview(LeftText)
+            cell?.addSubview(LeftText)
             cell?.contentView.addSubview(LeftM)
             cell?.contentView.addSubview(RightText)
             cell?.contentView.addSubview(RightM)
@@ -1153,6 +1150,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         }
         return cell!
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let Ar = Arr[section] as! Dictionary<String, Any>
@@ -1166,33 +1164,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         header.delegate = self as CollapsibleTableViewHeaderDelegate
         
         return header
-        /*
-         
-         header.titleLabel.text = Ar["heading"]! as? String
-         header.arrowLabel.text = ">"
-         header.setCollapsed(selected[section])
-         
-         header.section = section
-         header.delegate = self
-         */
-        
-        //return header
     }
-    /*
-     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-     let Ar = Arr[section] as! Dictionary<String, Any>
-     let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
-     button.tag = section+1
-     button.backgroundColor = UIColor.white
-     button.setTitle(Ar["heading"]! as? String, for: .normal)
-     button.setTitleColor(UIColor.black, for: .normal)
-     //button.addTarget(self, action: SetSelected(button, tableView), for: .touchUpInside)
-     button.addTarget(self, action:#selector(SetSelected(_:)), for:.touchUpInside)
-     
-     
-     return Ar["heading"]! as? String
-     }
-     */
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 70
@@ -1468,7 +1440,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controller.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil)) // 取消按钮
         
-#if targetEnvironment(simulator)
+#if (arch(i386) || arch(x86_64)) && os(iOS)
 #else
         controller.addAction(UIAlertAction(title: "拍照选择", style: .default) { action in
             self.selectorSourceType(type: "camera")
@@ -1761,17 +1733,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     
-    
-    
-    
-    @objc func SetSelected(_ button:UIButton) {
-        for i in 0...Arr.count{
-            NewProjectViewController.selected[i] = "0"
-        }
-        NewProjectViewController.selected[button.tag-1] = "1"
-        //expandTable.reloadSections([button.tag-1 as Int], with: .automatic)
-        //[expandTable reloadSections:[NSIndexSet indexSetWithIndex:sender.tag-1] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

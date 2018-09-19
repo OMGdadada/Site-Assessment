@@ -8,6 +8,7 @@
 
 import Foundation
 import GoogleSignIn
+import GoogleAPIClientForREST
 
 class UploadProject{
     let user :GIDGoogleUser
@@ -185,9 +186,12 @@ class UploadProject{
         print(sendData)
         /* --------------------------- */
         
-        let urlParams = sendData.compactMap({ (key, value) -> String in
+        let urlParams = sendData.flatMap({ (key, value) -> String in
             return "\(key)=\(value)"
         }).joined(separator: "&")
+//        ({ (key, value) -> String in
+//            
+//        })
         
         urlRequest.httpBody = urlParams.data(using: .utf8)
         

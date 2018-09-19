@@ -8,6 +8,8 @@
 
 import UIKit
 import GoogleSignIn
+import GoogleAPIClientForREST
+
 
 class ProductListViewController: UIViewController {
     static var userList :GIDGoogleUser!
@@ -91,7 +93,11 @@ class ProductListViewController: UIViewController {
     */
     
     @objc func SetProjectList(_ button:UIButton){
-        self.performSegue(withIdentifier: "ShowProjectList", sender: user)
+        //self.performSegue(withIdentifier: "ShowProjectList", sender: user)
+        let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
+        self.present(vc, animated: true, completion: nil)
+    
     }
     
     @objc func SetNewProject(_ button:UIButton){

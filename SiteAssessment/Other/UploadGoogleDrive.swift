@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import GoogleAPIClientForREST
 
 enum GDriveError: Error {
     case NoDataAtPath

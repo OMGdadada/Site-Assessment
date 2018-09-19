@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         
-        
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
                                                   categories: nil)
         application.registerUserNotificationSettings(settings)

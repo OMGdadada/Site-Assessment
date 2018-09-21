@@ -91,26 +91,41 @@ extension TCheckBoxTableViewCell {
     
     func setTabelCheckbox(model:QuestionModel) {
         setinittitle()
-        titlelable.frame = CGRect(x: 15, y: 10 , width: Int(Screen_W - 20), height: 60)
-        titlelable.text = model.question;
-        if(model.isReply){
-            if(model.item != "17" && model.item != "23"){
-                titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
-                titlelable.textColor = UIColor.white
-            }else{
-                if(model.isReply){
-                    titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
-                }
-            }
+        var hs = 0
+        if(model.item == "6" || model.item == "24" || model.item == "38" || model.item == "42"){
+            hs = 70
+        }
+        titlelable.frame = CGRect(x: 15, y: 10 + hs, width: Int(Screen_W - 20), height: 60)
+        titlelable.text = model.question
+        
+        if(model.defaultValue != ""){
+            titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+            titlelable.textColor = UIColor.white
+        }
+        if model.item == "42" {
+            let plable:UILabel = UILabel()
+            
+            plable.frame = CGRect(x: 0, y: 10, width: Screen_W, height: 60)
+            plable.text = "Please clearly indicate on the corresponding layout diagram the following:"
+            plable.font = UIFont.systemFont(ofSize: 18)
+            contentView.addSubview(plable)
         }
         if !model.isShow {
             return
         }
-        var hs = 0
-        if(model.item == "6" || model.item == "24" || model.item == "38" || model.item == "42"){
-            hs = 70
-        }else if(model.item == "58"){
+        
+        if(model.item == "58"){
+            let plable:UILabel = UILabel()
+            
+            plable.frame = CGRect(x: 15, y: 80, width: Int(Screen_W - 20), height: 90)
+            plable.text = "Please circle the type of structure from the following choices. If the structure opromItemroperty does not correspond with any of the listed choices, please provide a sketch with all necessary measurements in the box below." 
+            plable.font = UIFont.systemFont(ofSize: 18)
             hs = 370
+            let Truss_Type:UIImage = UIImage(named: "Truss_Type")!
+            let Truss_Type_View:UIImageView!=UIImageView(frame: CGRect(x:15, y:190, width: UIScreen.main.bounds.width-40, height: 250))
+            Truss_Type_View.image = Truss_Type
+            contentView.addSubview(Truss_Type_View)
+            contentView.addSubview(plable)
         }
         var i = 1;
         for op in model.option{
@@ -119,7 +134,7 @@ extension TCheckBoxTableViewCell {
                 textFiled.tag = Int(model.item)! - 1
                 textFiled.placeholder = "Please Enter the Numbers"
                 if model.isReply {
-                    textFiled.text = model.defaultValue
+                    textFiled.text = model.other
                 }
                 let kv = KeyBoardView.init()
                 textFiled.inputView = kv
@@ -128,7 +143,7 @@ extension TCheckBoxTableViewCell {
             }else if(model.item == "59"){
                 textView.frame = CGRect(x: 20, y: 90 + hs, width: Int(Screen_W - 40), height: 220)
                 if model.isReply {
-                    textView.text = model.defaultValue
+                    textView.text = model.other
                 }
             }else{
                 let btn :UIButton = UIButton(type: UIButtonType.custom)
@@ -139,20 +154,10 @@ extension TCheckBoxTableViewCell {
                 }
                 btn.setTitle(op as? String, for:.normal)
                 btn.setTitleColor(UIColor.black, for: .normal)
-                if(model.item == "16" || model.item == "22"){
-                    
-                    if(model.isReply){
-                        btn.setImage(radio_Y, for: .normal)
-                    }else{
-                        btn.setImage(radio_N, for: .normal)
-                    }
-                    
+                if(btn.currentTitle == model.defaultValue){
+                    btn.setImage(radio_Y, for: .normal)
                 }else{
-                    if(btn.currentTitle == model.defaultValue){
-                        btn.setImage(radio_Y, for: .normal)
-                    }else{
-                        btn.setImage(radio_N, for: .normal)
-                    }
+                    btn.setImage(radio_N, for: .normal)
                 }
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 25)
                 btn.tag = Int(model.item)!*10+i
@@ -160,12 +165,12 @@ extension TCheckBoxTableViewCell {
                 btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
                 btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
                 i = i+1
-                if(op as? String == "Other" && model.item != "58"){
+                if(op as? String == "Other" && model.item != "58" && model.defaultValue == "Other"){
                     textlable.frame = CGRect(x: 20, y: 90+(i/2)*60 + hs, width: 100, height: 40)
                     textlable.text = "NOTE:"
                     textView.frame = CGRect(x: 20, y: 90+(i/2)*60+50 + hs, width: Int(Screen_W - 40), height: 220)
                     if(model.isReply){
-                        textView.text = model.defaultValue
+                        textView.text = model.other
                     }
                 }
                 self.contentView.addSubview(btn)

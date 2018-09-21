@@ -23,6 +23,39 @@ class UploadProject{
     func UploadProjectdata(_ Project_Id:String){
         _ = makePostCall(Project_Id)
     }
+    
+    func getSearchResults() {
+        if var urlComponents = URLComponents(string: "https://creator.zoho.com/api/json/crm/view/creditcheck_view") {
+            urlComponents.query = "authtoken=6be21a290c7115b73ff7df767a84ac34&zc_ownername=mohanwang&scope=creatorapi&criteria=(cck_oapp==\"2\")&&(cck_sapp==\"2\")"
+            
+            guard let url = urlComponents.url else { return }
+            
+            let session = URLSession.shared
+            
+            let task = session.dataTask(with: url) {
+                (data, response, error) in
+                guard error == nil else {
+                    print("error calling POST on /todos/1")
+                    print(error!)
+                    return
+                }
+                
+                guard let responseData = data else {
+                    print("Error: did not receive data")
+                    return
+                }
+                
+                guard let string = NSString(data: responseData, encoding: String.Encoding.utf8.rawValue) else {
+                    print("Error: data is wrong")
+                    return
+                }
+                
+                print(string)
+            }
+            task.resume()
+        }
+    }
+    
     func UploadProjectToGoogleDrive(_ Project_Id:String){
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
@@ -265,7 +298,5 @@ class UploadProject{
         }
         return nil
     }
-    
-    
 }
 

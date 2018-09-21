@@ -37,10 +37,15 @@ class ProjectResultViewController: UIViewController {
         congifureSubView()
         
     }
+    // 上传
+    @IBAction func update(_ sender: Any) {
+        
+    }
     
     @IBAction func cannel(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func save(_ sender: UIBarButtonItem) {
         if isUpdate {
             return
@@ -782,6 +787,7 @@ extension ProjectResultViewController
                     default:
                         break
                     }
+                    
                     break
                 case 5:
                     if (projects["sa_notes"] as! String == "") {

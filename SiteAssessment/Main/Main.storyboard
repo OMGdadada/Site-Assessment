@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -181,6 +182,38 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3ql-Zz-duC">
                                 <rect key="frame" x="0.0" y="108" width="1024" height="1258"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="bhq-t0-gbt">
+                                    <rect key="frame" x="0.0" y="145.5" width="1024" height="100"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkC-E1-Z34">
+                                            <rect key="frame" x="412" y="20" width="200" height="60"/>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="200" id="Sel-NE-85j"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <state key="normal" title="Update">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
+                                                    <integer key="value" value="30"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="update:" destination="6yA-wP-kRe" eventType="touchUpInside" id="lU5-S0-JqM"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="xkC-E1-Z34" secondAttribute="bottom" constant="20" id="E0k-PT-Rsr"/>
+                                        <constraint firstItem="xkC-E1-Z34" firstAttribute="centerX" secondItem="bhq-t0-gbt" secondAttribute="centerX" id="X7K-GM-hFl"/>
+                                        <constraint firstItem="xkC-E1-Z34" firstAttribute="top" secondItem="bhq-t0-gbt" secondAttribute="top" constant="20" id="qmy-ak-0W7"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectResultTableViewCell" rowHeight="72" id="F4S-b5-Icj" customClass="ProjectResultTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="1024" height="72"/>
@@ -275,6 +308,18 @@
                                                 <action selector="BackOn_Click:" destination="u8L-mI-jye" id="sbe-FK-Lyy"/>
                                             </connections>
                                         </barButtonItem>
+                                        <rightBarButtonItems>
+                                            <barButtonItem title="Edit" id="7ZS-zA-wvf">
+                                                <connections>
+                                                    <action selector="edit:" destination="u8L-mI-jye" id="MfG-tI-hrz"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="delete" id="MYa-RT-En9">
+                                                <connections>
+                                                    <action selector="didClickDelete:" destination="u8L-mI-jye" id="QiF-r7-xrg"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -282,6 +327,56 @@
                                 <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectListTableViewCell" rowHeight="59" id="MuS-m4-b2q" customClass="ProjectListTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="59"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MuS-m4-b2q" id="eAj-O2-TcV">
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="58.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZ0-dC-Arb">
+                                                    <rect key="frame" x="20" y="17.5" width="48" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSD-x4-Mox">
+                                                    <rect key="frame" x="88" y="19" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGu-11-3qs">
+                                                    <rect key="frame" x="904" y="0.0" width="100" height="58.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="100" id="ilz-QA-ksa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="didClikec:" destination="MuS-m4-b2q" eventType="touchUpInside" id="wCp-iD-nkY"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qSD-x4-Mox" firstAttribute="centerY" secondItem="bZ0-dC-Arb" secondAttribute="centerY" id="JKo-bW-7jy"/>
+                                                <constraint firstItem="bZ0-dC-Arb" firstAttribute="leading" secondItem="eAj-O2-TcV" secondAttribute="leading" constant="20" id="Y8e-rO-W2U"/>
+                                                <constraint firstAttribute="trailing" secondItem="kGu-11-3qs" secondAttribute="trailing" constant="20" id="jqs-7p-QjG"/>
+                                                <constraint firstItem="qSD-x4-Mox" firstAttribute="leading" secondItem="bZ0-dC-Arb" secondAttribute="trailing" constant="20" id="rCU-Ie-NgJ"/>
+                                                <constraint firstItem="kGu-11-3qs" firstAttribute="top" secondItem="eAj-O2-TcV" secondAttribute="top" id="rVr-ib-O7T"/>
+                                                <constraint firstAttribute="bottom" secondItem="kGu-11-3qs" secondAttribute="bottom" id="uCv-rk-Unw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="bZ0-dC-Arb" firstAttribute="centerY" secondItem="MuS-m4-b2q" secondAttribute="centerY" id="Xsu-9W-Bss"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="item" destination="kGu-11-3qs" id="fT0-NC-i0O"/>
+                                            <outlet property="status" destination="bZ0-dC-Arb" id="Sg9-CR-drl"/>
+                                            <outlet property="title" destination="qSD-x4-Mox" id="76K-Ix-Ewe"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="u8L-mI-jye" id="HdL-sL-jLO"/>
                                     <outlet property="delegate" destination="u8L-mI-jye" id="rfN-zE-BPP"/>
@@ -296,13 +391,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vyj-H2-73w"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="NI7-hf-Kgf"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ProjectListView" destination="cTl-WE-kk6" id="hQe-DY-5Jw"/>
+                        <outlet property="deleteItem" destination="MYa-RT-En9" id="gG5-zk-e3g"/>
+                        <outlet property="editItem" destination="7ZS-zA-wvf" id="1zV-Fi-GsY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoe-k1-NRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1948" y="-782"/>
+            <point key="canvasLocation" x="1947.6562499999998" y="-782.2840409956076"/>
         </scene>
     </scenes>
 </document>

@@ -11,12 +11,12 @@ protocol TDiagramTableViewCellDelagate :NSObjectProtocol {
     /// uitextFiled  发生改变
     ///
     /// - Parameter textFied: 文本框
-    func diagrmWithChange(textFiedstr:String? ,cell:TDiagramTableViewCell)
+    func diagrmWithChange(textFiedstr:String? ,cell:TDiagramTableViewCell ,textTag:NSInteger)
     
     /// uitextFiled  发生改变
     ///
     /// - Parameter textFied: 文本框
-    func diagrmWithValue(textFiedstr:String? ,cell:TDiagramTableViewCell)
+    func diagrmWithValue(textFiedstr:String? ,cell:TDiagramTableViewCell ,textTag:NSInteger)
     
 }
 class TDiagramTableViewCell: UITableViewCell {
@@ -29,7 +29,7 @@ class TDiagramTableViewCell: UITableViewCell {
     var buttomText:UITextField!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         selectionStyle = .none
     }
     
@@ -46,21 +46,7 @@ class TDiagramTableViewCell: UITableViewCell {
 
 extension TDiagramTableViewCell
 {
-    func setinitlabel(lableStr : String,Item : String){
-        titleLable = UILabel()
-        titleLable.frame = CGRect(x: 15, y: 10, width: Int(Screen_W - 20), height: 60)
-        titleLable.textColor = UIColor.gray
-        titleLable.numberOfLines=0
-        titleLable.lineBreakMode = NSLineBreakMode.byWordWrapping
-        titleLable.font = UIFont.systemFont(ofSize: 25)
-        titleLable.textAlignment = NSTextAlignment.center
-        contentView.addSubview(titleLable)
-        
-        imagec = UIImageView()
-        imagec.frame = CGRect(x:Screen_W - ico_expand.size.width - 12, y:((40 - ico_expand.size.height) / 2 ) , width:ico_expand.size.width,height: ico_expand.size.height)
-        imagec.image = ico_expand
-        contentView.addSubview(imagec)
-        
+    func setinitlabel(){
         let Main_Breaker_Panel_Diagram:UIImage = UIImage(named: "Main_Breaker_Panel_Diagram")!
         let Pickerimage:UIImageView!=UIImageView(frame: CGRect(x:225, y:200, width: 300, height: 300))
         Pickerimage.image = Main_Breaker_Panel_Diagram
@@ -124,6 +110,46 @@ extension TDiagramTableViewCell
         buttomText.tag = 4000
     }
     
+    func refresh(model:QuestionModel)  {
+        titleLable = UILabel()
+        titleLable.frame = CGRect(x: 15, y: 10, width: Int(Screen_W - 20), height: 60)
+        titleLable.textColor = UIColor.gray
+        titleLable.numberOfLines=0
+        titleLable.lineBreakMode = NSLineBreakMode.byWordWrapping
+        titleLable.font = UIFont.systemFont(ofSize: 25)
+        titleLable.textAlignment = NSTextAlignment.center
+        contentView.addSubview(titleLable)
+        
+        imagec = UIImageView()
+        imagec.frame = CGRect(x:Screen_W - ico_expand.size.width - 12, y:((40 - ico_expand.size.height) / 2 ) , width:ico_expand.size.width,height: ico_expand.size.height)
+        imagec.image = ico_expand
+        contentView.addSubview(imagec)
+        titleLable.text = model.question
+        if model.isShow {
+            textLabel?.textColor = UIColor(red: 0.0000, green: 0.6824, blue: 0.4627, alpha: 1.0000)
+            imagec.image = ico_expand1
+        }else{
+            textLabel?.textColor = UIColor(red: 0.3961, green: 0.3961, blue: 0.3961, alpha: 1.0000)
+            imagec.image = ico_expand
+            return
+        }
+
+        let labelc = UILabel()
+        labelc.text = model.option[0] as? String
+        labelc.frame = CGRect(x: 10, y: 90 , width: Int(Screen_W-20), height: 60)
+        labelc.font = UIFont.systemFont(ofSize: 18)
+        labelc.numberOfLines=0
+        labelc.lineBreakMode = NSLineBreakMode.byWordWrapping
+        self.contentView.addSubview(labelc)
+        setinitlabel()
+        TopText.text = model.top
+        LeftText.text = model.left
+        RightText.text = model.right
+        buttomText.text = model.bottom
+        
+       
+    }
+    
 }
 
 extension TDiagramTableViewCell : UITextFieldDelegate
@@ -131,10 +157,10 @@ extension TDiagramTableViewCell : UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        delageta?.diagrmWithValue(textFiedstr: newText, cell: self)
+        delageta?.diagrmWithValue(textFiedstr: newText, cell: self ,textTag: textField.tag)
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        delageta?.diagrmWithChange(textFiedstr: nil, cell: self)
+        delageta?.diagrmWithChange(textFiedstr: nil, cell: self ,textTag: textField.tag)
     }
 }

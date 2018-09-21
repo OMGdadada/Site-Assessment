@@ -66,6 +66,8 @@
 		16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */; };
 		16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */; };
 		16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD721359C7E0019AAD4 /* conmon.swift */; };
+		5ECDAE9721539715004B7644 /* ProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */; };
+		5ECDAE9921539B06004B7644 /* HistoyDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDAE9821539B06004B7644 /* HistoyDto.swift */; };
 		5ED483882151F50F00401A5F /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483872151F50F00401A5F /* AddProjectViewController.swift */; };
 		5ED4839321523A3700401A5F /* TQuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED4839221523A3700401A5F /* TQuestionTableViewCell.swift */; };
 		5ED483952152434400401A5F /* TCheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */; };
@@ -138,6 +140,8 @@
 		16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectResultHeadView.xib; sourceTree = "<group>"; };
 		16AC3CD721359C7E0019AAD4 /* conmon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conmon.swift; sourceTree = "<group>"; };
 		4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SiteAssessment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListTableViewCell.swift; sourceTree = "<group>"; };
+		5ECDAE9821539B06004B7644 /* HistoyDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoyDto.swift; sourceTree = "<group>"; };
 		5ED483872151F50F00401A5F /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		5ED4839221523A3700401A5F /* TQuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TQuestionTableViewCell.swift; sourceTree = "<group>"; };
 		5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCheckBoxTableViewCell.swift; sourceTree = "<group>"; };
@@ -276,6 +280,7 @@
 			children = (
 				1647118921319F810044BB0F /* SiteRootModel.h */,
 				1647118A21319F810044BB0F /* SiteRootModel.m */,
+				5ECDAE9821539B06004B7644 /* HistoyDto.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				1647118721316B430044BB0F /* ProjectResultTableViewCell.swift */,
+				5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */,
 				16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */,
 				16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */,
 			);
@@ -578,6 +584,7 @@
 				08CA58E02109F92A00AF4059 /* KeyBoardModel.swift in Sources */,
 				1647113E21315B7D0044BB0F /* HGImagePickerController.swift in Sources */,
 				1647119521357EB20044BB0F /* UIImag+Extension .swift in Sources */,
+				5ECDAE9721539715004B7644 /* ProjectListTableViewCell.swift in Sources */,
 				16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */,
 				1647115221315C9F0044BB0F /* UploadProject.swift in Sources */,
 				164711922132D7F00044BB0F /* THTool.swift in Sources */,
@@ -591,6 +598,7 @@
 				08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */,
 				08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */,
 				08CA58E12109F92A00AF4059 /* KeyBoardTipView.swift in Sources */,
+				5ECDAE9921539B06004B7644 /* HistoyDto.swift in Sources */,
 				1647114921315BB20044BB0F /* ProjectListViewController.swift in Sources */,
 				1647114521315BB20044BB0F /* ViewController.swift in Sources */,
 				08CA588D2109ACC100AF4059 /* AppDelegate.swift in Sources */,

@@ -453,6 +453,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             }
         }
         let PorjectList = [
+            "ststus":1,
             "uploaded":false,
             "Datauploaded":false,
             "Answer":[
@@ -725,7 +726,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
             }
             cell?.setinitlabel(lableStr: text,Item: Item!)
             if(Item == "6"){
-                
                 
                 cell?.viewWithTag(600)?.removeFromSuperview()
                 let Img_Btn :UIButton = UIButton(frame: CGRect(x:(UIScreen.main.bounds.width/3)*CGFloat(Pickerimage6_Nums%3)+10, y : 150+(UIScreen.main.bounds.width/3)*CGFloat(Pickerimage6_Nums/3)+10, width: (UIScreen.main.bounds.width/3)-20, height: (UIScreen.main.bounds.width/3)-20))
@@ -1211,10 +1211,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 }else{
                     sdwsa = sdwsa + 70 + textlArr[indexPath.row]
                 }
-                
             }
-            
-            
         }else{
             let Ar_r = Arr[indexPath.section] as! Dictionary<String,Any>
             let Ar_QuestionList = Ar_r["QuestionList"] as! NSMutableArray

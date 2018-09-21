@@ -269,6 +269,8 @@
 				<true/>
 				<key>Item</key>
 				<string>16</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -283,6 +285,8 @@
 				<true/>
 				<key>Item</key>
 				<string>17</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -305,7 +309,7 @@
 				<key>option</key>
 				<array>
 					<string>Yes</string>
-					<string></string>
+					<string>No</string>
 				</array>
 				<key>DefaultValue</key>
 				<string>No</string>
@@ -313,6 +317,8 @@
 				<true/>
 				<key>Item</key>
 				<string>19</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -332,6 +338,8 @@
 				<true/>
 				<key>Item</key>
 				<string>20</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -347,6 +355,8 @@
 				<true/>
 				<key>Item</key>
 				<string>21</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -364,6 +374,8 @@
 				<true/>
 				<key>Item</key>
 				<string>22</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -378,6 +390,8 @@
 				<true/>
 				<key>Item</key>
 				<string>23</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -393,6 +407,8 @@
 				<true/>
 				<key>Item</key>
 				<string>24</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -408,6 +424,8 @@
 				<true/>
 				<key>Item</key>
 				<string>25</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -423,6 +441,8 @@
 				<true/>
 				<key>Item</key>
 				<string>26</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -438,6 +458,8 @@
 				<true/>
 				<key>Item</key>
 				<string>27</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -453,6 +475,8 @@
 				<true/>
 				<key>Item</key>
 				<string>28</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -468,6 +492,8 @@
 				<true/>
 				<key>Item</key>
 				<string>29</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -483,6 +509,8 @@
 				<true/>
 				<key>Item</key>
 				<string>30</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -498,6 +526,8 @@
 				<true/>
 				<key>Item</key>
 				<string>31</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 		</array>
 	</dict>
@@ -588,6 +618,8 @@
 				<true/>
 				<key>Item</key>
 				<string>36</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>
@@ -891,6 +923,8 @@
 				<true/>
 				<key>Item</key>
 				<string>55</string>
+				<key>ishidden</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>Question</key>

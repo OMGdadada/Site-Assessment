@@ -16,13 +16,16 @@ class ProjectListViewController: UIViewController{
     var NetWork = "不可用的网络(未连接)"
     
     var user:GIDGoogleUser!
-    var PlistList = NSMutableArray () as! [String]
+    var PlistList = NSMutableArray () as! [HistoyDto]
+    var completleList = NSMutableArray () as! [HistoyDto]
     var PlistListCanBtn = NSMutableArray () as! [Bool]
     var projectname : String?
     
     static var ProjectInformationList = NSMutableDictionary()
     @IBOutlet weak var ProjectListView: UITableView!
     
+    @IBOutlet weak var editItem: UIBarButtonItem!
+    @IBOutlet weak var deleteItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +36,32 @@ class ProjectListViewController: UIViewController{
         
         for i in ArrayList{
             if(i.contains(".plist")){
-                PlistList.append(i)
+                
+                var ProjectInformation :NSDictionary
+                ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(i)")!
+                let model:HistoyDto = HistoyDto()
+                switch (Int(ProjectInformation["ststus"] as! String)!) {
+                case 1:
+                    model.status = .Completed
+                    break
+                case 2:
+                     model.status = .Uploading
+                    break
+                case 3:
+                    model.status = .Waiting
+                    break
+                case 4:
+                    model.status = .Incomplete
+                    break
+                case 5:
+                    model.status = .uploadFailed
+                    break
+                default: break
+                    
+                }
+                
+                model.projectID = i
+                PlistList.append(model)
                 PlistListCanBtn.append(false)
             }
         }
@@ -74,19 +102,24 @@ class ProjectListViewController: UIViewController{
         self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
-    
+    @IBAction func edit(_ sender: Any) {
+        if ProjectListView.isEditing {
+            ProjectListView.setEditing(false, animated: true)
+        }else{
+            ProjectListView.setEditing(true, animated: true)
+        }
+    }
+
+    @IBAction func didClickDelete(_ sender: Any) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        //print(keyPath ?? "")
-        
         let projectInformation = object as!ProjectInformation
-        //print("回调\(String(describing: project.value(forKey:keyPath!)!))")
-        //print("进度1:\( project1.schedule*100/project1.Total)%")
-        //print("进度:\( project.schedule*100/project.Total)%")
         UpdateTableViewUI(projectInformation.ProjectName!)
     }
     
@@ -99,26 +132,20 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return PlistList.count
     }
-    func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return 1
-    }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let model:HistoyDto = PlistList[indexPath.row]
         
-        let Label = UILabel(frame: CGRect(x: 20, y: 0, width: UIScreen.main.bounds.width-40, height: 70))
+        let cell: ProjectListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProjectListTableViewCell", for: indexPath) as! ProjectListTableViewCell
         var ProjectInformation :NSDictionary
-        ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(PlistList[indexPath.row])")!
+        ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
         
-        let ProjectName = PlistList[indexPath.row].replacingOccurrences(of: ".plist", with: "")
+        let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
         
-        Label.text = "Project: \n \(ProjectName)"
-        Label.textColor = UIColor.black
-        Label.font = UIFont.systemFont(ofSize: 18)
-        Label.numberOfLines=0
+        cell.title.text = "Project: \n \(ProjectName!)"
+
         if(ProjectInformation["uploaded"] as? Bool == false){
-            Label.text = "\(Label.text!) (暂未上传完成) \n点击上传"
+            cell.title.text = "\(cell.title.text!) (暂未上传完成) \n点击上传"
             PlistListCanBtn[indexPath.row] = true
             for (offset: _ ,element: (key: key,value: _)) in ProjectListViewController.ProjectInformationList.enumerated(){
                 
@@ -126,33 +153,48 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                     let projectInformation = ProjectListViewController.ProjectInformationList[key] as! ProjectInformation
                     PlistListCanBtn[indexPath.row] = false
                     if (projectInformation.Total == 0){
-                        Label.text = "Project: \n \(ProjectName) (正在上传) 进度: 0%" 
+                        cell.title.text = "Project: \n \(ProjectName!) (正在上传) 进度: 0%"
                         
                     }else{
-                        Label.text = "Project: \n \(ProjectName) (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%" 
+                        cell.title.text = "Project: \n \(ProjectName!) (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
                         if(projectInformation.schedule*100/projectInformation.Total == 100){
                             PlistListCanBtn[indexPath.row] = false
-                            Label.text = "\(Label.text!) (上传完成)"
+                            cell.title.text = "\(cell.title.text!) (上传完成)"
                         }
                     }
                 }
             }
         }else{
             PlistListCanBtn[indexPath.row] = false
-            Label.text = "\(Label.text!) (上传完成)"
+            cell.title.text = "\(cell.title.text!) (上传完成)"
         }
-        cell.addSubview(Label)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
     
+//    - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSNumber *select = self.dataArray[indexPath.row];
+//    if (![self.selectArray containsObject:select]) {
+//    [self.selectArray addObject:select];
+//    }
+//    }
+//
+//    - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    NSNumber *select = self.dataArray[indexPath.row];
+//    if ([self.selectArray containsObject:select]) {
+//    [self.selectArray removeObject:select];
+//    }
+//    }
+    
     //处理选中事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         print("选中的Cell 为\(PlistList[indexPath.row])")
-        let ProjectName = PlistList[indexPath.row].replacingOccurrences(of: ".plist", with: "")
+        let model:HistoyDto = PlistList[indexPath.row]
+        
+        let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
         let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(PlistList[indexPath.row])")!
         print(ProjectInformation)
         if PlistListCanBtn[indexPath.row] == true {
@@ -163,15 +205,15 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                          indexPath: indexPath,
                          selfVC: self) { index in
                             if index == 0 {
-                                self.network(ProjectName: ProjectName)
+                                self.network(ProjectName: ProjectName!)
                             }else if index == 1 {
                                 self.projectname = ProjectName;
-                                self.pushVC(projectID: ProjectName ,update: false) 
+                                self.pushVC(projectID: ProjectName! ,update: false)
                             }
             }
         }else{ 
             self.projectname = ProjectName;
-            pushVC(projectID: ProjectName ,update: true)  
+            pushVC(projectID: ProjectName! ,update: true)
         }
     }
     // 开启编辑模式
@@ -193,14 +235,16 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             print("滑动删除")
-            let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(PlistList[indexPath.row])")!
+            let model:HistoyDto  = PlistList[indexPath.row]
+            
+            let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
             // 移除已经上传成功的文件
             if(ProjectInformation["uploaded"] as? Bool == true && ProjectInformation["Datauploaded"] as? Bool == true){
-                let ProjectName = PlistList[indexPath.row].replacingOccurrences(of: ".plist", with: "")
-                let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName).plist"
+                let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
+                let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName!).plist"
                 let Manager = FileManager.default
                 try! Manager.removeItem(atPath: filePath)
-                let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName)"
+                let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName!)"
                 let fileArray = Manager.subpaths(atPath: Folder)
                 
                 for fn in fileArray!{
@@ -257,7 +301,7 @@ extension ProjectListViewController
     // 更新上传进度
     fileprivate func UpdateTableViewUI(_ ProjectId:String){
         for (index , value) in PlistList.enumerated(){
-            if(value == "\(ProjectId).plist"){
+            if(value.projectID == "\(ProjectId).plist"){
                 ProjectListView.reloadRows(at: [[0,index]], with: .automatic)
             }
         }

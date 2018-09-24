@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -58,7 +56,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Na-no-KFo">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Site Assessment" id="EHg-m4-XEN">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="1uv-YQ-Euh">
@@ -75,7 +73,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JMl-L2-fYb">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
+                                <rect key="frame" x="0.0" y="70" width="1024" height="1296"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="quA-gF-pOb" id="gfK-hH-PA5"/>
@@ -112,7 +110,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EUm-CO-GlE">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Site Assessment" id="jjo-Al-bLL">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="n7Y-hQ-n08">
@@ -120,12 +118,16 @@
                                                 <action selector="cannel:" destination="0R8-vA-4Y6" id="60g-EU-I1i"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Review" id="ClZ-Ct-NDJ"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Review" id="ClZ-Ct-NDJ">
+                                            <connections>
+                                                <action selector="save:" destination="0R8-vA-4Y6" id="7iJ-62-ksC"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h25-Bf-fS8">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
+                                <rect key="frame" x="0.0" y="70" width="1024" height="1296"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="0R8-vA-4Y6" id="0aw-SY-RNB"/>
@@ -146,7 +148,6 @@
                         <viewLayoutGuide key="safeArea" id="Lqz-nU-hxT"/>
                     </view>
                     <connections>
-                        <outlet property="save" destination="ClZ-Ct-NDJ" id="JsN-Ch-Lj1"/>
                         <outlet property="tableView" destination="h25-Bf-fS8" id="ka5-YE-485"/>
                     </connections>
                 </viewController>
@@ -163,7 +164,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1t-g5-Sl2">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="70" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Review" id="Tus-mW-3n0">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="Bup-au-b38">
@@ -171,7 +172,7 @@
                                                 <action selector="cannel:" destination="6yA-wP-kRe" id="TK5-aS-GPK"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Submit" id="yL8-aa-ona">
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="yL8-aa-ona">
                                             <connections>
                                                 <action selector="save:" destination="6yA-wP-kRe" id="TQj-Rk-n4f"/>
                                             </connections>
@@ -180,40 +181,8 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3ql-Zz-duC">
-                                <rect key="frame" x="0.0" y="108" width="1024" height="1258"/>
+                                <rect key="frame" x="0.0" y="120" width="1024" height="1146"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="bhq-t0-gbt">
-                                    <rect key="frame" x="0.0" y="145.5" width="1024" height="100"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkC-E1-Z34">
-                                            <rect key="frame" x="412" y="20" width="200" height="60"/>
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="Sel-NE-85j"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                            <state key="normal" title="Update">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
-                                                    <integer key="value" value="30"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="update:" destination="6yA-wP-kRe" eventType="touchUpInside" id="lU5-S0-JqM"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="xkC-E1-Z34" secondAttribute="bottom" constant="20" id="E0k-PT-Rsr"/>
-                                        <constraint firstItem="xkC-E1-Z34" firstAttribute="centerX" secondItem="bhq-t0-gbt" secondAttribute="centerX" id="X7K-GM-hFl"/>
-                                        <constraint firstItem="xkC-E1-Z34" firstAttribute="top" secondItem="bhq-t0-gbt" secondAttribute="top" constant="20" id="qmy-ak-0W7"/>
-                                    </constraints>
-                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectResultTableViewCell" rowHeight="72" id="F4S-b5-Icj" customClass="ProjectResultTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="1024" height="72"/>
@@ -268,15 +237,38 @@
                                     <outlet property="delegate" destination="6yA-wP-kRe" id="c1Q-ig-p8e"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-Jm-Y10">
+                                <rect key="frame" x="412" y="1286" width="200" height="60"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="dY6-de-4j9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="update:" destination="6yA-wP-kRe" eventType="touchUpInside" id="es8-qL-d6h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3ql-Zz-duC" firstAttribute="top" secondItem="W1t-g5-Sl2" secondAttribute="bottom" id="1yK-hZ-Pgm"/>
                             <constraint firstItem="6ND-Qq-dfO" firstAttribute="trailing" secondItem="3ql-Zz-duC" secondAttribute="trailing" id="9KD-hy-jJC"/>
                             <constraint firstItem="W1t-g5-Sl2" firstAttribute="leading" secondItem="6ND-Qq-dfO" secondAttribute="leading" id="IIy-Be-TTj"/>
+                            <constraint firstItem="6ND-Qq-dfO" firstAttribute="bottom" secondItem="b6p-Jm-Y10" secondAttribute="bottom" constant="20" id="OjA-DA-Aq2"/>
                             <constraint firstItem="W1t-g5-Sl2" firstAttribute="trailing" secondItem="6ND-Qq-dfO" secondAttribute="trailing" id="ZPx-sP-J4e"/>
-                            <constraint firstItem="6ND-Qq-dfO" firstAttribute="bottom" secondItem="3ql-Zz-duC" secondAttribute="bottom" id="jzw-76-Uu3"/>
+                            <constraint firstItem="b6p-Jm-Y10" firstAttribute="centerX" secondItem="6ND-Qq-dfO" secondAttribute="centerX" id="cax-PS-E4J"/>
+                            <constraint firstItem="6ND-Qq-dfO" firstAttribute="bottom" secondItem="3ql-Zz-duC" secondAttribute="bottom" constant="100" id="jzw-76-Uu3"/>
                             <constraint firstItem="3ql-Zz-duC" firstAttribute="leading" secondItem="6ND-Qq-dfO" secondAttribute="leading" id="mPq-PT-g93"/>
+                            <constraint firstItem="b6p-Jm-Y10" firstAttribute="top" secondItem="3ql-Zz-duC" secondAttribute="bottom" constant="20" id="mrG-33-cit"/>
                             <constraint firstItem="W1t-g5-Sl2" firstAttribute="top" secondItem="6ND-Qq-dfO" secondAttribute="top" id="sgx-Yx-yE7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6ND-Qq-dfO"/>
@@ -285,6 +277,7 @@
                     <connections>
                         <outlet property="saveItem" destination="yL8-aa-ona" id="SGI-Hx-o5M"/>
                         <outlet property="tableView" destination="3ql-Zz-duC" id="pUg-mw-4rt"/>
+                        <outlet property="updateItem" destination="b6p-Jm-Y10" id="ptd-VY-sme"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eI4-oJ-GbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -300,7 +293,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bic-su-m7m">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
                                 <items>
                                     <navigationItem title="Site Assessment" id="ZdP-ux-Iuw">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="DaS-Re-j9k">

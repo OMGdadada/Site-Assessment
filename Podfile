@@ -5,6 +5,7 @@ pod 'Firebase/Auth'
 pod 'GoogleAPIClientForREST/Drive'
 pod 'Alamofire'
 pod 'MJExtension'
+pod 'IQKeyboardManager'
 end
 
 

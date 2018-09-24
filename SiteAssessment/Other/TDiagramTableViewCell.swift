@@ -11,12 +11,12 @@ protocol TDiagramTableViewCellDelagate :NSObjectProtocol {
     /// uitextFiled  发生改变
     ///
     /// - Parameter textFied: 文本框
-    func diagrmWithChange(textFiedstr:String? ,cell:TDiagramTableViewCell ,textTag:NSInteger)
+    func diagrmWithChange(textFiedstr:String? ,indexPath:IndexPath ,textTag:NSInteger)
     
     /// uitextFiled  发生改变
     ///
     /// - Parameter textFied: 文本框
-    func diagrmWithValue(textFiedstr:String? ,cell:TDiagramTableViewCell ,textTag:NSInteger)
+    func diagrmWithValue(textFiedstr:String? ,indexPath:IndexPath ,textTag:NSInteger)
     
 }
 class TDiagramTableViewCell: UITableViewCell {
@@ -27,6 +27,8 @@ class TDiagramTableViewCell: UITableViewCell {
     var LeftText:UITextField!
     var RightText:UITextField!
     var buttomText:UITextField!
+    var indexp:IndexPath?
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -109,8 +111,9 @@ extension TDiagramTableViewCell
         RightText.tag = 3000
         buttomText.tag = 4000
     }
-    
-    func refresh(model:QuestionModel)  {
+    //
+    func refresh(model:QuestionModel , indexpath:IndexPath)  {
+        indexp = indexpath
         titleLable = UILabel()
         titleLable.frame = CGRect(x: 15, y: 10, width: Int(Screen_W - 20), height: 60)
         titleLable.textColor = UIColor.gray
@@ -133,7 +136,7 @@ extension TDiagramTableViewCell
             imagec.image = ico_expand
             return
         }
-
+        //
         let labelc = UILabel()
         labelc.text = model.option[0] as? String
         labelc.frame = CGRect(x: 10, y: 90 , width: Int(Screen_W-20), height: 60)
@@ -142,6 +145,7 @@ extension TDiagramTableViewCell
         labelc.lineBreakMode = NSLineBreakMode.byWordWrapping
         self.contentView.addSubview(labelc)
         setinitlabel()
+        //
         TopText.text = model.top
         LeftText.text = model.left
         RightText.text = model.right
@@ -157,10 +161,10 @@ extension TDiagramTableViewCell : UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-        delageta?.diagrmWithValue(textFiedstr: newText, cell: self ,textTag: textField.tag)
+        delageta?.diagrmWithValue(textFiedstr: newText, indexPath: indexp! ,textTag: textField.tag)
         return true
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        delageta?.diagrmWithChange(textFiedstr: nil, cell: self ,textTag: textField.tag)
+        delageta?.diagrmWithChange(textFiedstr: nil, indexPath: indexp! ,textTag: textField.tag)
     }
 }

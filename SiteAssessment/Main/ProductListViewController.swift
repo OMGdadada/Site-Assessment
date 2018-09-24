@@ -94,12 +94,9 @@ class ProductListViewController: UIViewController {
     
     @objc func SetProjectList(_ button:UIButton){
         self.performSegue(withIdentifier: "ShowProjectList", sender: user)
-//        let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
-//        self.present(vc, animated: true, completion: nil)
     }
-    
     @objc func SetNewProject(_ button:UIButton){
+
         let alertController = UIAlertController(title: "Build a new project",
                                                 message: "Please enter new project id", preferredStyle: .alert)
         alertController.addTextField {
@@ -111,13 +108,16 @@ class ProductListViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default, handler: {
             action in
             //也可以用下标的形式获取textField let login = alertController.textFields![0]
-            let Project_Id = alertController.textFields!.first!
+            let Project_Id =  alertController.textFields!.first!
             let Project_Id_Pattern = "^[0-9]{19}$"
             let pred = NSPredicate(format: "SELF MATCHES %@", Project_Id_Pattern)
             let isMatch:Bool = pred.evaluate(with: Project_Id.text!)
             print("Project Id is Match ?:\(isMatch)")
             if(isMatch){
-                self.performSegue(withIdentifier: "ShowNewProject", sender: Project_Id.text!)
+                let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
+                vc.Project_Id = Project_Id.text!
+                self.present(vc, animated: true, completion: nil)
             }else{
                 let alertController = UIAlertController(title: "Enter the correct project ID (19-bit pure number)",
                                                         message: nil, preferredStyle: .alert)

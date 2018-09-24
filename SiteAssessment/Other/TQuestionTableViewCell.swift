@@ -88,9 +88,11 @@ extension TQuestionTableViewCell {
         titlelable.text = model.question
         titlelable.frame = CGRect(x: 15, y: 10 + hs, width: Int(Screen_W - 20), height: 60)
         print(model.defaultValue)
-        if( model.isReply){
-            titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
-            titlelable.textColor = UIColor.white
+        if(model.other != nil){
+            if model.other != "" {
+                titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+                titlelable.textColor = UIColor.white 
+            }
         }
         
     }
@@ -125,7 +127,7 @@ extension TQuestionTableViewCell {
                 let Image:UIImageView = UIImageView(frame: CGRect(x:(UIScreen.main.bounds.width/3)*CGFloat(i%3)+10, y : 80 + height + (UIScreen.main.bounds.width/3)*CGFloat(i/3)+10, width: (UIScreen.main.bounds.width/3)-20, height: (UIScreen.main.bounds.width/3)-20))
                 if model.images != nil {
                     print("fffffff \(model.images[i])")
-                    Image.image = model.images[i] as? UIImage
+                    Image.image = UIImage(contentsOfFile: model.images?[i] as! String) 
                 }
                 
                 //print(Image)

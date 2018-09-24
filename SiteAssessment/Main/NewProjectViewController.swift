@@ -532,14 +532,14 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         vc.saveResultBlock = { 
             var alertText = ""
             if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
-                UploadProject.Uploadshared.UploadProjectdata(self.Project_Id!)
+                //UploadProject.Uploadshared.UploadProjectdata(self.Project_Id!)
                 alertText = "Upload And Save data Success !"
                 if(self.NetWork == "wifi的网络"){
                     let projectinformation = ProjectInformation()
                     projectinformation.setValue(self.Project_Id, forKey: "ProjectName")
                     
                     ProjectListViewController.ProjectInformationList.addEntries(from: [self.Project_Id:projectinformation])
-                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.Project_Id)
+                    //UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.Project_Id)
                     
                     alertText = "Upload And Save data And Img Success !"
                 }
@@ -1437,7 +1437,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         controller.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil)) // 取消按钮
         
-#if (arch(i386) || arch(x86_64)) && os(iOS)
+        #if targetEnvironment(simulator)
 #else
         controller.addAction(UIAlertAction(title: "拍照选择", style: .default) { action in
             self.selectorSourceType(type: "camera")

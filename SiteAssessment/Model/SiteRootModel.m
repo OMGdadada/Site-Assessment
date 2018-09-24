@@ -28,4 +28,43 @@
 {
     return @{@"defaultValue":@"DefaultValue"};
 }
+
+- (NSString *)other
+{
+    if (_other == nil) {
+        return @"";
+    }
+    return _other;
+}
+- (NSString *)left
+{
+    if (_left == nil) {
+        return @"";
+    }
+    return _left;
+}
+
+- (NSString *)top
+{
+    if (_top == nil) {
+        return @"";
+    }
+    return _top;
+}
+
+- (NSString *)bottom
+{
+    if (_bottom == nil) {
+        return @"";
+    }
+    return _bottom;
+}
+
+- (NSString *)right
+{
+    if (_right == nil) {
+        return @"";
+    }
+    return _right;
+}
 @end

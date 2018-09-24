@@ -53,6 +53,7 @@ PODS:
   - GTMSessionFetcher/Core (1.1.8)
   - GTMSessionFetcher/Full (1.1.8):
     - GTMSessionFetcher/Core (= 1.1.8)
+  - IQKeyboardManager (6.1.1)
   - MJExtension (3.0.15.1)
 
 DEPENDENCIES:
@@ -60,6 +61,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - GoogleAPIClientForREST/Drive
   - GoogleSignIn
+  - IQKeyboardManager
   - MJExtension
 
 SPEC REPOS:
@@ -78,6 +80,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMOAuth2
     - GTMSessionFetcher
+    - IQKeyboardManager
     - MJExtension
 
 SPEC CHECKSUMS:
@@ -95,8 +98,9 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
+  IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
 
-PODFILE CHECKSUM: c710813c009fffb586783a87fb5274ad4e9e9513
+PODFILE CHECKSUM: 1572cbe5d37a00de2f09e38d0932ba3c1f1b814b
 
 COCOAPODS: 1.5.3

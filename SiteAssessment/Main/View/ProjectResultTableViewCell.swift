@@ -19,12 +19,19 @@ class ProjectResultTableViewCell: UITableViewCell {
             }else{
                 title.text = "\(question?.question ?? " "):"
             }
-            if question?.defaultValue == "Incomplete" {
+            if question?.other == "" || question?.other == nil {
+                detail.text = "Incomplete"
                 detail.textColor =  UIColor.red
             }else{
+                if question?.item == "37" {
+                    detail.text = "Up:\(question?.top ?? ""), Left:\(question?.left ?? ""), Down:\(question?.bottom ?? ""), Right:\(question?.right ?? "")"
+                }else{
+                   detail.text =  question?.other ?? " " 
+                }
+                
                 detail.textColor = UIColor.black
             }
-            detail.text =  question?.defaultValue ?? " "
+            
         }
     }
     override func awakeFromNib() {

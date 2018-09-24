@@ -7,31 +7,32 @@
 //
 
 import UIKit
+import Alamofire
 
 let projectResultHeadView:String = "ProjectResultHeadView"
 
 class ProjectResultViewController: UIViewController {
     typealias SaveResultBlock = (() -> Void)
     @IBOutlet weak var saveItem: UIBarButtonItem!
+    let manager = NetworkReachabilityManager()
+    var NetWork = "不可用的网络(未连接)"
     
-    lazy var dataSoure:NSMutableArray = NSMutableArray.init() // 数据源
+    @IBOutlet weak var updateItem: UIButton!
+    var dataSoure:NSMutableArray = NSMutableArray.init() // 数据源
     var prejectID:String? = ""
     var isUpdate:Bool = false;
+    var imgDic:[String:Any] = [:]
     
     var saveResultBlock:SaveResultBlock?
     
     var count:Int = 0 //  未答题num
     ///  查看问卷 1 new 问卷跳转  0 历史问卷跳转
     var isHistory:Bool = false 
-    
-    var selectProjects:Array<Any> = Array<Any>(repeating: "NULL", count: 59) as! [String] 
-    
+        
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchWithData()
-        
+                
         fetchWithSelectData()
         
         congifureSubView()
@@ -39,7 +40,43 @@ class ProjectResultViewController: UIViewController {
     }
     // 上传
     @IBAction func update(_ sender: Any) {
-        
+        if count == 0 {
+            saveQuestion()
+            let model:HistoyDto = HistoyDto()
+            model.uploaded = false
+            model.Datauploaded = false
+            model.projectID = self.prejectID
+            var alertText = ""
+            if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
+                UploadProject.Uploadshared.UploadProjectdata(self.prejectID! ,model: model)
+                alertText = "Upload And Save data Success !"
+                if(self.NetWork == "wifi的网络"){
+                    let projectinformation = ProjectInformation()
+                    projectinformation.setValue(self.prejectID, forKey: "ProjectName")
+                    ProjectListViewController.ProjectInformationList.addEntries(from: [self.prejectID:projectinformation])
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID!, model: model)
+                    
+                    alertText = "Upload And Save data And Img Success !"
+                }
+                
+            }else{
+                alertText = "Only Save Success !"
+            }
+            if (self.saveResultBlock != nil)  {
+                self.saveResultBlock!()
+            }
+            let alertController = UIAlertController(title: alertText,
+                                                    message: nil, preferredStyle: .alert)
+            //显示提示框
+            self.present(alertController, animated: true, completion: nil)
+            //两秒钟后自动消失
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+                self.presentedViewController?.dismiss(animated: false, completion: nil)
+                self.presentingViewController!.dismiss(animated: true, completion: nil)
+            }
+        }else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func cannel(_ sender: Any) {
@@ -47,22 +84,35 @@ class ProjectResultViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
-        if isUpdate {
-            return
+        if (self.saveResultBlock != nil)  {
+            self.saveResultBlock!()
         }
-        if count > 0 {
-            
-            self.dismiss(animated: true, completion: nil)
-        }else{
-            if saveResultBlock != nil{
-                saveResultBlock!()
-            } 
-            if isHistory {
-                self.dismiss(animated: true, completion: nil) 
-            }
-        }
+        saveQuestion()
         
     }
+    
+    fileprivate func saveQuestion() {
+        var num:Int = 0
+        if count == 0 {
+            num = 2
+        }else{
+            num = 3
+        }
+        let PorjectList = [
+            "ststus":num,
+            "uploaded":false,
+            "Datauploaded":false,
+            "Img":imgDic,
+            "questionList":SiteRootModel.mj_keyValuesArray(withObjectArray: dataSoure as? [Any])
+            ] as [String : Any]
+        if prejectID!.contains(".plist") {
+            prejectID = prejectID?.replacingOccurrences(of: ".plist", with: "")
+        }
+        let filePath:String = NSHomeDirectory() + "/Documents/\(prejectID!).plist"
+        NSDictionary(dictionary: PorjectList).write(toFile: filePath, atomically: true)
+        print(filePath)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,17 +124,31 @@ class ProjectResultViewController: UIViewController {
 extension ProjectResultViewController
 {
     fileprivate func congifureSubView() {
-        //隐藏保存item
-        if isHistory {
-            saveItem.title = "Submit";
+        manager?.listener = { status in var statusStr: String?
+            switch status {
+            case .unknown:
+                statusStr = "未识别的网络"
+                self.NetWork = statusStr!
+                break
+            case .notReachable:
+                statusStr = "不可用的网络(未连接)"
+                self.NetWork = statusStr!
+            case .reachable:
+                if (self.manager?.isReachableOnWWAN)! {
+                    statusStr = "2G,3G,4G...的网络"
+                    self.NetWork = statusStr!
+                } else if (self.manager?.isReachableOnEthernetOrWiFi)! {
+                    statusStr = "wifi的网络";
+                    self.NetWork = statusStr!
+                }
+                break
+            }
+            print(statusStr! as Any)
         }
-        if isUpdate {
-            saveItem.title = nil;
-        }
+        manager?.startListening()
         //初始化
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
-        tableView.tableFooterView = UIView()
         tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
         // 注册head
@@ -100,7 +164,7 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
         if dataSoure.count > 0 {
             let model:SiteRootModel = dataSoure[5] as! SiteRootModel
             let one:QuestionModel = model.questionList[0]
-            if one.defaultValue == "Incomplete" {
+            if one.defaultValue == "" {
                 return dataSoure.count - 1
             }
         }
@@ -131,18 +195,18 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
                 let five:QuestionModel = model.questionList[5]
                 let eight:QuestionModel = model.questionList[8]
                 let oneone:QuestionModel = model.questionList[11]
-                if five.defaultValue == "No" || five.defaultValue == "Incomplete" {
+                if five.defaultValue == "No" || five.defaultValue == "" {
                     if indexPath.row == 6 ||  indexPath.row == 7 {
                         return 0
                     } 
                 }
-                if eight.defaultValue == "No" || eight.defaultValue == "Incomplete" {
+                if eight.defaultValue == "No" || eight.defaultValue == "" {
                     if indexPath.row == 9 || indexPath.row == 10 || indexPath.row == 11 || indexPath.row == 13 || indexPath.row == 14 || indexPath.row == 15 || indexPath.row == 16 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 21  {
                         return 0
                     }
                     
                 }
-                if oneone.defaultValue == "No" || oneone.defaultValue == "Incomplete"  {
+                if oneone.defaultValue == "No" || oneone.defaultValue == ""  {
                     if indexPath.row == 12  {
                         return 0
                     }
@@ -150,7 +214,7 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
                 break
             case 2:
                 let three:QuestionModel = model.questionList[3]
-                if three.defaultValue == "No" || three.defaultValue == "Incomplete" {
+                if three.defaultValue == "No" || three.defaultValue == "" {
                     if indexPath.row == 4 {
                         return 0 
                     }
@@ -158,7 +222,7 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
                 break
             case 4:
                 let four:QuestionModel = model.questionList[4]
-                if four.defaultValue == "No" || four.defaultValue == "Incomplete" {
+                if four.defaultValue == "No" || four.defaultValue == "" {
                     if indexPath.row == 5 {
                         return 0 
                     }
@@ -198,602 +262,92 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
 
 extension ProjectResultViewController
 {
-    // 获取问卷数据
-    fileprivate func fetchWithData() {
-        let plistpath = Bundle.main.path(forResource: "QuestionsList", ofType: "plist")
-        let arr:NSArray = NSArray(contentsOfFile: plistpath!)!
-        dataSoure = SiteRootModel.mj_objectArray(withKeyValuesArray: arr)
-        tableView.reloadData()
-    }
+
     
     // 获取选择数据
     fileprivate func fetchWithSelectData()
     {
-        var ProjectInformation :NSMutableDictionary
-        ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(prejectID ?? "").plist")!
-        let projects:NSDictionary = ProjectInformation["Answer"] as! NSDictionary
+
+        if isHistory {
+            var ProjectInformation :NSDictionary
+            ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(prejectID ?? "")")!
+            dataSoure = SiteRootModel.mj_objectArray(withKeyValuesArray: ProjectInformation["questionList"])
+            tableView.reloadData()
+            return
+        }
+        
         for i  in 0..<dataSoure.count {
             let  model:SiteRootModel = dataSoure[i] as! SiteRootModel
             for j in 0..<model.questionList.count {
                 let question:QuestionModel = model.questionList[j]
                 switch i {
                 case 0:
-                    switch j {
-                    case 0:
-                        if (projects["sa_shingleMaterial"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_shingleMaterial"] as! String 
-                        }
-                        break
-                    case 1:
-                        if (projects["sa_missingShingles"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_missingShingles"] as! String 
-                        }
-                        break
-                    case 2:
-                        if (projects["sa_missingRidgeCap"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_missingRidgeCap"] as! String 
-                        }
-                        break
-                    case 3:
-                        if (projects["sa_curvedPlywood"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_curvedPlywood"] as! String 
-                        }
-                        break
-                    case 4:
-                        if (projects["sa_overallRoofCondition"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_overallRoofCondition"] as! String 
-                        }
-                        
-                        break
-                    case 5:
-                        if (projects["sa_full3DSiteImaging"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_full3DSiteImaging"] as! String 
-                        }
-                        break
-                    case 6:
-                        if (projects["sa_shinglePhotoCloseUp"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 7:
-                        if (projects["sa_shinglePhotoTopView"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 8:
-                        if (projects["sa_shinglePhotoBackView"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    default:
-                        break
+                    if (question.defaultValue == ""  ) {
+                        count = count + 1
                     }
                     break
                 case 1:
-                    
-                    switch j {
-                    case 0:
-                        if (projects["sa_meterLocation"] as! String == "") {
-                            question.defaultValue = "Incomplete"
+                    if j == 6 || j == 7 {
+                        let model5 = model.questionList[5]
+                        if model5.other == "Yes" && question.other == "" {
                             count = count + 1
+                        } 
+                    }else if j == 9 || j == 10 || j == 11 || j == 12 || j == 13 || j == 14 || j == 15 || j == 16 || j == 17 || j == 18  || j == 19 || j == 20 || j == 21{
+                        let model8 = model.questionList[8]
+                        if j == 12 {
+                            let model11 = model.questionList[11]
+                            if model11.other == "Yes" && question.other == ""  {
+                                count = count + 1
+                            }
                         }else{
-                            question.defaultValue = projects["sa_meterLocation"] as! String
+                            if model8.other == "Yes" && question.other == "" {
+                                count = count + 1
+                            }
                         }
-                        break
-                    case 1:
-                        if (projects["sa_connectionType"] as! String == "") {
-                            question.defaultValue = "Incomplete"
+                    }else{
+                        if (question.other == "" ) {
                             count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_connectionType"] as! String
                         }
-                        break
-                    case 2:
-                        if (projects["sa_exteriorWallMaterial"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_exteriorWallMaterial"] as! String
-                        }
-                        
-                        break
-                    case 3:
-                        if (projects["sa_meterHeight"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_meterHeight"] as! String
-                        }
-                        
-                        break
-                    case 4:
-                        if (projects["sa_gasMeterLocation"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_gasMeterLocation"] as! String
-                        }
-                        break
-                    case 5:
-                        if (projects["sa_meterObstruction"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_meterObstruction"] as! String
-                        }
-                        break
-                    case 6:
-                        if (projects["sa_obstructionType1"] as! String == "" ) {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_meterObstruction"] as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_obstructionType1"] as! String
-                        }
-                        break
-                    case 7:
-                        if (projects["sa_obstructionDistance"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_meterObstruction"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_obstructionDistance"] as! String
-                        }
-                        
-                        break
-                    case 8:
-                        if (projects["sa_trenchingRequired"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_trenchingRequired"] as! String
-                        }
-                        
-                        break
-                    case 9:
-                        if (projects["sa_trenchingOverDriveway"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_trenchingOverDriveway"] as! String
-                        }
-                        
-                        break
-                    case 10:
-                        if (projects["sa_trenchingMaterial"] as! String == "") {
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                            question.defaultValue = "Incomplete"
-                        }else{
-                            question.defaultValue = projects["sa_trenchingMaterial"] as! String
-                        }
-                        
-                        break
-                    case 11:
-                        if (projects["sa_trenchingObstructions"] as! String == "") {
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                            question.defaultValue = "Incomplete"
-                        }else{
-                            question.defaultValue = projects["sa_trenchingObstructions"] as! String
-                        }
-                        break
-                    case 12:
-                        if (projects["sa_trenchingObstructionType"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" && projects["sa_trenchingObstructions"]  as! String == "YES"{
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_trenchingObstructionType"] as! String
-                        }
-                        
-                        break
-                    case 13:
-                        if (projects["sa_trenchingDistance"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_trenchingDistance"] as! String
-                        }
-                        
-                        break
-                    case 14:
-                        if (projects["sa_meterPhotoCloseUp"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 15:
-                        if (projects["sa_meterPhotoWideAngle"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 16:
-                        if (projects["sa_meterHeightMeasurementPhoto"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 17:
-                        if (projects["sa_meterSurroundingAreaPhoto"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 18:
-                        if (projects["sa_meterObstructionPhoto"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 19:
-                        if (projects["sa_teckCableRouteReferencePhoto"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 20:
-                        if (projects["sa_trenchingRouteAerialPhoto"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    case 21:
-                        if (projects["sa_trenchingRouteGroundPhoto"] as! String == "") {
-                            if  projects["sa_trenchingRequired"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                            question.defaultValue = "Incomplete"
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        break
-                    default:
-                        break
                     }
                     break
                 case 2:
                     switch j {
-                    case 0:
-                        if (projects["sa_breakerPanelAmp"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_breakerPanelAmp"] as! String
-                        }
-                        
-                        break
-                    case 1:
-                        if (projects["sa_breakerPanelLocation"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_breakerPanelLocation"] as! String
-                        }
-                        
-                        break
-                    case 2:
-                        if (projects["sa_availableBreakerSlot"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_availableBreakerSlot"] as! String
-                        }
-                        break
-                    case 3:
-                        if (projects["sa_breakerPanelObstruction"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_breakerPanelObstruction"] as! String
-                        }
-                        
-                        break
                     case 4:
-                        if (projects["sa_obstructionType"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_breakerPanelObstruction"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_obstructionType"] as! String
+                        let model3 = model.questionList[3]
+                        if model3.other == "Yes" && model3.other == ""  {
+                            count = count + 1
                         }
-                        
                         break
                     case 5:
-                        if (projects["sa_panelDistance"] as! String == "") {
-                            question.defaultValue = "Incomplete"
+                        if question.other == "" {
                             count = count + 1
-                        }else{
-                            let value:String = projects["sa_panelDistance"] as! String
-                            if value != "NULL" {
-                                let strs:[String] = (value.components(separatedBy: ","))
-                                question.defaultValue = "Up:\(strs[1]), Left:\(strs[0]), Down:\(strs[3]), Right:\(strs[2])"
-                            }
-                        }
-                        
-                        break
-                    case 6:
-                        if (projects["sa_mainBreakerPanelPhotoCloseUp"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 7:
-                        if (projects["sa_mainBreakerPanelPhotoWideAngle"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 8:
-                        if (projects["sa_mainBreakerPanelPhotoInterior"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
-                        }
-                        
-                        break
-                    case 9:
-                        if (projects["sa_mainBreakerPanelPhoto360Degree"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = "Photo Uploaded"
                         }
                         break
-                        
                     default:
+                        if question.other == ""   {
+                            count = count + 1 
+                        }
                         break
                     }
                     break
                 case 3:
-                    switch j {
-                    case 0:
-                        if (projects["sa_locationElectricalMeter"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_locationElectricalMeter"] as! String
-                        }
-                        
-                        break
-                    case 1:
-                        if (projects["sa_locationGasMeter"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_locationGasMeter"] as! String
-                        }
-                        
-                        break
-                    case 2:
-                        if (projects["sa_locationObstruction"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_locationObstruction"] as! String
-                        }
-                        
-                        break
-                    case 3:
-                        if (projects["sa_locationMainBreakerPanel"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_locationMainBreakerPanel"] as! String
-                        }
-                        
-                        break
-                    case 4:
-                        if (projects["sa_distanceElectricalMeterToFrontCornerOfHouse"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_distanceElectricalMeterToFrontCornerOfHouse"] as! String
-                        }
-                        
-                        break
-                    case 5:
-                        if (projects["sa_distanceElectricalMeterToGasMeter"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_distanceElectricalMeterToGasMeter"] as! String
-                        }
-                        
-                        break
-                    case 6:
-                        if (projects["sa_distanceElectricalMeterToYardDoor"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_distanceElectricalMeterToYardDoor"] as! String
-                        }
-                        
-                        break
-                    case 7:
-                        if (projects["sa_distanceElectricalMeterToObstruction"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_distanceElectricalMeterToObstruction"] as! String
-                        }
-                        
-                        break
-                    default:
-                        break
+                    if  question.other == ""{
+                        count = count + 1
                     }
                     break
                 case 4:
                     switch j {
-                    case 0:
-                        if (projects["sa_roofSheathing"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_roofSheathing"] as! String
-                        }
-                        
-                        break
-                    case 1:
-                        if (projects["sa_signsOfMold"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_signsOfMold"] as! String
-                        }
-                        
-                        break
-                    case 2:
-                        if (projects["sa_signsOfWaterLeakage"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_signsOfWaterLeakage"] as! String
-                        }
-                        
-                        break
-                    case 3:
-                        if (projects["sa_waterLeakageType"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_waterLeakageType"] as! String
-                        }
-                        
-                        break
-                    case 4:
-                        if (projects["sa_signsOfDamage"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_signsOfDamage"] as! String
-                        }
-                        
-                        break
                     case 5:
-                        if (projects["sa_typeOfDamage"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            if  projects["sa_signsOfDamage"]  as! String == "Yes" {
-                                count = count + 1
-                            }
-                        }else{
-                            question.defaultValue = projects["sa_typeOfDamage"] as! String
-                        }
-                        
-                        break
-                    case 6:
-                        if (projects["sa_trussSpacing"] as! String == "") {
-                            question.defaultValue = "Incomplete"
+                        let model4:QuestionModel = model.questionList[4]
+                        if model4.other == "Yes" && question.other == "" {
                             count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_trussSpacing"] as! String
                         }
-                        
-                        break
-                    case 7:
-                        if (projects["sa_trussMemberSize"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_trussMemberSize"] as! String
-                        }
-                        
-                        break
-                    case 8:
-                        if (projects["sa_trussType"] as! String == "") {
-                            question.defaultValue = "Incomplete"
-                            count = count + 1
-                        }else{
-                            question.defaultValue = projects["sa_trussType"] as! String
-                        }
-                        
                         break
                     default:
+                        if  question.other == "" {
+                            count = count + 1
+                        }
                         break
-                    }
-                    
-                    break
-                case 5:
-                    if (projects["sa_notes"] as! String == "") {
-                        question.defaultValue = "Incomplete"
-                    }else{
-                        question.defaultValue = projects["sa_notes"] as! String
                     }
                     break
                 default :
@@ -802,10 +356,9 @@ extension ProjectResultViewController
             }
         }
         if  count > 0 {
-            saveItem.title = "Missing(\(count))"
-            saveItem.tintColor = UIColor.red 
+            updateItem.setTitle("Missing(\(count))", for: .normal)
+           // updateItem.setTitleColor(UIColor.red, for: .normal)
         }
-        
         tableView.reloadData()
     }
 }

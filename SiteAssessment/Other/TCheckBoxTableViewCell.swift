@@ -35,6 +35,7 @@ class TCheckBoxTableViewCell: UITableViewCell {
     var textFiled:UITextField!
     var textlable:UILabel!
     var textView:UITextView!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -44,19 +45,16 @@ class TCheckBoxTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
     @objc func tapped(_ button:UIButton) {
-        var Question_Item = button.tag/10
-        if(Question_Item == 59){
-            Question_Item = 58
-        }
-        delageta?.didClick(cell: self, itemStr: button.currentTitle ,itemTag: Question_Item)
+        
+        delageta?.didClick(cell: self, itemStr: button.currentTitle ,itemTag: button.tag)
     }
 }
 extension TCheckBoxTableViewCell {
@@ -86,7 +84,7 @@ extension TCheckBoxTableViewCell {
         textView.layer.borderWidth = 1.0
         textView.delegate = self
         contentView.addSubview(textView)
-
+        
     }
     
     func setTabelCheckbox(model:QuestionModel) {
@@ -98,9 +96,11 @@ extension TCheckBoxTableViewCell {
         titlelable.frame = CGRect(x: 15, y: 10 + hs, width: Int(Screen_W - 20), height: 60)
         titlelable.text = model.question
         
-        if(model.defaultValue != ""){
-            titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
-            titlelable.textColor = UIColor.white
+        if(model.other != nil){
+            if model.other != "" {
+                titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+                titlelable.textColor = UIColor.white 
+            }
         }
         if model.item == "42" {
             let plable:UILabel = UILabel()
@@ -126,25 +126,54 @@ extension TCheckBoxTableViewCell {
             Truss_Type_View.image = Truss_Type
             contentView.addSubview(Truss_Type_View)
             contentView.addSubview(plable)
+            var num:Int = 0
+            if model.images != nil {
+                num = model.images.count
+            }
+            if model.defaultValue == "Other" {
+                if(num == 0){
+                    let Img_Btn :UIButton = UIButton(frame: CGRect(x:(UIScreen.main.bounds.width/3)*CGFloat(num % 3)+10, y : 840+(UIScreen.main.bounds.width/3)*CGFloat(num / 3)+10, width: (UIScreen.main.bounds.width/3)-20, height: (UIScreen.main.bounds.width/3)-20))
+                    Img_Btn.setTitle("+", for:.normal)
+                    Img_Btn.setTitleColor(UIColor.black, for: .normal)
+                    Img_Btn.titleLabel?.font = UIFont.systemFont(ofSize: 105)
+                    Img_Btn.titleLabel?.textColor = UIColor.gray
+                    Img_Btn.tag = 5800
+                    Img_Btn.addTarget(self, action:#selector(tapped(_:)), for:.touchUpInside)
+                    Img_Btn.backgroundColor = UIColor(red: 239/256, green: 239/256, blue: 239/256, alpha: 1)
+                    contentView.addSubview(Img_Btn)
+                }
+                if(num == 1){
+                    let Image:UIImageView = UIImageView(frame: CGRect(x:(UIScreen.main.bounds.width/3)*CGFloat(0%3)+10, y : 840+(UIScreen.main.bounds.width/3)*CGFloat(0/3)+10, width: (UIScreen.main.bounds.width/3)-20, height: (UIScreen.main.bounds.width/3)-20))
+                    if model.images != nil {
+                        print("fffffff \(model.images[0])")
+                        Image.image = UIImage(contentsOfFile: model.images?[0] as! String) 
+                    }
+                    contentView.addSubview(Image)
+                }
+            }
+            
         }
         var i = 1;
+        let tag:Int = Int(model.item) ?? 0
         for op in model.option{
             if(op as? String == "M"){
                 textFiled.frame = CGRect(x: 20, y: 90 + hs, width: 225, height: 40)
                 textFiled.tag = Int(model.item)! - 1
                 textFiled.placeholder = "Please Enter the Numbers"
-                if model.isReply {
+                if model.isReply{
                     textFiled.text = model.other
                 }
+                textFiled.tag = tag
                 let kv = KeyBoardView.init()
                 textFiled.inputView = kv
                 kv.inputSource = textFiled
-
+                
             }else if(model.item == "59"){
                 textView.frame = CGRect(x: 20, y: 90 + hs, width: Int(Screen_W - 40), height: 220)
                 if model.isReply {
                     textView.text = model.other
                 }
+                textView.tag = tag
             }else{
                 let btn :UIButton = UIButton(type: UIButtonType.custom)
                 if(i%2 == 1){
@@ -172,6 +201,7 @@ extension TCheckBoxTableViewCell {
                     if(model.isReply){
                         textView.text = model.other
                     }
+                    textView.tag = tag
                 }
                 self.contentView.addSubview(btn)
             }
@@ -184,12 +214,22 @@ extension TCheckBoxTableViewCell : UITextFieldDelegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        if newText == "" {
+            titlelable.backgroundColor = UIColor.white
+            titlelable.textColor = UIColor.black 
+        }else{
+            titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+            titlelable.textColor = UIColor.white 
+        }
         delageta?.textFiledValue(textFiedstr: newText, cell: self);
         return true
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        delageta?.textFiledChnage(textFiedstr: textField.text, cell: self)
-    }
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        if textFiled.tag ==  Int((question?.item)!) {
+//           // delageta?.textFiledChnage(textFiedstr: textField.text, cell: self)
+//        }
+//        
+//    }
 }
 
 extension TCheckBoxTableViewCell : UITextViewDelegate
@@ -197,12 +237,22 @@ extension TCheckBoxTableViewCell : UITextViewDelegate
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let currentText = textView.text ?? ""
         let newText = (currentText as NSString).replacingCharacters(in: range, with: text)
+        if newText == "" {
+            titlelable.backgroundColor = UIColor.white
+            titlelable.textColor = UIColor.black 
+        }else{
+            titlelable.backgroundColor = UIColor(red: 42/256, green: 161/256, blue: 96/256, alpha: 1)
+            titlelable.textColor = UIColor.white 
+        }
         delageta?.textFiledValue(textFiedstr: newText, cell: self);
         return true
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-         delageta?.textFiledChnage(textFiedstr: textView.text, cell: self)
-    }
+//    func textViewDidEndEditing(_ textView: UITextView) {
+//        if textView.tag ==  Int((question?.item)!) {
+//            delageta?.textFiledChnage(textFiedstr: textView.text, cell: self)       
+//        }
+//        
+//    }
 }
 

@@ -20,8 +20,8 @@ class UploadProject{
         drive = UploadGoogleDrive(service)
     }
     static let Uploadshared = UploadProject()
-    func UploadProjectdata(_ Project_Id:String){
-        _ = makePostCall(Project_Id)
+    func UploadProjectdata(_ Project_Id:String , model:HistoyDto){
+        _ = makePostCall(Project_Id ,update: model.Datauploaded)
     }
     
     func getSearchResults() {
@@ -56,12 +56,12 @@ class UploadProject{
         }
     }
     
-    func UploadProjectToGoogleDrive(_ Project_Id:String){
+    func UploadProjectToGoogleDrive(_ Project_Id:String , model:HistoyDto?){
         var ProjectInformation :NSMutableDictionary
-        ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
-        if(ProjectInformation["Datauploaded"] as? Bool == false){
-            _ = makePostCall(Project_Id)
-        }else if(ProjectInformation["uploaded"] as? Bool == false){
+        ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model?.projectID ?? "").plist")!
+        if(model?.Datauploaded == false){
+            makePostCall(Project_Id , update: (model?.Datauploaded)!)
+        }else if(model?.uploaded == false){
             
             var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
             var ProjectImg_Total = 0
@@ -112,6 +112,7 @@ class UploadProject{
                                                     print("Upload file ID: \(fid)")
                                                     print("上传文件完成")
                                                     ImgInformation["uploaded"] = true
+                                                    ImgInformation["ststus"] = 0
                                                     ImgInformationList[i] = ImgInformation
                                                     ImgList[key] = ImgInformationList
                                                     ProjectInformation["Img"] = ImgList
@@ -125,6 +126,7 @@ class UploadProject{
                                                     if(ProjectImg_Total == ProjectImg_schedule){
                                                         print("项目上传完成")
                                                         ProjectInformation["uploaded"] = true
+                                                        ImgInformation["ststus"] = 1
                                                         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
                                                         NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
                                                         self.scheduleNotification(itemID: Project_Id )
@@ -134,7 +136,7 @@ class UploadProject{
                                         }
                                     }else{
                                         ProjectImg_schedule += 1
-                                        
+                                        ImgInformation["ststus"] = 1
                                         //ProjectListViewController.UpdateTableView()
                                         if(ProjectImg_Total == ProjectImg_schedule){
                                             print("项目上传完成")
@@ -198,7 +200,7 @@ class UploadProject{
     }
     
     
-    func makePostCall(_ Project_Id:String) {
+    func makePostCall(_ Project_Id:String ,update:Bool) {
         guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/add?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi") else {
             print("Error: cannot create URL")
             return
@@ -210,16 +212,16 @@ class UploadProject{
         
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
-        if(ProjectInformation["Datauploaded"] as? Bool == true){
+        if(update == true){
             return
         }
         print(NSHomeDirectory()+"/Documents/\(Project_Id).plist")
-        let SENDDATA: [String: Any] = (ProjectInformation["Answer"] as? Dictionary)!
-        let sendData: [String: Any] = SENDDATA
+        let SENDDATA: [String: String] = addAnswer(Project_Id) as! [String : String]
+        let sendData: [String: String] = SENDDATA
         print(sendData)
         /* --------------------------- */
         
-        let urlParams = sendData.flatMap({ (key, value) -> String in
+        let urlParams = sendData.compactMap({ (key, value) -> String in
             return "\(key)=\(value)"
         }).joined(separator: "&")
 //        ({ (key, value) -> String in
@@ -297,6 +299,298 @@ class UploadProject{
             }
         }
         return nil
+    }
+    
+    fileprivate func addAnswer(_ Project_Id:String) -> [String : Any?] {
+        
+        var answer:[String:String] = [:]
+        answer["sa_prj"] = Project_Id
+        var ProjectInformation :NSDictionary
+        ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
+        var dataSoure:NSMutableArray = NSMutableArray()
+        dataSoure = SiteRootModel.mj_objectArray(withKeyValuesArray: ProjectInformation["questionList"])
+        for i  in 0..<dataSoure.count {
+            let  model:SiteRootModel = dataSoure[i] as! SiteRootModel
+            for j in 0..<model.questionList.count {
+                let question:QuestionModel = model.questionList[j]
+                switch i {
+                case 0:
+                    switch j {
+                    case 0 :
+                        answer["sa_shingleMaterial"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 1 :
+                        answer["sa_missingShingles"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 2 :
+                        answer["sa_missingRidgeCap"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 3 :
+                        answer["sa_curvedPlywood"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 4 :
+                        answer["sa_overallRoofCondition"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 5 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_full3DSiteImaging"] = "Yes"  
+                        }else{ 
+                            answer["sa_full3DSiteImaging"] = "No"
+                        }
+                        break
+                    case 6 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_shinglePhotoCloseUp"] = "Yes"  
+                        }else{ 
+                            answer["sa_shinglePhotoCloseUp"] = "No"
+                        }
+                        break
+                    case 7 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_shinglePhotoTopView"] = "Yes"  
+                        }else{ 
+                            answer["sa_shinglePhotoTopView"] = "No"
+                        }
+                        break
+                    case 8 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_shinglePhotoBackView"] = "Yes"  
+                        }else{ 
+                            answer["sa_shinglePhotoBackView"] = "No"
+                        }
+                        break
+                    default: break
+                    }
+                    break
+                case 1:
+                    switch j {
+                    case 0:
+                    answer["sa_meterLocation"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 1:
+                        answer["sa_connectionType"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 2:
+                        answer["sa_exteriorWallMaterial"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 3:
+                        answer["sa_meterHeight"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 4:
+                        answer["sa_gasMeterLocation"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 5:
+                        answer["sa_meterObstruction"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 6:
+                        answer["sa_obstructionType1"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 7:
+                        answer["sa_obstructionDistance"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 8:
+                        answer["sa_trenchingRequired"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 9:
+                        answer["sa_trenchingOverDriveway"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 10:
+                        answer["sa_trenchingMaterial"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 11:
+                        answer["sa_trenchingObstructions"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 12:
+                        answer["sa_trenchingObstructionType"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 13:
+                        answer["sa_trenchingDistance"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 14 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_meterPhotoCloseUp"] = "Yes"  
+                        }else{ 
+                            answer["sa_meterPhotoCloseUp"] = "No"
+                        }
+                        break
+                    case 15 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_meterPhotoWideAngle"] = "Yes"  
+                        }else{ 
+                            answer["sa_meterPhotoWideAngle"] = "No"
+                        }
+                        break
+                    case 16 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_meterHeightMeasurementPhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_meterHeightMeasurementPhoto"] = "No"
+                        }
+                        break
+                    case 17 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_meterSurroundingAreaPhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_meterSurroundingAreaPhoto"] = "No"
+                        }
+                        break
+                    case 18 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_meterObstructionPhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_meterObstructionPhoto"] = "No"
+                        }
+                        break
+                    case 19 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_teckCableRouteReferencePhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_teckCableRouteReferencePhoto"] = "No"
+                        }
+                        break
+                    case 20 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_trenchingRouteAerialPhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_trenchingRouteAerialPhoto"] = "No"
+                        }
+                        break
+                    case 21 :
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_trenchingRouteGroundPhoto"] = "Yes"  
+                        }else{ 
+                            answer["sa_trenchingRouteGroundPhoto"] = "No"
+                        }
+                        break
+                    default: break  
+                    }
+                    break
+                case 2 : 
+                    switch j {
+                    case 0:
+                    answer["sa_breakerPanelAmp"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 1:
+                        answer["sa_breakerPanelLocation"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 2:
+                        answer["sa_availableBreakerSlot"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 3:
+                        answer["sa_breakerPanelObstruction"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 4:
+                        answer["sa_obstructionType"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 5:
+                       // answer["sa_mainBreakerPanelDiagram"] = question.other!
+                        break
+                    case 6:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_mainBreakerPanelPhotoCloseUp"] = "Yes"  
+                        }else{ 
+                            answer["sa_mainBreakerPanelPhotoCloseUp"] = "No"
+                        }
+                        break
+                    case 7:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_mainBreakerPanelPhotoWideAngle"] = "Yes"  
+                        }else{ 
+                            answer["sa_mainBreakerPanelPhotoWideAngle"] = "No"
+                        }
+                        break
+                    case 8:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_mainBreakerPanelPhotoInterior"] = "Yes"  
+                        }else{ 
+                            answer["sa_mainBreakerPanelPhotoInterior"] = "No"
+                        }
+                        break
+                    case 9:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_mainBreakerPanelPhoto360Degree"] = "Yes"  
+                        }else{ 
+                            answer["sa_mainBreakerPanelPhoto360Degree"] = "No"
+                        }
+                        break
+                    default: break  
+                    }
+                    break
+                case 3 : 
+                    switch j {
+                    case 0:
+                        answer["sa_locationElectricalMeter"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 1:
+                        answer["sa_locationGasMeter"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 2:
+                        answer["sa_locationObstruction"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 3:
+                        answer["sa_locationMainBreakerPanel"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 4:
+                        answer["sa_distanceElectricalMeterToFrontCornerOfHouse"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 5:
+                        answer["sa_distanceElectricalMeterToGasMeter"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 6:
+                        answer["sa_distanceElectricalMeterToYardDoor"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 7:
+                        answer["sa_distanceElectricalMeterToObstruction"] = question.other! == "" ?"No":question.other!
+                        break
+                    default: break  
+                    }
+                    break  
+                case 4 : 
+                    switch j {
+                    case 0:
+                        answer["sa_roofSheathing"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 1:
+                        answer["sa_signsOfMold"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 2:
+                        answer["sa_signsOfWaterLeakage"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 3:
+                        answer["sa_waterLeakageType"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 4:
+                        answer["sa_signsOfDamage"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 5:
+                        answer["sa_typeOfDamage"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 6:
+                        answer["sa_trussSpacing"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 7:
+                        answer["sa_trussMemberSize"] = question.other! == "" ?"No":question.other!
+                        break
+                    case 8:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_trussType"] = "Yes"  
+                        }else{ 
+                            answer["sa_trussType"] = question.other! == "" ?"No":question.other!
+                        }
+                        break
+                        
+                    default: break  
+                    }
+                    break 
+                case 5 :
+                    answer["sa_notes"] = question.other! == "" ?"No":question.other!
+                    break
+                default: break
+                }
+                
+            }
+        }
+        return answer
     }
 }
 

@@ -18,6 +18,10 @@ enum UpdateStatusType {
 class HistoyDto: NSObject {
     var status: UpdateStatusType = .Completed
     var projectID : String? = ""
+    var uploaded:Bool = false
+    var Datauploaded = false
+    
+    
     
     
 }

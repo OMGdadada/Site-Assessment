@@ -10,6 +10,7 @@ import UIKit
 import CoreData
 import Firebase
 import GoogleSignIn
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let manager:IQKeyboardManager = IQKeyboardManager.shared()
+        manager.isEnabled = true
+        manager.shouldResignOnTouchOutside = true
+        manager.shouldToolbarUsesTextFieldTintColor = true
+        manager.isEnableAutoToolbar = false
+        
         FIRApp.init(named: "SignIn")
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID

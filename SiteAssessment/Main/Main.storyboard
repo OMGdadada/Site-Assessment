@@ -39,7 +39,6 @@
                         <viewLayoutGuide key="safeArea" id="1jg-HT-93c"/>
                     </view>
                     <connections>
-                        <segue destination="quA-gF-pOb" kind="showDetail" identifier="ShowNewProject" id="ZFa-7N-SmU"/>
                         <segue destination="u8L-mI-jye" kind="showDetail" identifier="ShowProjectList" id="Ibg-oS-I59"/>
                     </connections>
                 </viewController>
@@ -153,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sg7-K8-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1920" y="838"/>
+            <point key="canvasLocation" x="1920" y="943"/>
         </scene>
         <!--Project Result View Controller-->
         <scene sceneID="QkT-2u-WwT">
@@ -180,6 +179,26 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-Jm-Y10">
+                                <rect key="frame" x="412" y="1286" width="200" height="60"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="dY6-de-4j9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="update:" destination="6yA-wP-kRe" eventType="touchUpInside" id="es8-qL-d6h"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="3ql-Zz-duC">
                                 <rect key="frame" x="0.0" y="120" width="1024" height="1146"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -237,26 +256,6 @@
                                     <outlet property="delegate" destination="6yA-wP-kRe" id="c1Q-ig-p8e"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6p-Jm-Y10">
-                                <rect key="frame" x="412" y="1286" width="200" height="60"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="dY6-de-4j9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Update">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="self.layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="self.layer.cornerRadius">
-                                        <integer key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="update:" destination="6yA-wP-kRe" eventType="touchUpInside" id="es8-qL-d6h"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -275,6 +274,7 @@
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="lay_bottom" destination="jzw-76-Uu3" id="K0k-Vf-Wan"/>
                         <outlet property="saveItem" destination="yL8-aa-ona" id="SGI-Hx-o5M"/>
                         <outlet property="tableView" destination="3ql-Zz-duC" id="pUg-mw-4rt"/>
                         <outlet property="updateItem" destination="b6p-Jm-Y10" id="ptd-VY-sme"/>
@@ -282,7 +282,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eI4-oJ-GbD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2592.7734375" y="192.82576866764273"/>
+            <point key="canvasLocation" x="2721" y="193"/>
         </scene>
         <!--Project List View Controller-->
         <scene sceneID="Z6K-9J-a2y">
@@ -396,7 +396,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoe-k1-NRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1947.6562499999998" y="-782.2840409956076"/>
+            <point key="canvasLocation" x="1822" y="-784"/>
         </scene>
     </scenes>
 </document>

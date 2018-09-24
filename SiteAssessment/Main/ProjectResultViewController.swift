@@ -14,6 +14,7 @@ let projectResultHeadView:String = "ProjectResultHeadView"
 class ProjectResultViewController: UIViewController {
     typealias SaveResultBlock = (() -> Void)
     @IBOutlet weak var saveItem: UIBarButtonItem!
+    @IBOutlet weak var lay_bottom: NSLayoutConstraint!
     let manager = NetworkReachabilityManager()
     var NetWork = "不可用的网络(未连接)"
     
@@ -84,11 +85,13 @@ class ProjectResultViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: UIBarButtonItem) {
+        if  isHistory {
+            return
+        }
+        saveQuestion()
         if (self.saveResultBlock != nil)  {
             self.saveResultBlock!()
         }
-        saveQuestion()
-        
     }
     
     fileprivate func saveQuestion() {
@@ -105,12 +108,9 @@ class ProjectResultViewController: UIViewController {
             "Img":imgDic,
             "questionList":SiteRootModel.mj_keyValuesArray(withObjectArray: dataSoure as? [Any])
             ] as [String : Any]
-        if prejectID!.contains(".plist") {
-            prejectID = prejectID?.replacingOccurrences(of: ".plist", with: "")
-        }
-        let filePath:String = NSHomeDirectory() + "/Documents/\(prejectID!).plist"
-        NSDictionary(dictionary: PorjectList).write(toFile: filePath, atomically: true)
-        print(filePath)
+        //两秒钟后自动消失
+        savePlistData(project: self.prejectID!, dic: PorjectList as NSDictionary)
+       
     }
     
     override func didReceiveMemoryWarning() {
@@ -269,10 +269,14 @@ extension ProjectResultViewController
     {
 
         if isHistory {
+            lay_bottom.constant = 0
+            updateItem.isHidden = true
+            self.saveItem.title = ""
             var ProjectInformation :NSDictionary
-            ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(prejectID ?? "")")!
+            ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(prejectID ?? "").plist")!
             dataSoure = SiteRootModel.mj_objectArray(withKeyValuesArray: ProjectInformation["questionList"])
             tableView.reloadData()
+            
             return
         }
         

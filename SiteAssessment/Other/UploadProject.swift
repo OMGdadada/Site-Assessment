@@ -128,8 +128,8 @@ class UploadProject{
                                                         ProjectInformation["uploaded"] = true
                                                         ImgInformation["ststus"] = 1
                                                         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-                                                        NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
-                                                        self.scheduleNotification(itemID: Project_Id )
+                                                        self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
+                                                self.scheduleNotification(itemID: Project_Id )
                                                     }
                                                 }
                                             }
@@ -142,7 +142,8 @@ class UploadProject{
                                             print("项目上传完成")
                                             ProjectInformation["uploaded"] = true
                                             let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-                                            NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
+                                            
+                                            self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                             self.scheduleNotification(itemID: Project_Id )
                                         }
                                         porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
@@ -162,41 +163,41 @@ class UploadProject{
         
         
         /*
-        
-        var RoofShinglePhotoCheckList = ImgList["RoofShinglePhotoCheckList"] as! NSMutableArray
-        for i in 0...RoofShinglePhotoCheckList.count{
-            if(i == RoofShinglePhotoCheckList.count){
-                break
-            }
-            var ImgInformation = RoofShinglePhotoCheckList[i] as! Dictionary<String,Any>
-            if(ImgInformation["uploaded"] as? Bool == false){
-                if let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
-                    
-                    let ImgName = ImgInformation["ImgName"] as? String
-                    print("上传图片\(ImgName!)")
-                    let testFilePath = documentsDir.appendingPathComponent("\(Project_Id)/\(ImgName!).jpg").path
-                    print(testFilePath)
-                    drive?.uploadFile("\(Project_Id)/RoofShinglePhotoCheckList", filePath: testFilePath, MIMEType: "image/jpeg") { (fileID, error) in
-                        if let err = error {
-                            print("Error: \(err.localizedDescription)")
-                        }
-                        if let fid = fileID {
-                            print("Upload file ID: \(fid)")
-                            print("上传文件完成")
-                            ImgInformation["uploaded"] = true
-                            RoofShinglePhotoCheckList[i] = ImgInformation
-                            ImgList["RoofShinglePhotoCheckList"] = RoofShinglePhotoCheckList
-                            ProjectInformation["Img"] = ImgList
-                            
-                            let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-                            NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
-                            print(filePath)
-                        }
-                    }
-                }
-            }
-        }
-        */
+         
+         var RoofShinglePhotoCheckList = ImgList["RoofShinglePhotoCheckList"] as! NSMutableArray
+         for i in 0...RoofShinglePhotoCheckList.count{
+         if(i == RoofShinglePhotoCheckList.count){
+         break
+         }
+         var ImgInformation = RoofShinglePhotoCheckList[i] as! Dictionary<String,Any>
+         if(ImgInformation["uploaded"] as? Bool == false){
+         if let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
+         
+         let ImgName = ImgInformation["ImgName"] as? String
+         print("上传图片\(ImgName!)")
+         let testFilePath = documentsDir.appendingPathComponent("\(Project_Id)/\(ImgName!).jpg").path
+         print(testFilePath)
+         drive?.uploadFile("\(Project_Id)/RoofShinglePhotoCheckList", filePath: testFilePath, MIMEType: "image/jpeg") { (fileID, error) in
+         if let err = error {
+         print("Error: \(err.localizedDescription)")
+         }
+         if let fid = fileID {
+         print("Upload file ID: \(fid)")
+         print("上传文件完成")
+         ImgInformation["uploaded"] = true
+         RoofShinglePhotoCheckList[i] = ImgInformation
+         ImgList["RoofShinglePhotoCheckList"] = RoofShinglePhotoCheckList
+         ProjectInformation["Img"] = ImgList
+         
+         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
+         NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
+         print(filePath)
+         }
+         }
+         }
+         }
+         }
+         */
     }
     
     
@@ -224,9 +225,9 @@ class UploadProject{
         let urlParams = sendData.compactMap({ (key, value) -> String in
             return "\(key)=\(value)"
         }).joined(separator: "&")
-//        ({ (key, value) -> String in
-//            
-//        })
+        //        ({ (key, value) -> String in
+        //            
+        //        })
         
         urlRequest.httpBody = urlParams.data(using: .utf8)
         
@@ -255,9 +256,17 @@ class UploadProject{
         task.resume()
         ProjectInformation["Datauploaded"] = true
         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-        NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
+        saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
     }
     
+    fileprivate func saveFile(dic:NSMutableDictionary , filepath:String , projectID:String) {
+        deletePlistData(project: projectID)
+        
+        savePlistData(project: projectID, dic: dic)
+        
+//        NSDictionary(dictionary: dic).write(toFile: filepath, atomically: true)
+    }
+        
     
     func scheduleNotification(itemID:String){
         //如果已存在该通知消息，则先取消
@@ -365,7 +374,7 @@ class UploadProject{
                 case 1:
                     switch j {
                     case 0:
-                    answer["sa_meterLocation"] = question.other! == "" ?"No":question.other!
+                        answer["sa_meterLocation"] = question.other! == "" ?"No":question.other!
                         break
                     case 1:
                         answer["sa_connectionType"] = question.other! == "" ?"No":question.other!
@@ -468,7 +477,7 @@ class UploadProject{
                 case 2 : 
                     switch j {
                     case 0:
-                    answer["sa_breakerPanelAmp"] = question.other! == "" ?"No":question.other!
+                        answer["sa_breakerPanelAmp"] = question.other! == "" ?"No":question.other!
                         break
                     case 1:
                         answer["sa_breakerPanelLocation"] = question.other! == "" ?"No":question.other!
@@ -483,7 +492,7 @@ class UploadProject{
                         answer["sa_obstructionType"] = question.other! == "" ?"No":question.other!
                         break
                     case 5:
-                       // answer["sa_mainBreakerPanelDiagram"] = question.other!
+                        // answer["sa_mainBreakerPanelDiagram"] = question.other!
                         break
                     case 6:
                         if question.other == "Photo Uploaded" {

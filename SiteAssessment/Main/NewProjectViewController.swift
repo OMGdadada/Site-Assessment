@@ -526,40 +526,40 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
         NSDictionary(dictionary: PorjectList).write(toFile: filePath, atomically: true)
         print(filePath)
         
-        let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
-        let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
-        vc.prejectID = Project_Id
-        vc.saveResultBlock = { 
-            var alertText = ""
-            if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
-                //UploadProject.Uploadshared.UploadProjectdata(self.Project_Id!)
-                alertText = "Upload And Save data Success !"
-                if(self.NetWork == "wifi的网络"){
-                    let projectinformation = ProjectInformation()
-                    projectinformation.setValue(self.Project_Id, forKey: "ProjectName")
-                    
-                    ProjectListViewController.ProjectInformationList.addEntries(from: [self.Project_Id:projectinformation])
-                    //UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.Project_Id)
-                    
-                    alertText = "Upload And Save data And Img Success !"
-                }
-                
-            }else{
-                alertText = "Only Save Success !"
-            }
-            
-            let alertController = UIAlertController(title: alertText,
-                                                    message: nil, preferredStyle: .alert)
-            //显示提示框
-            self.present(alertController, animated: true, completion: nil)
-            //两秒钟后自动消失
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                self.presentedViewController?.dismiss(animated: false, completion: nil)
-                self.presentingViewController!.dismiss(animated: true, completion: nil)
-            }
-
-        }
-        self.present(vc, animated: true, completion: nil)
+//        let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
+//        let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
+//        vc.prejectID = Project_Id
+//        vc.saveResultBlock = { 
+//            var alertText = ""
+//            if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
+//                //UploadProject.Uploadshared.UploadProjectdata(self.Project_Id!)
+//                alertText = "Upload And Save data Success !"
+//                if(self.NetWork == "wifi的网络"){
+//                    let projectinformation = ProjectInformation()
+//                    projectinformation.setValue(self.Project_Id, forKey: "ProjectName")
+//                    
+//                    ProjectListViewController.ProjectInformationList.addEntries(from: [self.Project_Id:projectinformation])
+//                    //UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.Project_Id)
+//                    
+//                    alertText = "Upload And Save data And Img Success !"
+//                }
+//                
+//            }else{
+//                alertText = "Only Save Success !"
+//            }
+//            
+//            let alertController = UIAlertController(title: alertText,
+//                                                    message: nil, preferredStyle: .alert)
+//            //显示提示框
+//            self.present(alertController, animated: true, completion: nil)
+//            //两秒钟后自动消失
+//            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+//                self.presentedViewController?.dismiss(animated: false, completion: nil)
+//                self.presentingViewController!.dismiss(animated: true, completion: nil)
+//            }
+//
+//        }
+//        self.present(vc, animated: true, completion: nil)
     }
     
     func setExtraCellLineHidden(tableview:UITableView){

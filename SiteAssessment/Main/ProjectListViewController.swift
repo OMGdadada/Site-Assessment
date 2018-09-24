@@ -38,7 +38,6 @@ class ProjectListViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Dispose of any resources that can be recreated.
-        loadWithdata()
         self.deleteItem.title = ""
         print("PlistList:\(PlistList)")
         ProjectListView.tableFooterView = UIView()

@@ -96,7 +96,6 @@ class ProductListViewController: UIViewController {
         self.performSegue(withIdentifier: "ShowProjectList", sender: user)
     }
     @objc func SetNewProject(_ button:UIButton){
-
         let alertController = UIAlertController(title: "Build a new project",
                                                 message: "Please enter new project id", preferredStyle: .alert)
         alertController.addTextField {

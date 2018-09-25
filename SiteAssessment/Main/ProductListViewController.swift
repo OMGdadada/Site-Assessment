@@ -54,7 +54,7 @@ class ProductListViewController: UIViewController {
         NewProductbtn.setTitle("New Project", for: .normal)
         NewProductbtn.setTitleColor(UIColor.black, for: .normal)
         NewProductbtn.addTarget(self, action:#selector(SetNewProject(_:)), for: UIControlEvents.touchUpInside)
-
+        
         view.addSubview(ProjectListbtn)
         view.addSubview(NewProductbtn)
         //设置历史和新增按钮END
@@ -75,63 +75,78 @@ class ProductListViewController: UIViewController {
         service.authorizer = user.authentication.fetcherAuthorizer()
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     @objc func SetProjectList(_ button:UIButton){
         self.performSegue(withIdentifier: "ShowProjectList", sender: user)
     }
     @objc func SetNewProject(_ button:UIButton){
-        let alertController = UIAlertController(title: "Build a new project",
-                                                message: "Please enter new project id", preferredStyle: .alert)
-        alertController.addTextField {
-            (textField: UITextField!) -> Void in
-            textField.keyboardType = UIKeyboardType.numberPad;
-            textField.placeholder = "Project Id"
+        
+        UploadProject.Uploadshared.getSearchResults { str in
+            let dic:[String:Any]? = self.stringValueDic(str)
+            DispatchQueue.main.async(execute: {
+                
+                let vw:NewProjectListView = Bundle.main.loadNibNamed("NewProjectListView", owner: nil, options: nil)?[0] as! NewProjectListView
+                vw.frame = CGRect(x: 0, y: 0, width: Screen_W/2, height: Screen_H / 2)
+                vw.center = self.view.center
+                vw.backgroundColor = UIColor.black
+                vw.dataSoure = dic!["Site_Assessment"] as! Array<Any>
+                vw.delageta = self
+                self.view.addSubview(vw)
+            })
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
-            action in
-            //也可以用下标的形式获取textField let login = alertController.textFields![0]
-            let Project_Id =  alertController.textFields!.first!
-            let Project_Id_Pattern = "^[0-9]{19}$"
-            let pred = NSPredicate(format: "SELF MATCHES %@", Project_Id_Pattern)
-            let isMatch:Bool = pred.evaluate(with: Project_Id.text!)
-            print("Project Id is Match ?:\(isMatch)")
-            if(isMatch){
-                let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
-                vc.Project_Id = Project_Id.text!
-                self.present(vc, animated: true, completion: nil)
-            }else{
-                let alertController = UIAlertController(title: "Enter the correct project ID (19-bit pure number)",
-                                                        message: nil, preferredStyle: .alert)
-                //显示提示框
-                self.present(alertController, animated: true, completion: nil)
-                //两秒钟后自动消失
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                    self.presentedViewController?.dismiss(animated: false, completion: nil)
-                }
-            }
-            
-        })
-        alertController.addAction(cancelAction)
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion: nil)
+        //        return;
+        //        let alertController = UIAlertController(title: "Build a new project",
+        //                                                message: "Please enter new project id", preferredStyle: .alert)
+        //        alertController.addTextField {
+        //            (textField: UITextField!) -> Void in
+        //            textField.keyboardType = UIKeyboardType.numberPad;
+        //            textField.placeholder = "Project Id"
+        //        }
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        //        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
+        //            action in
+        //            //也可以用下标的形式获取textField let login = alertController.textFields![0]
+        //            let Project_Id =  alertController.textFields!.first!
+        //            let Project_Id_Pattern = "^[0-9]{19}$"
+        //            let pred = NSPredicate(format: "SELF MATCHES %@", Project_Id_Pattern)
+        //            let isMatch:Bool = pred.evaluate(with: Project_Id.text!)
+        //            print("Project Id is Match ?:\(isMatch)")
+        //            if(isMatch){
+        //                let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        //                let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
+        //                vc.Project_Id = Project_Id.text!
+        //                self.present(vc, animated: true, completion: nil)
+        //            }else{
+        //                let alertController = UIAlertController(title: "Enter the correct project ID (19-bit pure number)",
+        //                                                        message: nil, preferredStyle: .alert)
+        //                //显示提示框
+        //                self.present(alertController, animated: true, completion: nil)
+        //                //两秒钟后自动消失
+        //                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+        //                    self.presentedViewController?.dismiss(animated: false, completion: nil)
+        //                }
+        //            }
+        //            
+        //        })
+        //        alertController.addAction(cancelAction)
+        //        alertController.addAction(okAction)
+        //        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func SignOut(_ button:UIButton){
@@ -148,5 +163,27 @@ class ProductListViewController: UIViewController {
             let controller = segue.destination as! ProjectListViewController
             controller.user = sender as? GIDGoogleUser
         }
+    }
+}
+extension ProductListViewController :NewProjectListViewDelagate
+{
+    // 选择新项目
+    func didClickWithItem(str: String?) {
+        let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
+        vc.Project_Id = str
+        self.present(vc, animated: true, completion: nil)
+    }
+}
+
+extension ProductListViewController
+{
+    // MARK: 字符串转字典
+    fileprivate  func stringValueDic(_ str: String) -> [String : Any]?{
+        let data = str.data(using: String.Encoding.utf8)
+        if let dict = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : Any] {
+            return dict
+        }
+        return nil
     }
 }

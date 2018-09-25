@@ -14,7 +14,7 @@ let radio_N:UIImage = UIImage(named: "radio_N")!
 let radio_Y:UIImage = UIImage(named: "radio_Y")!
 let ico_expand:UIImage = UIImage(named: "icon_mr")!
 let ico_expand1:UIImage = UIImage(named: "icon_xl")!
-
+let Kappdelegate = UIApplication.shared.delegate as! AppDelegate
 
 //保存数据
 func savePlistData(project:String ,dic:NSDictionary) {

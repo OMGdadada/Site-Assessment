@@ -66,6 +66,8 @@
 		16AC3CD421358C470019AAD4 /* ProjectResultHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */; };
 		16AC3CD621358C560019AAD4 /* ProjectResultHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */; };
 		16AC3CD821359C7E0019AAD4 /* conmon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AC3CD721359C7E0019AAD4 /* conmon.swift */; };
+		16EBF921215A54D200A6DB5D /* NewProjectListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16EBF920215A54D200A6DB5D /* NewProjectListView.swift */; };
+		16EBF923215A54EE00A6DB5D /* NewProjectListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16EBF922215A54EE00A6DB5D /* NewProjectListView.xib */; };
 		5ECDAE9721539715004B7644 /* ProjectListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */; };
 		5ECDAE9921539B06004B7644 /* HistoyDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ECDAE9821539B06004B7644 /* HistoyDto.swift */; };
 		5ED483882151F50F00401A5F /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483872151F50F00401A5F /* AddProjectViewController.swift */; };
@@ -139,6 +141,8 @@
 		16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResultHeadView.swift; sourceTree = "<group>"; };
 		16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectResultHeadView.xib; sourceTree = "<group>"; };
 		16AC3CD721359C7E0019AAD4 /* conmon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = conmon.swift; sourceTree = "<group>"; };
+		16EBF920215A54D200A6DB5D /* NewProjectListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectListView.swift; sourceTree = "<group>"; };
+		16EBF922215A54EE00A6DB5D /* NewProjectListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewProjectListView.xib; sourceTree = "<group>"; };
 		4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SiteAssessment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListTableViewCell.swift; sourceTree = "<group>"; };
 		5ECDAE9821539B06004B7644 /* HistoyDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoyDto.swift; sourceTree = "<group>"; };
@@ -353,6 +357,8 @@
 				5ECDAE9621539715004B7644 /* ProjectListTableViewCell.swift */,
 				16AC3CD321358C470019AAD4 /* ProjectResultHeadView.swift */,
 				16AC3CD521358C560019AAD4 /* ProjectResultHeadView.xib */,
+				16EBF920215A54D200A6DB5D /* NewProjectListView.swift */,
+				16EBF922215A54EE00A6DB5D /* NewProjectListView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08CA58BF2109F92300AF4059 /* Main_Breaker_Panel_Diagram.png in Resources */,
+				16EBF923215A54EE00A6DB5D /* NewProjectListView.xib in Resources */,
 				08CA58BB2109F92300AF4059 /* icon_xl@3x.png in Resources */,
 				1647113921315B7D0044BB0F /* HGImage.storyboard in Resources */,
 				08CA58BC2109F92300AF4059 /* icon_xl.png in Resources */,
@@ -583,6 +590,7 @@
 				16471185213162660044BB0F /* ProjectResultViewController.swift in Sources */,
 				1647114821315BB20044BB0F /* ProductListViewController.swift in Sources */,
 				1647113B21315B7D0044BB0F /* HGImageCollectionViewCell.swift in Sources */,
+				16EBF921215A54D200A6DB5D /* NewProjectListView.swift in Sources */,
 				08CA58E02109F92A00AF4059 /* KeyBoardModel.swift in Sources */,
 				1647113E21315B7D0044BB0F /* HGImagePickerController.swift in Sources */,
 				1647119521357EB20044BB0F /* UIImag+Extension .swift in Sources */,

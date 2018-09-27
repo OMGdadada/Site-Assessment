@@ -301,18 +301,6 @@
                                                 <action selector="BackOn_Click:" destination="u8L-mI-jye" id="sbe-FK-Lyy"/>
                                             </connections>
                                         </barButtonItem>
-                                        <rightBarButtonItems>
-                                            <barButtonItem title="Edit" id="7ZS-zA-wvf">
-                                                <connections>
-                                                    <action selector="edit:" destination="u8L-mI-jye" id="MfG-tI-hrz"/>
-                                                </connections>
-                                            </barButtonItem>
-                                            <barButtonItem title="delete" id="MYa-RT-En9">
-                                                <connections>
-                                                    <action selector="didClickDelete:" destination="u8L-mI-jye" id="QiF-r7-xrg"/>
-                                                </connections>
-                                            </barButtonItem>
-                                        </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -345,16 +333,37 @@
                                                         <constraint firstAttribute="width" constant="100" id="ilz-QA-ksa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" title="Deleta">
+                                                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="didClikec:" destination="MuS-m4-b2q" eventType="touchUpInside" id="wCp-iD-nkY"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOu-eP-sMn">
+                                                    <rect key="frame" x="794" y="0.0" width="100" height="58.5"/>
+                                                    <state key="normal" title="Update">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="update:" destination="MuS-m4-b2q" eventType="touchUpInside" id="ppR-7g-FNs"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qSD-x4-Mox" firstAttribute="centerY" secondItem="bZ0-dC-Arb" secondAttribute="centerY" id="JKo-bW-7jy"/>
+                                                <constraint firstItem="zOu-eP-sMn" firstAttribute="height" secondItem="kGu-11-3qs" secondAttribute="height" id="MHY-tj-Oa4"/>
+                                                <constraint firstItem="zOu-eP-sMn" firstAttribute="centerY" secondItem="kGu-11-3qs" secondAttribute="centerY" id="U4G-2N-whI"/>
+                                                <constraint firstItem="zOu-eP-sMn" firstAttribute="width" secondItem="kGu-11-3qs" secondAttribute="width" id="V47-Vb-7TX"/>
                                                 <constraint firstItem="bZ0-dC-Arb" firstAttribute="leading" secondItem="eAj-O2-TcV" secondAttribute="leading" constant="20" id="Y8e-rO-W2U"/>
                                                 <constraint firstAttribute="trailing" secondItem="kGu-11-3qs" secondAttribute="trailing" constant="20" id="jqs-7p-QjG"/>
+                                                <constraint firstItem="kGu-11-3qs" firstAttribute="leading" secondItem="zOu-eP-sMn" secondAttribute="trailing" constant="10" id="kTa-fG-XAw"/>
                                                 <constraint firstItem="qSD-x4-Mox" firstAttribute="leading" secondItem="bZ0-dC-Arb" secondAttribute="trailing" constant="20" id="rCU-Ie-NgJ"/>
                                                 <constraint firstItem="kGu-11-3qs" firstAttribute="top" secondItem="eAj-O2-TcV" secondAttribute="top" id="rVr-ib-O7T"/>
                                                 <constraint firstAttribute="bottom" secondItem="kGu-11-3qs" secondAttribute="bottom" id="uCv-rk-Unw"/>
@@ -367,6 +376,7 @@
                                             <outlet property="item" destination="kGu-11-3qs" id="fT0-NC-i0O"/>
                                             <outlet property="status" destination="bZ0-dC-Arb" id="Sg9-CR-drl"/>
                                             <outlet property="title" destination="qSD-x4-Mox" id="76K-Ix-Ewe"/>
+                                            <outlet property="update" destination="zOu-eP-sMn" id="ykh-Lj-pkx"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -390,8 +400,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ProjectListView" destination="cTl-WE-kk6" id="hQe-DY-5Jw"/>
-                        <outlet property="deleteItem" destination="MYa-RT-En9" id="gG5-zk-e3g"/>
-                        <outlet property="editItem" destination="7ZS-zA-wvf" id="1zV-Fi-GsY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoe-k1-NRv" userLabel="First Responder" sceneMemberID="firstResponder"/>

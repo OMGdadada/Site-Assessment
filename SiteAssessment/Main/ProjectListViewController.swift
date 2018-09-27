@@ -25,8 +25,8 @@ class ProjectListViewController: UIViewController{
     static var ProjectInformationList = NSMutableDictionary()
     @IBOutlet weak var ProjectListView: UITableView!
     
-    @IBOutlet weak var editItem: UIBarButtonItem!
-    @IBOutlet weak var deleteItem: UIBarButtonItem!
+//    @IBOutlet weak var editItem: UIBarButtonItem!
+//    @IBOutlet weak var deleteItem: UIBarButtonItem!
     
     var edit:Bool = false
     
@@ -38,7 +38,6 @@ class ProjectListViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Dispose of any resources that can be recreated.
-        self.deleteItem.title = ""
         print("PlistList:\(PlistList)")
         ProjectListView.tableFooterView = UIView()
         NetWorkmanager?.listener = { status in var statusStr: String?
@@ -130,20 +129,20 @@ class ProjectListViewController: UIViewController{
         self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func edit(_ sender: Any) {
-        if ProjectListView.isEditing {
-            ProjectListView.setEditing(false, animated: true)
-            edit = false
-        }else{
-            ProjectListView.setEditing(true, animated: true)
-            edit = true
-        }
-        ProjectListView.reloadData()
-    }
-
-    @IBAction func didClickDelete(_ sender: Any) {
-        
-    }
+//    @IBAction func edit(_ sender: Any) {
+//        if ProjectListView.isEditing {
+//            ProjectListView.setEditing(false, animated: true)
+//            edit = false
+//        }else{
+//            ProjectListView.setEditing(true, animated: true)
+//            edit = true
+//        }
+//        ProjectListView.reloadData()
+//    }
+//
+//    @IBAction func didClickDelete(_ sender: Any) {
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -161,21 +160,20 @@ class ProjectListViewController: UIViewController{
 extension ProjectListViewController : UITableViewDelegate , UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if edit {
-            return completleList.count
-        }
+//        if edit {
+//            return completleList.count
+//        }
         return PlistList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var model:HistoyDto
-        if edit {
-           model  = completleList[indexPath.row]
-        }else{
-           model = PlistList[indexPath.row]
-        }
+        var model:HistoyDto = PlistList[indexPath.row]
+//        if edit {
+//           model  = completleList[indexPath.row]
+//        }else{
+//           
+//        }
          
-        
         let cell: ProjectListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProjectListTableViewCell", for: indexPath) as! ProjectListTableViewCell
     
         cell.model = model
@@ -210,12 +208,12 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         if edit {
-            var model:HistoyDto
-            if edit {
-                model  = completleList[indexPath.row]
-            }else{
-                model = PlistList[indexPath.row]
-            }
+            var model:HistoyDto =  PlistList[indexPath.row]
+//            if edit {
+//                model  = completleList[indexPath.row]
+//            }else{
+//               
+//            }
             (selecList as! NSMutableArray ).remove(model)
         }
     }
@@ -224,14 +222,14 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         print("选中的Cell 为\(PlistList[indexPath.row])")
-        var model:HistoyDto
-        if edit {
-            model  = completleList[indexPath.row]
-            selecList.append(model)
-            return
-        }else{
-            model = PlistList[indexPath.row]
-        }
+        let model:HistoyDto = PlistList[indexPath.row]
+//        if edit {
+//            model  = completleList[indexPath.row]
+//            selecList.append(model)
+//            return
+//        }else{
+//            
+//        }
         
         if model.status == .Incomplete {
             pushAddPreject(model: model)
@@ -332,7 +330,7 @@ extension ProjectListViewController
 
 extension ProjectListViewController : ProjectListTableViewCellDelagate
 {
-    func didProjectClick(cell: ProjectListTableViewCell, type: UpdateStatusType?) {
+    func didWithUpdate(cell: ProjectListTableViewCell, type: UpdateStatusType?) {
         let indexp:IndexPath = ProjectListView.indexPath(for: cell)!
         let model:HistoyDto = PlistList[indexp.row]
         model.uploaded = false
@@ -342,6 +340,10 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
         }else{
             network(ProjectName: model.projectID ?? "", model: model)
         }
+    }
+    
+    func didProjectClick(cell: ProjectListTableViewCell, type: UpdateStatusType?) {
+        
     }
     
     fileprivate func pushAddPreject(model:HistoyDto) {

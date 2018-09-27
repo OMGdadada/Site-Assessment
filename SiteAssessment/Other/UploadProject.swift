@@ -26,7 +26,7 @@ class UploadProject{
     
     func getSearchResults(completion:@escaping ((_ str:String) -> Void)) {
         if var urlComponents = URLComponents(string: "https://creator.zoho.com/api/json/crm/view/Site_Assessment_Report") {
-            urlComponents.query = "authtoken=6be21a290c7115b73ff7df767a84ac34&zc_ownername=mohanwang&scope=creatorapi&raw=true&criteria=(sa_assignedTo==\"ychen@polaronsolar.com\")"
+            urlComponents.query = "authtoken=6be21a290c7115b73ff7df767a84ac34&zc_ownername=mohanwang&scope=creatorapi&raw=true"
             
             guard let url = urlComponents.url else { return }
             

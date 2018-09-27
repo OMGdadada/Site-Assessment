@@ -206,17 +206,17 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     }
     
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if edit {
-            var model:HistoyDto =  PlistList[indexPath.row]
-//            if edit {
-//                model  = completleList[indexPath.row]
-//            }else{
-//               
-//            }
-            (selecList as! NSMutableArray ).remove(model)
-        }
-    }
+//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        if edit {
+//            var model:HistoyDto =  PlistList[indexPath.row]
+////            if edit {
+////                model  = completleList[indexPath.row]
+////            }else{
+////               
+////            }
+//            (selecList as! NSMutableArray ).remove(model)
+//        }
+//    }
     
     //处理选中事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

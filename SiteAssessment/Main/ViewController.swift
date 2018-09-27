@@ -25,6 +25,7 @@ class ViewController: UIViewController,GIDSignInUIDelegate {
         let Signbtn = GIDSignInButton(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
         Signbtn.center = view.center
         view.addSubview(Signbtn)
+        
     }
 
     override func didReceiveMemoryWarning() {

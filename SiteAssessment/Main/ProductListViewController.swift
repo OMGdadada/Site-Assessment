@@ -23,8 +23,10 @@ class ProductListViewController: UIViewController {
         HandImg.center = CGPoint(x: view.center.x, y: view.center.y/2)
         
         let data = NSData(contentsOf: user.profile.imageURL(withDimension: 300))
-        let handimg:UIImage = UIImage(data: data! as Data)!
-        HandImg.image = handimg
+        if data != nil {
+            let handimg:UIImage = UIImage(data: data! as Data)!
+            HandImg.image = handimg
+        }
         HandImg.layer.cornerRadius = HandImg.bounds.height/2//CGRectGetHeight(HandImg.bounds)/2
         // 设置图片的外围圆框*
         HandImg.layer.masksToBounds = true

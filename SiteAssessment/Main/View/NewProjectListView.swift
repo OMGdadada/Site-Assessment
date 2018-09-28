@@ -46,8 +46,6 @@ class NewProjectListView: UIView {
         Kappdelegate.window?.addSubview(bgView)
         let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tap))
         bgView.addGestureRecognizer(tap)
-        
-        
     }
 }
 
@@ -59,7 +57,9 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
-        cell.textLabel?.text = dataSoure[indexPath.row] as? String
+        let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
+        
+        cell.textLabel?.text = dic["sa_prj"] as? String
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         
         return cell
@@ -70,7 +70,8 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delageta?.didClickWithItem(str: dataSoure[indexPath.row] as? String)
+        let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
+        delageta?.didClickWithItem(str: dic["sa_prj"] as? String)
         self.removeFromSuperview()
         bgView.removeFromSuperview()
     }

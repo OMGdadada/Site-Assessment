@@ -109,7 +109,7 @@ class ProductListViewController: UIViewController {
                 vw.backgroundColor = UIColor.black
                 vw.dataSoure = dic!["Site_Assessment"] as! Array<Any>
                 vw.delageta = self
-                self.view.addSubview(vw)
+                Kappdelegate.window?.addSubview(vw)
             })
         }
         //        return;
@@ -130,10 +130,7 @@ class ProductListViewController: UIViewController {
         //            let isMatch:Bool = pred.evaluate(with: Project_Id.text!)
         //            print("Project Id is Match ?:\(isMatch)")
         //            if(isMatch){
-        //                let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //                let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
-        //                vc.Project_Id = Project_Id.text!
-        //                self.present(vc, animated: true, completion: nil)
+        //                
         //            }else{
         //                let alertController = UIAlertController(title: "Enter the correct project ID (19-bit pure number)",
         //                                                        message: nil, preferredStyle: .alert)
@@ -177,7 +174,10 @@ extension ProductListViewController :NewProjectListViewDelagate
         self.present(vc, animated: true, completion: nil)
     }
 }
-
+//let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
+//                vc.Project_Id = Project_Id.text!
+//                self.present(vc, animated: true, completion: nil)
 extension ProductListViewController
 {
     // MARK: 字符串转字典

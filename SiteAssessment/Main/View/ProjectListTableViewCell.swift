@@ -15,7 +15,7 @@ protocol ProjectListTableViewCellDelagate :NSObjectProtocol {
     /// - Parameters:
     ///   - cell: 当前cell
     ///   - question_item: 按钮tag
-    func didProjectClick(cell:ProjectListTableViewCell , type:UpdateStatusType?)
+    func didProjectClick(cell:ProjectListTableViewCell , model:HistoyDto)
     
     /// didClick  按钮点击事件
     ///
@@ -52,8 +52,8 @@ class ProjectListTableViewCell: UITableViewCell {
                 self.update.setTitle("Uploading", for: .normal);
                 self.update.isEnabled = false;
                 break
-            case .Waiting?:
-                self.status.text = "Waiting"
+            case .NotUploaded?:
+                self.status.text = "Pending"
                 self.item.setTitle("resume", for: .normal)
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Upload", for: .normal);
@@ -61,11 +61,11 @@ class ProjectListTableViewCell: UITableViewCell {
                 break
             case .Incomplete?:
                 self.status.text = "Incomplete"
-                self.item.setTitle("Edit", for: .normal)
+                self.item.setTitle("Continue", for: .normal)
                 self.status.textColor = UIColor.red
                 break
             case .uploadFailed?:
-                self.status.text = "uploadFailed"
+                self.status.text = "Failed"
                 self.item.setTitle("Continue", for: .normal)
                 self.status.textColor = UIColor.red
                 break
@@ -82,7 +82,7 @@ class ProjectListTableViewCell: UITableViewCell {
     }
 
     @IBAction func didClikec(_ sender: Any) {
-        delegate?.didProjectClick(cell: self, type: model?.status)
+        delegate?.didProjectClick(cell: self, model: model!)
     }
     @IBAction func update(_ sender: Any) {
         delegate?.didWithUpdate(cell: self, type: model?.status)

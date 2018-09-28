@@ -61,9 +61,9 @@ class UploadProject{
     func UploadProjectToGoogleDrive(_ Project_Id:String , model:HistoyDto?){
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model?.projectID ?? "").plist")!
-        if(model?.Datauploaded == false){
+        if(ProjectInformation["Datauploaded"] as! Bool == false){
             makePostCall(Project_Id , update: (model?.Datauploaded)!)
-        }else if(model?.uploaded == false){
+        }else if(ProjectInformation["uploaded"] as! Bool == false){
             
             var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
             var ProjectImg_Total = 0
@@ -114,7 +114,7 @@ class UploadProject{
                                                     print("Upload file ID: \(fid)")
                                                     print("上传文件完成")
                                                     ImgInformation["uploaded"] = true
-                                                    ImgInformation["ststus"] = 0
+                                                    ImgInformation["ststus"] = 1
                                                     ImgInformationList[i] = ImgInformation
                                                     ImgList[key] = ImgInformationList
                                                     ProjectInformation["Img"] = ImgList
@@ -157,8 +157,6 @@ class UploadProject{
                     }
                 }
             })
-            
-            
             return
         }
         

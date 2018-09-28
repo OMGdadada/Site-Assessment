@@ -88,14 +88,12 @@ class ProjectListViewController: UIViewController{
                 switch ProjectInformation["ststus"] as! Int {
                 case 1:
                     model.status = .Completed
-                    
                     break
                 case 2:
-                    model.status = .Waiting
+                    model.status = .NotUploaded
                     break
                 case 3:
                     model.status = .Incomplete
-                    completleList.append(model)
                     break
                 default : break
                     
@@ -222,15 +220,7 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         print("选中的Cell 为\(PlistList[indexPath.row])")
-        let model:HistoyDto = PlistList[indexPath.row]
-//        if edit {
-//            model  = completleList[indexPath.row]
-//            selecList.append(model)
-//            return
-//        }else{
-//            
-//        }
-        
+        let model:HistoyDto = PlistList[indexPath.row]        
         if model.status == .Incomplete {
             pushAddPreject(model: model)
         }else{
@@ -342,9 +332,9 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
         }
     }
     
-    func didProjectClick(cell: ProjectListTableViewCell, type: UpdateStatusType?) {
-        
-    }
+    func didProjectClick(cell: ProjectListTableViewCell, model: HistoyDto) {
+        delete(model: model, indexpath: self.ProjectListView.indexPath(for: cell)!)  
+    } 
     
     fileprivate func pushAddPreject(model:HistoyDto) {
     let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -352,5 +342,24 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
     vc.Project_Id = model.projectID
     vc.isIncomple = true
     self.present(vc, animated: true, completion: nil)
+    }
+    
+    fileprivate func delete(model:HistoyDto, indexpath:IndexPath) {
+    let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
+        if model.status == .Completed
+        {
+            let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
+            let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName!).plist"
+            let Manager = FileManager.default
+            try! Manager.removeItem(atPath: filePath)
+            let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName!)"
+            let fileArray = Manager.subpaths(atPath: Folder)
+            
+            for fn in fileArray!{
+                try! Manager.removeItem(atPath: Folder + "/\(fn)")
+            }
+            PlistList.remove(at: indexpath.row)
+            ProjectListView.deleteRows(at: [indexpath as IndexPath], with: UITableViewRowAnimation.fade)
+        }
     }
 }

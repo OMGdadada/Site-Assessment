@@ -10,7 +10,7 @@ import UIKit
 enum UpdateStatusType {
     case Completed
     case Uploading
-    case Waiting
+    case NotUploaded
     case Incomplete
     case uploadFailed
 }

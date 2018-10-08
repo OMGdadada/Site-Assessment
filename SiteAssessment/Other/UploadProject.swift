@@ -143,6 +143,7 @@ class UploadProject{
                                         if(ProjectImg_Total == ProjectImg_schedule){
                                             print("项目上传完成")
                                             ProjectInformation["uploaded"] = true
+                                            ProjectInformation["ststus"] = 1
                                             let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
                                             
                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)

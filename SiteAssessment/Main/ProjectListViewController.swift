@@ -179,14 +179,16 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
         if(model.uploaded == false){
             cell.title.text = "\(cell.title.text!) (暂未上传完成) \n点击上传"
             for (offset: _ ,element: (key: key,value: _)) in ProjectListViewController.ProjectInformationList.enumerated(){
-                if(projectname == "\(key)"){
+                if(model.projectID == "\(key)"){
                     let projectInformation = ProjectListViewController.ProjectInformationList[key] as! ProjectInformation
                     if (projectInformation.Total == 0){
-                        cell.title.text = "Project: \n \(model.projectID!).plist (正在上传) 进度: 0%"
+                        cell.title.text = "Project: \(model.projectID!).plist (正在上传) 进度: 0%"
                     }else{
-                        cell.title.text = "Project: \n \(model.projectID!).plist (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
+                        cell.title.text = "Project: \(model.projectID!).plist (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
                         if(projectInformation.schedule*100/projectInformation.Total == 100){
                             model.uploaded = true
+                            model.status = .Completed
+                            tableView.reloadRows(at: [indexPath], with: .automatic)
                             cell.title.text = "\(cell.title.text!) (上传完成)"
                         }
                     }
@@ -345,7 +347,7 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
     }
     
     fileprivate func delete(model:HistoyDto, indexpath:IndexPath) {
-    let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
+//    let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
         if model.status == .Completed
         {
             let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")

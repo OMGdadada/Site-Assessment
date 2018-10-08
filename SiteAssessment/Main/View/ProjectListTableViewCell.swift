@@ -42,14 +42,14 @@ class ProjectListTableViewCell: UITableViewCell {
                 self.item.setTitle("reupload", for: .normal)
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Reupload", for: .normal);
+                self.item.isEnabled = true;
                 self.update.isEnabled = true;
                 break
             case .Uploading?:
                 self.status.text = "Uploading"
-                self.item.isHidden = true
-                self.item.isEnabled = false
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Uploading", for: .normal);
+                self.item.isEnabled = false;
                 self.update.isEnabled = false;
                 break
             case .NotUploaded?:
@@ -57,19 +57,23 @@ class ProjectListTableViewCell: UITableViewCell {
                 self.item.setTitle("resume", for: .normal)
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Upload", for: .normal);
+                self.item.isEnabled = false;
                 self.update.isEnabled = true;
                 break
             case .Incomplete?:
                 self.status.text = "Incomplete"
                 self.item.setTitle("Continue", for: .normal)
+                self.item.isEnabled = false;
+                self.update.isEnabled = false;
                 self.status.textColor = UIColor.red
                 break
             case .uploadFailed?:
                 self.status.text = "Failed"
                 self.item.setTitle("Continue", for: .normal)
                 self.status.textColor = UIColor.red
+                self.item.isEnabled = false;
+                self.update.isEnabled = true;
                 break
-                
             default: break
             }
         }

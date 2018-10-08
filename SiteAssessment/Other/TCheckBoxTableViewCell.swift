@@ -120,6 +120,7 @@ extension TCheckBoxTableViewCell {
             plable.frame = CGRect(x: 15, y: 80, width: Int(Screen_W - 20), height: 90)
             plable.text = "Please circle the type of structure from the following choices. If the structure opromItemroperty does not correspond with any of the listed choices, please provide a sketch with all necessary measurements in the box below." 
             plable.font = UIFont.systemFont(ofSize: 18)
+            plable.numberOfLines = 0
             hs = 370
             let Truss_Type:UIImage = UIImage(named: "Truss_Type")!
             let Truss_Type_View:UIImageView!=UIImageView(frame: CGRect(x:15, y:190, width: UIScreen.main.bounds.width-40, height: 250))

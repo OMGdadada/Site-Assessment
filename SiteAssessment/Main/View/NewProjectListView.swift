@@ -40,6 +40,8 @@ class NewProjectListView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = UIColor.white
+        tableView.alpha = 0.8
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellid)
@@ -58,7 +60,6 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
         let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
-        
         cell.textLabel?.text = dic["sa_prj"] as? String
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         

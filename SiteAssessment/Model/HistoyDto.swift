@@ -8,11 +8,11 @@
 
 import UIKit
 enum UpdateStatusType {
-    case Completed
-    case Uploading
-    case NotUploaded
-    case Incomplete
-    case uploadFailed
+    case Completed    // 已完成
+    case Uploading    // 上传中
+    case Pending      // 未上传
+    case Incomplete   // 未完成
+    case uploadFailed // 上传失败
 }
 
 class HistoyDto: NSObject {

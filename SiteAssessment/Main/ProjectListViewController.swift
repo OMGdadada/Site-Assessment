@@ -32,13 +32,14 @@ class ProjectListViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadWithdata()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Dispose of any resources that can be recreated.
         print("PlistList:\(PlistList)")
+        loadWithdata()
         ProjectListView.tableFooterView = UIView()
         NetWorkmanager?.listener = { status in var statusStr: String?
             switch status {
@@ -90,7 +91,7 @@ class ProjectListViewController: UIViewController{
                     model.status = .Completed
                     break
                 case 2:
-                    model.status = .NotUploaded
+                    model.status = .Pending
                     break
                 case 3:
                     model.status = .Incomplete
@@ -112,6 +113,7 @@ class ProjectListViewController: UIViewController{
         projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
         ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
         UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,model: model)
+        model.status = .Uploading
         self.UpdateTableViewUI(ProjectName)
     }
     // 更新上传进度
@@ -126,21 +128,6 @@ class ProjectListViewController: UIViewController{
     @IBAction func BackOn_Click(_ sender: Any) {
         self.presentingViewController!.dismiss(animated: true, completion: nil)
     }
-    
-//    @IBAction func edit(_ sender: Any) {
-//        if ProjectListView.isEditing {
-//            ProjectListView.setEditing(false, animated: true)
-//            edit = false
-//        }else{
-//            ProjectListView.setEditing(true, animated: true)
-//            edit = true
-//        }
-//        ProjectListView.reloadData()
-//    }
-//
-//    @IBAction func didClickDelete(_ sender: Any) {
-//        
-//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -158,20 +145,11 @@ class ProjectListViewController: UIViewController{
 extension ProjectListViewController : UITableViewDelegate , UITableViewDataSource
 {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if edit {
-//            return completleList.count
-//        }
         return PlistList.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var model:HistoyDto = PlistList[indexPath.row]
-//        if edit {
-//           model  = completleList[indexPath.row]
-//        }else{
-//           
-//        }
-         
+        let model:HistoyDto = PlistList[indexPath.row]         
         let cell: ProjectListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProjectListTableViewCell", for: indexPath) as! ProjectListTableViewCell
     
         cell.model = model
@@ -182,11 +160,11 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                 if(model.projectID == "\(key)"){
                     let projectInformation = ProjectListViewController.ProjectInformationList[key] as! ProjectInformation
                     if (projectInformation.Total == 0){
-                        cell.title.text = "Project: \(model.projectID!).plist (正在上传) 进度: 0%"
+                        cell.title.text = "\(model.projectID!).plist (正在上传) 进度: 0%"
                     }else{
-                        cell.title.text = "Project: \(model.projectID!).plist (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
+                        cell.title.text = "\(model.projectID!).plist (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
                         if(projectInformation.schedule*100/projectInformation.Total == 100){
-                            model.uploaded = true
+                            
                             model.status = .Completed
                             tableView.reloadRows(at: [indexPath], with: .automatic)
                             cell.title.text = "\(cell.title.text!) (上传完成)"
@@ -204,19 +182,6 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
-    
-//    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//        if edit {
-//            var model:HistoyDto =  PlistList[indexPath.row]
-////            if edit {
-////                model  = completleList[indexPath.row]
-////            }else{
-////               
-////            }
-//            (selecList as! NSMutableArray ).remove(model)
-//        }
-//    }
     
     //处理选中事件
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -347,16 +312,31 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
     }
     
     fileprivate func delete(model:HistoyDto, indexpath:IndexPath) {
-//    let ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "")")!
         if model.status == .Completed
         {
             let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
             let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName!).plist"
+            
+            var ProjectInformation :NSDictionary
+            ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "").plist")!
+            
             let Manager = FileManager.default
             try! Manager.removeItem(atPath: filePath)
             let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName!)"
             let fileArray = Manager.subpaths(atPath: Folder)
             
+            //let ImgDic:[String:Any] = ProjectInformation["Img"] as! [String :Any];
+//            for imgItem in ImgDic["MeterPhotoCheckList"] as! [Any] {
+//
+//            }
+//
+//            for imgItem in ImgDic["MainBreakerPhotoCheckList"] as! [Any] {
+//
+//            }
+//            for imgItem in ImgDic["TrussType"] as! [Any] {
+//
+//            }
+
             for fn in fileArray!{
                 try! Manager.removeItem(atPath: Folder + "/\(fn)")
             }

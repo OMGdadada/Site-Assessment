@@ -22,17 +22,21 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
     
     //
     var isIncomple:Bool = false
-    var Project_Id:String!
+    var Project_Id:String!    // 地址
+    var Project_Id_id:String! // id
     var dataSoure = NSMutableArray()
     var currentIndexpath:IndexPath?
     var imgIndexPath:IndexPath? // 照片选中indexpath
     
     var Pickerimage_Nums = 0
     var Pickerimages : [String] = NSMutableArray() as! [String]
-    var RoofShinglePhotoCheckList:NSMutableArray = []
     var MeterPhotoCheckList:NSMutableArray = []
+    var MeterPhotoCheckList1:NSMutableArray = []
+    var MeterPhotoCheckList2:NSMutableArray = []
     var MainBreakerPhotoCheckList:NSMutableArray = []
     var TrussType:NSMutableArray = []
+    var TrussType1:NSMutableArray = []
+    
 
     var imagePicker:UIImagePickerController = UIImagePickerController()
     var imageManager:PHCachingImageManager!
@@ -63,10 +67,19 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
         vc.prejectID = Project_Id
         vc.dataSoure = dataSoure
         var dic:[String : Any] = [:]
-        dic["RoofShinglePhotoCheckList"] = RoofShinglePhotoCheckList
-        dic["MeterPhotoCheckList"]       = MeterPhotoCheckList
+
+        let Meterarrs :NSMutableArray = []
+        Meterarrs.addingObjects(from: MeterPhotoCheckList.copy() as! [Any])
+        Meterarrs.addingObjects(from: MeterPhotoCheckList1.copy()  as! [Any])
+        Meterarrs.addingObjects(from: MeterPhotoCheckList2.copy()  as! [Any])
+        
+        dic["MeterPhotoCheckList"]       = Meterarrs
         dic["MainBreakerPhotoCheckList"] = MainBreakerPhotoCheckList
-        dic["TrussType"]                 = TrussType
+        
+        let types :NSMutableArray = []
+        types.addingObjects(from: TrussType.copy() as! [Any])
+        types.addingObjects(from:TrussType1.copy() as! [Any])
+        dic["TrussType"]                 = types
         vc.imgDic = dic
         vc.saveResultBlock = { 
             self.presentingViewController!.dismiss(animated: true, completion: nil)
@@ -115,7 +128,6 @@ extension AddProjectViewController
                 }
             }
             let ImgDic:[String:Any] = ProjectInformation["Img"] as! [String :Any];
-            RoofShinglePhotoCheckList.add(ImgDic["RoofShinglePhotoCheckList"] as Any)  
             MeterPhotoCheckList.add(ImgDic["MeterPhotoCheckList"] as Any)
             MainBreakerPhotoCheckList.add(ImgDic["MainBreakerPhotoCheckList"] as Any)
             TrussType.add(ImgDic["TrussType"] as Any)            
@@ -166,7 +178,7 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
             cell?.delageta = self as TDiagramTableViewCellDelagate
             modle.height = 500
             return cell!
-        }else if(modle.item == "6" || modle.item == "7" || modle.item == "8" || modle.item == "9" || modle.item == "24" || modle.item == "25" || modle.item == "26" || modle.item == "27" || modle.item == "28" || modle.item == "29" || modle.item == "30" || modle.item == "31" ||  modle.item == "38" || modle.item == "39" || modle.item == "40" || modle.item == "41"  ){
+        }else if(modle.item == "24" || modle.item == "25" || modle.item == "26" || modle.item == "27" || modle.item == "28" || modle.item == "29" || modle.item == "30" || modle.item == "31" ||  modle.item == "38" || modle.item == "39" || modle.item == "40" || modle.item == "41" || modle.item == "59" || modle.item == "60" || modle.item == "61" ){
             var hs:Float = 0
             var cell:TQuestionTableViewCell? = tableView.dequeueReusableCell(withIdentifier: KTQuestionTableViewCell) as? TQuestionTableViewCell
             if( cell != nil ){
@@ -199,7 +211,7 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
             }
             cell = TCheckBoxTableViewCell(style: .default, reuseIdentifier: kCheckBoxTableViewCell)
             cell?.delageta = self as TCheckBoxTableViewCellDelagate
-            if modle.item == "59" {
+            if modle.item == "62" {
                 modle.height = 300
             }else{
                modle.height = Float(((modle.option.count-1)/2)*60+80) 
@@ -222,45 +234,27 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
             }else if(modle.item == "58"){
                 sdwsa = 370
             }
-            if(modle.defaultValue == "Other"){
+            if(modle.defaultValue.contains("Other")){
                 sdwsa = sdwsa + 70 + CGFloat(modle.height) + 300
             }else{
-                if( modle.item == "36"){
-                    if(modle.defaultValue != nil || modle.defaultValue != ""){
-                        //&& (Int(QuestionsCell.OptionSelecred[Int(Item!)!-1])! > 31)
-                        if(modle.item == "16" ){
-                            sdwsa = sdwsa + 70 + CGFloat(modle.height) + 300
-                            //print(sdwsa)
-                        // && (Int(QuestionsCell.OptionSelecred[Int(Item!)!-1])! > 7)
-                        }else if((modle.item == "22") ){
-                            sdwsa = sdwsa + 70 + CGFloat(modle.height) + 300
-                        }else{
-                            sdwsa = sdwsa + 70 + CGFloat(modle.height)
-                        }
-                    }else{
-                        sdwsa = sdwsa + 70 + CGFloat(modle.height)
-                    }
-                }else{
-                    sdwsa = sdwsa + 70 + CGFloat(modle.height)
-                }
+                sdwsa = sdwsa + 70 + CGFloat(modle.height)
             }
         }else{
             let Question_Item = Int(modle.item)!-1
             if(Question_Item == 5 || Question_Item == 23 || Question_Item == 37 || Question_Item == 41){
                 sdwsa = 70
             } 
-            if(Question_Item == 58){
+            if(Question_Item == 61){
                 sdwsa = 370
                 sdwsa = sdwsa + 70 + CGFloat(modle.height)
                 return sdwsa
             }
             if modle.isNoShow {
-               // Question_Item = Question_Item - 1
                 print("\(Question_Item)")
                 switch Question_Item {
                 case 15:
-                    let model14 = dto.questionList[indexPath.row - 1]
-                    if(model14.defaultValue == "Yes"){
+                    let  model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -269,8 +263,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 16:
-                    let model14 = dto.questionList[indexPath.row - 2]
-                    if(model14.defaultValue == "Yes"){
+                    let  model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -279,8 +273,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 18:
-                    let model17 = dto.questionList[indexPath.row - 1]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -289,8 +283,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 19:
-                    let model17 = dto.questionList[indexPath.row - 2]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -299,8 +293,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 20    :
-                    let model17 = dto.questionList[indexPath.row - 3]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -309,78 +303,18 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 21 :
-                    let model20 = dto.questionList[indexPath.row - 1]
-                    if(model20.defaultValue == "Yes"){
+                    let model20 = dto.questionList[11]
+                    if(model20.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
                         modle.other = ""
                         sdwsa = 0
-                    }
-                    break
-                case 35 :
-                    let model34 = dto.questionList[indexPath.row - 1]
-                    if(model34.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                        
-                    }else{
-                        modle.defaultValue = ""
-                        modle.other = ""
-                        sdwsa = 0
-                        
                     }
                     break
                 case 22 :
-                    let model17 = dto.questionList[indexPath.row - 5]
-                    if(model17.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                        
-                    }else{
-                        modle.defaultValue = ""
-                        modle.images = []
-                        modle.other = ""
-                        sdwsa = 0
-                    }
-                    break
-                case 23 :
-                    let model17 = dto.questionList[indexPath.row - 6]
-                    if(model17.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                        
-                    }else{
-                        modle.defaultValue = ""
-                        modle.images = []
-                        modle.other = ""
-                        sdwsa = 0
-                    }
-                    break
-                case 24 :
-                    let model17 = dto.questionList[indexPath.row - 7]
-                    if(model17.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                        
-                    }else{
-                        modle.defaultValue = ""
-                        modle.images = []
-                        modle.other = ""
-                        sdwsa = 0
-                    }
-                    break
-                case 25 :
-                    let model17 = dto.questionList[indexPath.row - 8]
-                    if(model17.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                       
-                    }else{
-                        modle.defaultValue = ""
-                        modle.images = []
-                        modle.other = ""
-                        sdwsa = 0
-                    }
-                    break
-                case 26 :
-                    let model17 = dto.questionList[indexPath.row - 9]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                         
                     }else{
@@ -391,21 +325,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 27 :
-                    let model17 = dto.questionList[indexPath.row - 10]
-                    if(model17.defaultValue == "Yes"){
-                        sdwsa = sdwsa + 80
-                        
-                    }else{
-                        modle.defaultValue = ""
-                        modle.images = []
-                        modle.other = ""
-                        sdwsa = 0
-                       
-                    }
-                    break
-                case 28 :
-                    let model17 = dto.questionList[indexPath.row - 11]
-                    if(model17.defaultValue == "Yes"){
+                    let model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
                         sdwsa = sdwsa + 80
                         
                     }else{
@@ -417,8 +338,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 29 :
-                    let model17 = dto.questionList[indexPath.row - 12]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -428,8 +349,8 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                     }
                     break
                 case 30 :
-                    let model17 = dto.questionList[indexPath.row - 13]
-                    if(model17.defaultValue == "Yes"){
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -438,9 +359,31 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
                         sdwsa = 0
                     }
                     break
+                case 35 :
+                    let model34 = dto.questionList[indexPath.row - 1]
+                    if(model34.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                        
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                        
+                    }
+                    break
+                case 52 :
+                    let model52 = dto.questionList[indexPath.row - 1 ]
+                    if(model52.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
                 case 54 :
                     let model53 = dto.questionList[indexPath.row - 1 ]
-                    if(model53.defaultValue == "Yes"){
+                    if(model53.other == "Yes"){
                         sdwsa = sdwsa + 80
                     }else{
                         modle.defaultValue = ""
@@ -459,6 +402,185 @@ extension AddProjectViewController : UITableViewDelegate , UITableViewDataSource
         return sdwsa
     }
     
+    // 
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        var sdwsa :CGFloat = 0
+        
+        let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
+        let modle:QuestionModel = dto.questionList[indexPath.row]
+        if modle.isShow {
+            if(modle.item == "6" || modle.item == "24" || modle.item == "38" || modle.item == "42" ){
+                sdwsa = 70
+            }else if(modle.item == "58"){
+                sdwsa = 370
+            }
+            if(modle.defaultValue.contains("Other")){
+                sdwsa = sdwsa + 70 + CGFloat(modle.height) + 300
+            }else{
+                sdwsa = sdwsa + 70 + CGFloat(modle.height)
+            }
+        }else{
+            let Question_Item = Int(modle.item)!-1
+            if(Question_Item == 5 || Question_Item == 23 || Question_Item == 37 || Question_Item == 41){
+                sdwsa = 70
+            } 
+            if(Question_Item == 61){
+                sdwsa = 370
+                sdwsa = sdwsa + 70 + CGFloat(modle.height)
+                return sdwsa
+            }
+            if modle.isNoShow {
+                print("\(Question_Item)")
+                switch Question_Item {
+                case 15:
+                    let  model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 16:
+                    let  model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 18:
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 19:
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 20    :
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 21 :
+                    let model20 = dto.questionList[11]
+                    if(model20.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 22 :
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                        
+                    }else{
+                        modle.defaultValue = ""
+                        modle.images = []
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 27 :
+                    let model14 = dto.questionList[5]
+                    if(model14.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                        
+                    }else{
+                        modle.defaultValue = ""
+                        modle.images = []
+                        modle.other = ""
+                        sdwsa = 0
+                        
+                    }
+                    break
+                case 29 :
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.images = []
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 30 :
+                    let model17 = dto.questionList[8]
+                    if(model17.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.images = []
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 35 :
+                    let model34 = dto.questionList[indexPath.row - 1]
+                    if(model34.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                        
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                        
+                    }
+                    break
+                case 52 :
+                    let model51 = dto.questionList[indexPath.row - 1 ]
+                    if(model51.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                case 54 :
+                    let model53 = dto.questionList[indexPath.row - 1 ]
+                    if(model53.other == "Yes"){
+                        sdwsa = sdwsa + 80
+                    }else{
+                        modle.defaultValue = ""
+                        modle.other = ""
+                        sdwsa = 0
+                    }
+                    break
+                default:
+                    sdwsa = sdwsa + 0
+                    break
+                }
+            }else{
+                sdwsa = sdwsa + 80
+            }
+        }
+        return sdwsa
+    }
     // 组头和组尾
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -511,56 +633,102 @@ extension AddProjectViewController : TCheckBoxTableViewCellDelagate
         let indexPath:IndexPath = tableView.indexPath(for: cell)!
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
         let modle:QuestionModel = dto.questionList[indexPath.row]
-        modle.other = textFiedstr
+        if modle.item == "36" {
+           
+           modle.textStr = textFiedstr ?? ""
+        }else{
+           modle.other = textFiedstr 
+        }
+        
         if textFiedstr == nil || textFiedstr == "" {
             modle.isReply = false
         }else{
             modle.isReply = true
         }
-        
     }
     // 编辑状态改变
     func textFiledChnage(textFiedstr: String?, cell: TCheckBoxTableViewCell) {
-       // let indexPath:IndexPath = tableView.indexPath(for: cell)!
-       // tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     // 点击按钮
-    func didClick(cell: TCheckBoxTableViewCell, itemStr: String?, itemTag: NSInteger) {
+    func didClick(cell: TCheckBoxTableViewCell, itemStr: String?, item: UIButton) {
         let indexPath:IndexPath = tableView.indexPath(for: cell)!
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
         let modle:QuestionModel = dto.questionList[indexPath.row]
-        if itemTag == 5800 {
+        if item.tag == 5800 {
             addCamera(indexp: indexPath)
         }else{
-            if modle.item == "58" && modle.item != "Other" {
+            if modle.item == "58" && modle.defaultValue != "Other" {
                 modle.images = []
-                TrussType.removeAllObjects()
-            }else if (modle.item == "17"){
-                MeterPhotoCheckList.removeAllObjects()
-            }
-            if itemStr == "Other" {
-                if modle.defaultValue == "Other" {
-                    return
+                // 移除文件
+                let Manager = FileManager.default
+                for fn in TrussType{
+                    try! Manager.removeItem(atPath: fn as! String)
                 }
-                modle.other = ""
-                modle.defaultValue = itemStr 
-            }else{
-                modle.defaultValue = itemStr 
-                modle.other = itemStr
+                TrussType.removeAllObjects()
+            }else if (modle.item == "14" && itemStr == "No"){
+                // 移除文件
+                let Manager = FileManager.default
+                for fn in MeterPhotoCheckList1{
+                    try! Manager.removeItem(atPath: fn as! String)
+                }
+                MeterPhotoCheckList1.removeAllObjects()
+            }else if (modle.item == "17" &&  itemStr == "No"){
+                // 移除文件
+                let Manager = FileManager.default
+                for fn in MeterPhotoCheckList2{
+                    try! Manager.removeItem(atPath: fn as! String)
+                }
+                MeterPhotoCheckList2.removeAllObjects()
             }
+            
+            // 设置多选处理
+            if modle.item == "36" {
+                if item.isSelected {
+                    if itemStr != "Other" {
+                        modle.other = "\(modle.other ?? ""),\(itemStr ?? "")"
+                    }
+                    modle.defaultValue = "\(modle.defaultValue!),\(itemStr ?? "")"
+                }else{
+                    modle.defaultValue = modle.defaultValue.replacingOccurrences(of: ",\(itemStr ?? "" )", with: "")
+                    if itemStr == "Other" {
+                        modle.other = modle.defaultValue
+                        modle.textStr = ""
+                    }else{
+                       modle.other = modle.other.replacingOccurrences(of: ",\(itemStr ?? "")", with: "") 
+                    }
+                }
+            }else{
+                // 单选处理
+                if itemStr == "Other" {
+                    if modle.defaultValue == "Other" {
+                        return
+                    }
+                    modle.other = ""
+                    modle.defaultValue = itemStr 
+                }else{
+                    modle.defaultValue = itemStr 
+                    modle.other = itemStr
+                }  
+            }
+            
+            
             
             if modle.item == "18" {
                 tableView.reloadData()
-            }else if modle.item == "54"{
-               let indexp = IndexPath(item: 5, section: 4)
-                tableView.reloadRows(at: [indexPath , indexp], with: .automatic) 
-            }else if modle.item == "35"{
-                let indexp = IndexPath(item: 4, section: 2)
-                tableView.reloadRows(at: [indexPath , indexp], with: .automatic) 
             }else if modle.item == "15"{
                 let index6 = IndexPath(item: 6, section: 1)
                 let index7 = IndexPath(item: 7, section: 1)
-                tableView.reloadRows(at: [indexPath , index6,index7], with: .automatic) 
+                let index18 = IndexPath(item: 18, section: 1)
+                tableView.reloadRows(at: [indexPath , index6,index7,index18], with: .automatic) 
+            }else if modle.item == "35"{
+                let indexp = IndexPath(item: 4, section: 2)
+                tableView.reloadRows(at: [indexPath , indexp], with: .automatic) 
+            }else if modle.item == "52"{
+                let indexp = IndexPath(item: 3, section: 4)
+                tableView.reloadRows(at: [indexPath , indexp], with: .automatic) 
+            }else if modle.item == "54"{
+               let indexp = IndexPath(item: 5, section: 4)
+                tableView.reloadRows(at: [indexPath , indexp], with: .automatic) 
             }else{
                tableView.reloadRows(at: [indexPath], with: .automatic)  
             }
@@ -599,7 +767,6 @@ extension AddProjectViewController : TDiagramTableViewCellDelagate
         }
     }
     func diagrmWithChange(textFiedstr: String?, indexPath: IndexPath, textTag: NSInteger) {
-        //tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
 
@@ -720,14 +887,18 @@ extension AddProjectViewController : TQuestionTableViewCellDelagate
         Pickerimage_Nums = Pickerimage_Nums+1
         Nums = Pickerimage_Nums
         
-        if(modle.item == "6" || modle.item == "7" || modle.item == "8" || modle.item == "9"){
-            RoofShinglePhotoCheckList.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
-        }else if(modle.item == "24" || modle.item == "25" || modle.item == "26" || modle.item == "27" || modle.item == "28" || modle.item == "29" || modle.item == "30" || modle.item == "31"){
+        if(modle.item == "24" || modle.item == "25" || modle.item == "26" || modle.item == "27" || modle.item == "29" ){
             MeterPhotoCheckList.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
+        }else if ( modle.item == "28"){
+            MeterPhotoCheckList1.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
+        }else if ( modle.item == "30" || modle.item == "31"){
+            MeterPhotoCheckList2.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
         }else if(modle.item == "38" || modle.item == "39" || modle.item == "40" || modle.item == "41"){
             MainBreakerPhotoCheckList.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
         }else if(modle.item == "58"){
             TrussType.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
+        }else if(modle.item == "58" || modle.item == "59" || modle.item == "60" || modle.item == "61"){
+            TrussType1.add(["uploaded" : false,"ImgName" : "\(PickerImage_Name)_\(Nums)"])
         }
         
         let ImageName = "\(PickerImage_Name)_\(Nums).jpg"

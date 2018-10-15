@@ -25,7 +25,11 @@ class ProjectResultTableViewCell: UITableViewCell {
             }else{
                 if question?.item == "37" {
                     detail.text = "Up:\(question?.top ?? ""), Left:\(question?.left ?? ""), Down:\(question?.bottom ?? ""), Right:\(question?.right ?? "")"
-                }else{
+                }else if question?.item == "36" {
+                    detail.text = "\(question?.other ?? ""),Other:\(question?.textStr ?? "")"
+                    let str:NSString = detail!.text as! NSString
+                    detail.text = str.substring(with: NSMakeRange(1, str.length - 1))
+                } else{
                    detail.text =  question?.other ?? " " 
                 }
                 

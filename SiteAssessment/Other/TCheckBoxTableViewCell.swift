@@ -25,7 +25,7 @@ protocol TCheckBoxTableViewCellDelagate :NSObjectProtocol {
     /// - Parameters:
     ///   - cell: 当前cell
     ///   - question_item: 按钮tag
-    func didClick(cell:TCheckBoxTableViewCell ,itemStr:String? ,itemTag:NSInteger)
+    func didClick(cell:TCheckBoxTableViewCell ,itemStr:String? ,item:UIButton)
 }
 
 class TCheckBoxTableViewCell: UITableViewCell {
@@ -53,8 +53,8 @@ class TCheckBoxTableViewCell: UITableViewCell {
     }
     
     @objc func tapped(_ button:UIButton) {
-        
-        delageta?.didClick(cell: self, itemStr: button.currentTitle ,itemTag: button.tag)
+        button.isSelected = !button.isSelected;
+        delageta?.didClick(cell: self, itemStr: button.currentTitle ,item: button)
     }
 }
 extension TCheckBoxTableViewCell {
@@ -102,7 +102,18 @@ extension TCheckBoxTableViewCell {
                 titlelable.textColor = UIColor.white 
             }
         }
-        if model.item == "42" {
+        
+        if model.item == "6" {
+            let plable:UILabel = UILabel()
+            
+            plable.frame = CGRect(x: 0, y: 10, width: Screen_W, height: 60)
+            plable.textAlignment = NSTextAlignment.center
+            plable.textColor = UIColor.gray
+            plable.font = UIFont.systemFont(ofSize: 25)
+            plable.text = "Roof & Shingle Photo Check List"
+            plable.font = UIFont.systemFont(ofSize: 18)
+            contentView.addSubview(plable)
+        }else if model.item == "42" {
             let plable:UILabel = UILabel()
             
             plable.frame = CGRect(x: 0, y: 10, width: Screen_W, height: 60)
@@ -169,7 +180,7 @@ extension TCheckBoxTableViewCell {
                 textFiled.inputView = kv
                 kv.inputSource = textFiled
                 
-            }else if(model.item == "59"){
+            }else if(model.item == "62"){
                 textView.frame = CGRect(x: 20, y: 90 + hs, width: Int(Screen_W - 40), height: 220)
                 if model.isReply {
                     textView.text = model.other
@@ -184,23 +195,40 @@ extension TCheckBoxTableViewCell {
                 }
                 btn.setTitle(op as? String, for:.normal)
                 btn.setTitleColor(UIColor.black, for: .normal)
-                if(btn.currentTitle == model.defaultValue){
-                    btn.setImage(radio_Y, for: .normal)
+                btn.setImage(radio_N, for: .normal)
+                btn.setImage(radio_Y, for: .selected)
+                
+                if model.item == "36" {
+                    if model.defaultValue.contains(btn.currentTitle!){
+                        btn.isSelected = true
+                    }else{
+                        btn.isSelected = false
+                    }
                 }else{
-                    btn.setImage(radio_N, for: .normal)
+                    if(btn.currentTitle == model.defaultValue){
+                        btn.isSelected = true
+                    }else{
+                        btn.isSelected = false
+                    } 
                 }
+                
                 btn.titleLabel?.font = UIFont.systemFont(ofSize: 25)
                 btn.tag = Int(model.item)!*10+i
                 btn.addTarget(self, action:#selector(tapped(_:)), for:.touchUpInside)
                 btn.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
                 btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
                 i = i+1
-                if(op as? String == "Other" && model.item != "58" && model.defaultValue == "Other"){
+                if(op as? String == "Other" && model.item != "58" && model.defaultValue.contains("Other")){
                     textlable.frame = CGRect(x: 20, y: 90+(i/2)*60 + hs, width: 100, height: 40)
                     textlable.text = "NOTE:"
                     textView.frame = CGRect(x: 20, y: 90+(i/2)*60+50 + hs, width: Int(Screen_W - 40), height: 220)
                     if(model.isReply){
-                        textView.text = model.other
+                        if model.item == "36" {
+                            textView.text = model.textStr
+                        }else{
+                            textView.text = model.other
+                        }
+                        
                     }
                     textView.tag = tag
                 }
@@ -225,12 +253,6 @@ extension TCheckBoxTableViewCell : UITextFieldDelegate
         delageta?.textFiledValue(textFiedstr: newText, cell: self);
         return true
     }
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        if textFiled.tag ==  Int((question?.item)!) {
-//           // delageta?.textFiledChnage(textFiedstr: textField.text, cell: self)
-//        }
-//        
-//    }
 }
 
 extension TCheckBoxTableViewCell : UITextViewDelegate
@@ -248,12 +270,5 @@ extension TCheckBoxTableViewCell : UITextViewDelegate
         delageta?.textFiledValue(textFiedstr: newText, cell: self);
         return true
     }
-    
-//    func textViewDidEndEditing(_ textView: UITextView) {
-//        if textView.tag ==  Int((question?.item)!) {
-//            delageta?.textFiledChnage(textFiedstr: textView.text, cell: self)       
-//        }
-//        
-//    }
 }
 

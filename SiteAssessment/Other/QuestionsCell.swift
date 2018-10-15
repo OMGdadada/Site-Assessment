@@ -312,26 +312,26 @@ class QuestionsCell: UITableViewCell,UITextFieldDelegate,UITextViewDelegate {
         indexPath?.row += 1
         switch Question_Item {
         case 15:
-            tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+            //tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
             break
         case 18:
-            tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+            //tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
             break
         case 21:
-            tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+            //tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
             break
         case 35:
-            tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+            //tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
             break
         case 53	:
-            tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+            //tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
             break
         default:
             break
         }
         //
         indexPath?.row -= 1
-        tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
+       // tableView?.reloadRows(at: [indexPath as! IndexPath], with: .automatic)
     }
     func superTableView() -> UITableView? {
         for view in sequence(first: self.superview, next: { $0?.superview }) {

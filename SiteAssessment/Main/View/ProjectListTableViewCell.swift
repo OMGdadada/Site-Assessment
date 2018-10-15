@@ -39,22 +39,23 @@ class ProjectListTableViewCell: UITableViewCell {
             switch model?.status {
             case .Completed?:
                 self.status.text = "Completed"
-                self.item.setTitle("reupload", for: .normal)
+                self.item.setTitle("delete", for: .normal)
                 self.status.textColor = UIColor.black
-                self.update.setTitle("Reupload", for: .normal);
+                self.update.setTitle("upload", for: .normal);
                 self.item.isEnabled = true;
-                self.update.isEnabled = true;
+                self.update.isEnabled = false;
                 break
             case .Uploading?:
                 self.status.text = "Uploading"
                 self.status.textColor = UIColor.black
+                self.item.setTitle("delete", for: .normal)
                 self.update.setTitle("Uploading", for: .normal);
                 self.item.isEnabled = false;
                 self.update.isEnabled = false;
                 break
-            case .NotUploaded?:
-                self.status.text = "Pending"
-                self.item.setTitle("resume", for: .normal)
+            case .Pending?:
+                self.status.text = "Update"
+                self.item.setTitle("delete", for: .normal)
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Upload", for: .normal);
                 self.item.isEnabled = false;
@@ -63,13 +64,14 @@ class ProjectListTableViewCell: UITableViewCell {
             case .Incomplete?:
                 self.status.text = "Incomplete"
                 self.item.setTitle("Continue", for: .normal)
-                self.item.isEnabled = false;
+                self.update.setTitle("Upload", for: .normal);
+                self.item.isEnabled = true;
                 self.update.isEnabled = false;
                 self.status.textColor = UIColor.red
                 break
             case .uploadFailed?:
-                self.status.text = "Failed"
-                self.item.setTitle("Continue", for: .normal)
+                self.status.text = "UploadFailed"
+                self.item.setTitle("Upload", for: .normal)
                 self.status.textColor = UIColor.red
                 self.item.isEnabled = false;
                 self.update.isEnabled = true;

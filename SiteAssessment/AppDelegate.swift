@@ -114,7 +114,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.applicationIconBadgeNumber = 0
         
         let info = notification.userInfo as! [String:String]
-        let number = info["ItemID"]
+        _ = info["ItemID"]
         
         let alertController = UIAlertController(title: "本地通知",
                                                 message: "消息内容：\(String(describing: notification.alertBody!))",

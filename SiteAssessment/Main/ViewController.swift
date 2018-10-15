@@ -46,7 +46,7 @@ extension ViewController: GIDSignInDelegate{
         
         if error != nil {
             //service.authorizer = nil
-            print("Sign error:\(error)")
+            print("Sign error:\(error ?? "" as! Error)")
             return
         } else {
             //ViewController.user = user

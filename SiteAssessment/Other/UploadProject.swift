@@ -24,11 +24,14 @@ class UploadProject{
         _ = makePostCall(Project_Id ,update: model.Datauploaded)
     }
     
-    func getSearchResults(completion:@escaping ((_ str:String) -> Void)) {
+    func getSearchResults(completion:@escaping ((_ str:String?) -> Void)) {
         if var urlComponents = URLComponents(string: "https://creator.zoho.com/api/json/crm/view/Site_Assessment_Report") {
             urlComponents.query = "authtoken=6be21a290c7115b73ff7df767a84ac34&zc_ownername=mohanwang&scope=creatorapi&raw=true"
             
-            guard let url = urlComponents.url else { return }
+            guard let url = urlComponents.url else { 
+                completion(nil)
+                return 
+            }
             
             let session = URLSession.shared
             
@@ -37,17 +40,20 @@ class UploadProject{
                 guard error == nil else {
                     print("error calling POST on /todos/1")
                     print(error!)
+                    completion(nil)
                     return
                 }
                 
                 guard let responseData = data else {
                     print("Error: did not receive data")
+                    completion(nil)
                     return
                 }
 
                
                 guard let string = NSString(data: responseData, encoding: String.Encoding.utf8.rawValue) else {
                     print("Error: data is wrong")
+                    completion(nil)
                     return
                 }
                 completion(string as String)
@@ -61,8 +67,9 @@ class UploadProject{
     func UploadProjectToGoogleDrive(_ Project_Id:String , model:HistoyDto?){
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model?.projectID ?? "").plist")!
+        makePostCall(Project_Id , update: (model?.Datauploaded)!)
         if(ProjectInformation["Datauploaded"] as! Bool == false){
-            makePostCall(Project_Id , update: (model?.Datauploaded)!)
+            
         }else if(ProjectInformation["uploaded"] as! Bool == false){
             
             var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
@@ -222,13 +229,13 @@ class UploadProject{
         let sendData: [String: String] = SENDDATA
         print(sendData)
         /* --------------------------- */
-        
-        let urlParams = sendData.compactMap({ (key, value) -> String in
+        let urlParams = sendData.compactMap ({ (key ,value) -> String in
             return "\(key)=\(value)"
         }).joined(separator: "&")
-        //        ({ (key, value) -> String in
-        //            
-        //        })
+        
+//        let urlParams = sendData.compactMap({ (key, value) -> String in
+//            return "\(key)=\(value)"
+//        }).joined(separator: "&")
         
         urlRequest.httpBody = urlParams.data(using: .utf8)
         
@@ -261,11 +268,7 @@ class UploadProject{
     }
     
     fileprivate func saveFile(dic:NSMutableDictionary , filepath:String , projectID:String) {
-        deletePlistData(project: projectID)
-        
         savePlistData(project: projectID, dic: dic)
-        
-//        NSDictionary(dictionary: dic).write(toFile: filepath, atomically: true)
     }
         
     
@@ -314,7 +317,7 @@ class UploadProject{
     fileprivate func addAnswer(_ Project_Id:String) -> [String : Any?] {
         
         var answer:[String:String] = [:]
-        answer["sa_prj"] = Project_Id
+       // answer["sa_prj"] = Project_Id
         var ProjectInformation :NSDictionary
         ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
         var dataSoure:NSMutableArray = NSMutableArray()
@@ -342,32 +345,16 @@ class UploadProject{
                         answer["sa_overallRoofCondition"] = question.other! == "" ?"No":question.other!
                         break
                     case 5 :
-                        if question.other == "Photo Uploaded" {
-                            answer["sa_full3DSiteImaging"] = "Yes"  
-                        }else{ 
-                            answer["sa_full3DSiteImaging"] = "No"
-                        }
+                        answer["sa_full3DSiteImaging"] = question.other! == "" ?"No":question.other! 
                         break
                     case 6 :
-                        if question.other == "Photo Uploaded" {
-                            answer["sa_shinglePhotoCloseUp"] = "Yes"  
-                        }else{ 
-                            answer["sa_shinglePhotoCloseUp"] = "No"
-                        }
+                        answer["sa_shinglePhotoCloseUp"] = question.other! == "" ?"No":question.other! 
                         break
                     case 7 :
-                        if question.other == "Photo Uploaded" {
-                            answer["sa_shinglePhotoTopView"] = "Yes"  
-                        }else{ 
-                            answer["sa_shinglePhotoTopView"] = "No"
-                        }
+                        answer["sa_shinglePhotoTopView"] = question.other! == "" ?"No":question.other!  
                         break
                     case 8 :
-                        if question.other == "Photo Uploaded" {
-                            answer["sa_shinglePhotoBackView"] = "Yes"  
-                        }else{ 
-                            answer["sa_shinglePhotoBackView"] = "No"
-                        }
+                        answer["sa_shinglePhotoBackView"] = question.other! == "" ?"No":question.other! 
                         break
                     default: break
                     }
@@ -493,7 +480,7 @@ class UploadProject{
                         answer["sa_obstructionType"] = question.other! == "" ?"No":question.other!
                         break
                     case 5:
-                        // answer["sa_mainBreakerPanelDiagram"] = question.other!
+                         answer["sa_mainBreakerPanelDiagram"] = question.other! == "" ?"No":question.other!
                         break
                     case 6:
                         if question.other == "Photo Uploaded" {
@@ -588,7 +575,27 @@ class UploadProject{
                             answer["sa_trussType"] = question.other! == "" ?"No":question.other!
                         }
                         break
-                        
+                    case 9:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_internalStructurePhotos"] = "Yes"
+                        }else{
+                            answer["sa_internalStructurePhotos"] = "No"
+                        }
+                        break
+                    case 10:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_trussMemberSizePhotos"] = "Yes"
+                        }else{
+                            answer["sa_trussMemberSizePhotos"] = "No"
+                        }
+                        break
+                    case 11:
+                        if question.other == "Photo Uploaded" {
+                            answer["sa_trussSpacingPhotos"] = "Yes"
+                        }else{
+                            answer["sa_trussSpacingPhotos"] = "No"
+                        }
+                        break
                     default: break  
                     }
                     break 

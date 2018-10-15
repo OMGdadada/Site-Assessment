@@ -98,13 +98,16 @@ class ProductListViewController: UIViewController {
         self.performSegue(withIdentifier: "ShowProjectList", sender: user)
     }
     @objc func SetNewProject(_ button:UIButton){
-        
+        button.isEnabled = false;
         UploadProject.Uploadshared.getSearchResults { str in
-            let dic:[String:Any]? = self.stringValueDic(str)
             DispatchQueue.main.async(execute: {
-                
+                button.isEnabled = true;
+                if str == nil {
+                    return
+                }
+                let dic:[String:Any]? = self.stringValueDic(str ?? "")
                 let vw:NewProjectListView = Bundle.main.loadNibNamed("NewProjectListView", owner: nil, options: nil)?[0] as! NewProjectListView
-                vw.frame = CGRect(x: 0, y: 0, width: Screen_W/2, height: Screen_H / 2)
+                vw.frame = CGRect(x: 0, y: 0, width: Screen_W/1.5, height: Screen_H / 2)
                 vw.center = self.view.center
                 vw.backgroundColor = UIColor.black
                 vw.dataSoure = dic!["Site_Assessment"] as! Array<Any>
@@ -166,11 +169,11 @@ class ProductListViewController: UIViewController {
 }
 extension ProductListViewController :NewProjectListViewDelagate
 {
-    // 选择新项目
-    func didClickWithItem(str: String?) {
+    func didClickWithItem(str: String?, id: String?) {
         let storyBoard :UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc : AddProjectViewController = storyBoard.instantiateViewController(withIdentifier: "AddProjectViewController") as! AddProjectViewController
         vc.Project_Id = str
+        vc.Project_Id_id = id
         self.present(vc, animated: true, completion: nil)
     }
 }

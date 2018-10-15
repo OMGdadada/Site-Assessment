@@ -36,6 +36,7 @@
 		08CA58E12109F92A00AF4059 /* KeyBoardTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D32109F92A00AF4059 /* KeyBoardTipView.swift */; };
 		08CA58E22109F92A00AF4059 /* KeyBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D42109F92A00AF4059 /* KeyBoardView.swift */; };
 		08CA58E32109F92A00AF4059 /* KeyBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CA58D52109F92A00AF4059 /* KeyBoardCell.swift */; };
+		162041A22173265F00D5BBF5 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 162041A12173265F00D5BBF5 /* UserNotifications.framework */; };
 		1647113821315B7D0044BB0F /* HGImageCompleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113121315B7D0044BB0F /* HGImageCompleteButton.swift */; };
 		1647113921315B7D0044BB0F /* HGImage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1647113221315B7D0044BB0F /* HGImage.storyboard */; };
 		1647113A21315B7D0044BB0F /* HGImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1647113321315B7D0044BB0F /* HGImageCollectionViewController.swift */; };
@@ -110,6 +111,7 @@
 		08CA58D32109F92A00AF4059 /* KeyBoardTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardTipView.swift; sourceTree = "<group>"; };
 		08CA58D42109F92A00AF4059 /* KeyBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardView.swift; sourceTree = "<group>"; };
 		08CA58D52109F92A00AF4059 /* KeyBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyBoardCell.swift; sourceTree = "<group>"; };
+		162041A12173265F00D5BBF5 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		1647113121315B7D0044BB0F /* HGImageCompleteButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCompleteButton.swift; sourceTree = "<group>"; };
 		1647113221315B7D0044BB0F /* HGImage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HGImage.storyboard; sourceTree = "<group>"; };
 		1647113321315B7D0044BB0F /* HGImageCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HGImageCollectionViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				162041A22173265F00D5BBF5 /* UserNotifications.framework in Frameworks */,
 				166ABF532152951A00023F6C /* Foundation.framework in Frameworks */,
 				166ABF512152951200023F6C /* UIKit.framework in Frameworks */,
 				9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */,
@@ -392,6 +395,7 @@
 		2C9291195BD43E4958304FFC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				162041A12173265F00D5BBF5 /* UserNotifications.framework */,
 				166ABF522152951A00023F6C /* Foundation.framework */,
 				166ABF502152951100023F6C /* UIKit.framework */,
 				4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */,
@@ -749,7 +753,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSR8TSX4AA;
@@ -770,7 +774,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QSR8TSX4AA;

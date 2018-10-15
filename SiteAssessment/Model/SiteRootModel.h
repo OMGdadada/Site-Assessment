@@ -31,4 +31,5 @@
 @property (nonatomic ,strong) NSArray *images;   // 图片集合
 @property (nonatomic ,copy) NSString  *other;    // 选中的答案
 @property (nonatomic ,assign) BOOL    ishidden; // 是否隐藏问题
+@property (nonatomic ,copy) NSString  *textStr; 
 @end

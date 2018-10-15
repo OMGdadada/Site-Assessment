@@ -265,8 +265,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -281,8 +279,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -313,8 +309,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -351,8 +345,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -370,8 +362,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -386,8 +376,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -403,10 +391,8 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
-				<true/>
+				<false/>
 				<key>Item</key>
 				<string>24</string>
 			</dict>
@@ -420,10 +406,8 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
-				<true/>
+				<false/>
 				<key>Item</key>
 				<string>25</string>
 			</dict>
@@ -437,10 +421,8 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
-				<true/>
+				<false/>
 				<key>Item</key>
 				<string>26</string>
 			</dict>
@@ -454,10 +436,8 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
-				<true/>
+				<false/>
 				<key>Item</key>
 				<string>27</string>
 			</dict>
@@ -471,8 +451,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -488,10 +466,8 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
-				<true/>
+				<false/>
 				<key>Item</key>
 				<string>29</string>
 			</dict>
@@ -505,8 +481,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -522,8 +496,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -614,8 +586,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -888,7 +858,7 @@
 				<key>DefaultValue</key>
 				<string></string>
 				<key>IsNoShow</key>
-				<false/>
+				<true/>
 				<key>Item</key>
 				<string>53</string>
 			</dict>
@@ -919,8 +889,6 @@
 				</array>
 				<key>DefaultValue</key>
 				<string></string>
-				<key>ishidden</key>
-				<true/>
 				<key>IsNoShow</key>
 				<true/>
 				<key>Item</key>
@@ -984,6 +952,51 @@
 				<key>Item</key>
 				<string>58</string>
 			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Internal Structure Photos:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string></string>
+				<key>IsNoShow</key>
+				<string>NO</string>
+				<key>Item</key>
+				<string>59</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Truss Member Size Photos:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string></string>
+				<key>IsNoShow</key>
+				<string>NO</string>
+				<key>Item</key>
+				<string>60</string>
+			</dict>
+			<dict>
+				<key>Question</key>
+				<string>Truss Spacing Photos:</string>
+				<key>option</key>
+				<array>
+					<string>Yes</string>
+					<string>No</string>
+				</array>
+				<key>DefaultValue</key>
+				<string></string>
+				<key>IsNoShow</key>
+				<string>NO</string>
+				<key>Item</key>
+				<string>61</string>
+			</dict>
 		</array>
 	</dict>
 	<dict>
@@ -1003,7 +1016,7 @@
 				<key>IsNoShow</key>
 				<false/>
 				<key>Item</key>
-				<string>59</string>
+				<string>62</string>
 			</dict>
 		</array>
 	</dict>

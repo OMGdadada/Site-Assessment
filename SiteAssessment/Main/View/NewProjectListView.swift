@@ -8,7 +8,7 @@
 
 import UIKit
 protocol NewProjectListViewDelagate :NSObjectProtocol {
-    func didClickWithItem(str:String?) 
+    func didClickWithItem(str:String? , id:String?) 
     
 }
 class NewProjectListView: UIView {
@@ -40,7 +40,7 @@ class NewProjectListView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = UIColor.gray
         tableView.alpha = 0.8
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,9 +60,13 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath)
         let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
-        cell.textLabel?.text = dic["sa_prj"] as? String
+        cell.backgroundColor = UIColor.gray
+        
+        cell.textLabel?.textColor = UIColor.white
+        cell.textLabel?.text = dic["sa_projectAddress"] as? String
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -72,7 +76,7 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
-        delageta?.didClickWithItem(str: dic["sa_prj"] as? String)
+        delageta?.didClickWithItem(str: dic["sa_projectAddress"] as? String ,id: dic["sa_prj"] as? String)
         self.removeFromSuperview()
         bgView.removeFromSuperview()
     }

@@ -67,4 +67,13 @@
     }
     return _right;
 }
+
+- (NSString *)textStr
+{
+    if (_textStr == nil) {
+        return @"";
+    }
+    return _textStr;
+}
+
 @end

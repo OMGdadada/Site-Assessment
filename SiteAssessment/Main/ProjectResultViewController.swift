@@ -20,7 +20,8 @@ class ProjectResultViewController: UIViewController {
     
     @IBOutlet weak var updateItem: UIButton!
     var dataSoure:NSMutableArray = NSMutableArray.init() // 数据源
-    var prejectID:String? = ""
+    var Project_Id_id:String! // id
+    var prejectID:String!
     var isUpdate:Bool = false;
     var imgDic:[String:Any] = [:]
     
@@ -196,12 +197,12 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
                 let eight:QuestionModel = model.questionList[8]
                 let oneone:QuestionModel = model.questionList[11]
                 if five.defaultValue == "No" || five.defaultValue == "" {
-                    if indexPath.row == 6 ||  indexPath.row == 7 {
+                    if indexPath.row == 6 ||  indexPath.row == 7 ||  indexPath.row == 18{
                         return 0
                     } 
                 }
                 if eight.defaultValue == "No" || eight.defaultValue == "" {
-                    if indexPath.row == 9 || indexPath.row == 10 || indexPath.row == 11 || indexPath.row == 13 || indexPath.row == 14 || indexPath.row == 15 || indexPath.row == 16 || indexPath.row == 17 || indexPath.row == 18 || indexPath.row == 19 || indexPath.row == 20 || indexPath.row == 21  {
+                    if indexPath.row == 9 || indexPath.row == 10 || indexPath.row == 11 || indexPath.row == 13 || indexPath.row == 20 || indexPath.row == 21  {
                         return 0
                     }
                     
@@ -224,6 +225,12 @@ extension  ProjectResultViewController : UITableViewDataSource , UITableViewDele
                 let four:QuestionModel = model.questionList[4]
                 if four.defaultValue == "No" || four.defaultValue == "" {
                     if indexPath.row == 5 {
+                        return 0 
+                    }
+                }
+                let two:QuestionModel = model.questionList[2]
+                if two.defaultValue == "No" || two.defaultValue == "" {
+                    if indexPath.row == 3 {
                         return 0 
                     }
                 }
@@ -291,12 +298,12 @@ extension ProjectResultViewController
                     }
                     break
                 case 1:
-                    if j == 6 || j == 7 {
+                    if j == 6 || j == 7 || j == 18 {
                         let model5 = model.questionList[5]
                         if model5.other == "Yes" && question.other == "" {
                             count = count + 1
                         } 
-                    }else if j == 9 || j == 10 || j == 11 || j == 12 || j == 13 || j == 14 || j == 15 || j == 16 || j == 17 || j == 18  || j == 19 || j == 20 || j == 21{
+                    }else if j == 9 || j == 10 || j == 11 || j == 12 || j == 13 || j == 20 || j == 21{
                         let model8 = model.questionList[8]
                         if j == 12 {
                             let model11 = model.questionList[11]
@@ -341,6 +348,12 @@ extension ProjectResultViewController
                     break
                 case 4:
                     switch j {
+                    case 3:
+                        let model2:QuestionModel = model.questionList[2]
+                        if model2.other == "Yes" && question.other == "" {
+                            count = count + 1
+                        }
+                        break
                     case 5:
                         let model4:QuestionModel = model.questionList[4]
                         if model4.other == "Yes" && question.other == "" {

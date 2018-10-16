@@ -304,9 +304,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cTl-WE-kk6">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="1302"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cTl-WE-kk6">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="1346"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectListTableViewCell" rowHeight="59" id="MuS-m4-b2q" customClass="ProjectListTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
@@ -389,9 +388,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="cTl-WE-kk6" firstAttribute="top" secondItem="Vyj-H2-73w" secondAttribute="top" id="2Eo-fb-7ms"/>
+                            <constraint firstItem="cTl-WE-kk6" firstAttribute="trailing" secondItem="Vyj-H2-73w" secondAttribute="trailing" id="EXR-S3-6XU"/>
+                            <constraint firstItem="cTl-WE-kk6" firstAttribute="leading" secondItem="Vyj-H2-73w" secondAttribute="leading" id="Kz3-St-WzU"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="leading" secondItem="Vyj-H2-73w" secondAttribute="leading" id="Mds-ac-l7b"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="trailing" secondItem="Vyj-H2-73w" secondAttribute="trailing" id="MvT-eP-PQn"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="top" secondItem="Vyj-H2-73w" secondAttribute="top" id="gja-HV-Ib0"/>
+                            <constraint firstAttribute="bottom" secondItem="cTl-WE-kk6" secondAttribute="bottom" id="kXs-bM-Zgi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Vyj-H2-73w"/>
                     </view>

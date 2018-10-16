@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+          
         let manager:IQKeyboardManager = IQKeyboardManager.shared()
         manager.isEnabled = true
         manager.shouldResignOnTouchOutside = true
@@ -29,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.init(named: "SignIn")
         FIRApp.configure()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        
+        Thread.sleep(forTimeInterval: 3.0)
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
                                                   categories: nil)
         application.registerUserNotificationSettings(settings)

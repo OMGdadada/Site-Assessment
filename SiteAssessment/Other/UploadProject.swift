@@ -20,8 +20,10 @@ class UploadProject{
         drive = UploadGoogleDrive(service)
     }
     static let Uploadshared = UploadProject()
-    func UploadProjectdata(_ Project_Id:String , model:HistoyDto){
-        _ = makePostCall(Project_Id ,update: model.Datauploaded)
+    func UploadProjectdata(_ Project_Id:String , completion:@escaping ((_ issuccess:Bool?) -> Void)){
+        _ = makePostCall(Project_Id, completion: { isSuccess in
+            completion(isSuccess)
+        })
     }
     
     func getSearchResults(completion:@escaping ((_ str:String?) -> Void)) {
@@ -49,8 +51,8 @@ class UploadProject{
                     completion(nil)
                     return
                 }
-
-               
+                
+                
                 guard let string = NSString(data: responseData, encoding: String.Encoding.utf8.rawValue) else {
                     print("Error: data is wrong")
                     completion(nil)
@@ -64,12 +66,14 @@ class UploadProject{
         }
     }
     
-    func UploadProjectToGoogleDrive(_ Project_Id:String , model:HistoyDto?){
+    func UploadProjectToGoogleDrive(_ Project_Id:String){
         var ProjectInformation :NSMutableDictionary
-        ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model?.projectID ?? "").plist")!
-        makePostCall(Project_Id , update: (model?.Datauploaded)!)
+        ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
+        
         if(ProjectInformation["Datauploaded"] as! Bool == false){
-            
+            makePostCall(Project_Id , completion: { isSuccess in
+                
+            })
         }else if(ProjectInformation["uploaded"] as! Bool == false){
             
             var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
@@ -121,7 +125,6 @@ class UploadProject{
                                                     print("Upload file ID: \(fid)")
                                                     print("上传文件完成")
                                                     ImgInformation["uploaded"] = true
-                                                    ImgInformation["ststus"] = 1
                                                     ImgInformationList[i] = ImgInformation
                                                     ImgList[key] = ImgInformationList
                                                     ProjectInformation["Img"] = ImgList
@@ -131,22 +134,23 @@ class UploadProject{
                                                     
                                                     print(filePath)
                                                     ProjectImg_schedule += 1
-                                                    porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                                   
+                                                    DispatchQueue.main.async(execute: {
+                                                         porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                                    })
                                                     if(ProjectImg_Total == ProjectImg_schedule){
                                                         print("项目上传完成")
                                                         ProjectInformation["uploaded"] = true
-                                                        ImgInformation["ststus"] = 1
+                                                        ProjectInformation["ststus"] = 1
                                                         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
                                                         self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
-                                                self.scheduleNotification(itemID: Project_Id )
+                                                        self.scheduleNotification(itemID: Project_Id )
                                                     }
                                                 }
                                             }
                                         }
                                     }else{
                                         ProjectImg_schedule += 1
-                                        ImgInformation["ststus"] = 1
-                                        //ProjectListViewController.UpdateTableView()
                                         if(ProjectImg_Total == ProjectImg_schedule){
                                             print("项目上传完成")
                                             ProjectInformation["uploaded"] = true
@@ -156,7 +160,10 @@ class UploadProject{
                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                             self.scheduleNotification(itemID: Project_Id )
                                         }
-                                        porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                        DispatchQueue.main.async(execute: {
+                                           porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                        })
+                                        
                                     }
                                 }
                             }
@@ -209,7 +216,7 @@ class UploadProject{
     }
     
     
-    func makePostCall(_ Project_Id:String ,update:Bool) {
+    func makePostCall(_ Project_Id:String  , completion: @escaping ((_ isSuccess:Bool) -> Void)) {
         guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/add?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi") else {
             print("Error: cannot create URL")
             return
@@ -221,9 +228,6 @@ class UploadProject{
         
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
-        if(update == true){
-            return
-        }
         print(NSHomeDirectory()+"/Documents/\(Project_Id).plist")
         let SENDDATA: [String: String] = addAnswer(Project_Id) as! [String : String]
         let sendData: [String: String] = SENDDATA
@@ -233,9 +237,6 @@ class UploadProject{
             return "\(key)=\(value)"
         }).joined(separator: "&")
         
-//        let urlParams = sendData.compactMap({ (key, value) -> String in
-//            return "\(key)=\(value)"
-//        }).joined(separator: "&")
         
         urlRequest.httpBody = urlParams.data(using: .utf8)
         
@@ -244,33 +245,39 @@ class UploadProject{
         
         let task = session.dataTask(with: urlRequest) {
             (data, response, error) in
-            guard error == nil else {
-                print("error calling POST")
-                print(error!)
-                return
-            }
-            guard let responseData = data else {
-                print("Error: did not receive data")
-                return
-            }
-            
-            guard let string = NSString(data: responseData, encoding: String.Encoding.utf8.rawValue) else {
-                print("Error: data is wrong")
-                return
-            }
-            print("responseData = \(string)")
-            
+            DispatchQueue.main.async(execute: {
+                guard error == nil else {
+                    print("error calling POST")
+                    print(error!)
+                    completion(false)
+                    return
+                }
+                guard let responseData = data else {
+                    print("Error: did not receive data")
+                    completion(false)
+                    return
+                }
+                
+                guard let string = NSString(data: responseData, encoding: String.Encoding.utf8.rawValue) else {
+                    print("Error: data is wrong")
+                    completion(false)
+                    return
+                }
+                print("responseData = \(string)")
+                completion(true)
+                ProjectInformation["Datauploaded"] = true
+                let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
+                 print("responseData = \(filePath)")
+                self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
+            })
         }
         task.resume()
-        ProjectInformation["Datauploaded"] = true
-        let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-        saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
     }
     
     fileprivate func saveFile(dic:NSMutableDictionary , filepath:String , projectID:String) {
         savePlistData(project: projectID, dic: dic)
     }
-        
+    
     
     func scheduleNotification(itemID:String){
         //如果已存在该通知消息，则先取消
@@ -317,7 +324,7 @@ class UploadProject{
     fileprivate func addAnswer(_ Project_Id:String) -> [String : Any?] {
         
         var answer:[String:String] = [:]
-       // answer["sa_prj"] = Project_Id
+        answer["sa_prj"] = Project_Id  
         var ProjectInformation :NSDictionary
         ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
         var dataSoure:NSMutableArray = NSMutableArray()
@@ -480,7 +487,7 @@ class UploadProject{
                         answer["sa_obstructionType"] = question.other! == "" ?"No":question.other!
                         break
                     case 5:
-                         answer["sa_mainBreakerPanelDiagram"] = question.other! == "" ?"No":question.other!
+                        answer["sa_mainBreakerPanelDiagram"] = question.other! == "" ?"No":question.other!
                         break
                     case 6:
                         if question.other == "Photo Uploaded" {

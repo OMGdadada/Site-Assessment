@@ -44,23 +44,24 @@ class ProjectResultViewController: UIViewController {
     @IBAction func update(_ sender: Any) {
         if count == 0 {
             saveQuestion()
-            let model:HistoyDto = HistoyDto()
-            model.uploaded = false
-            model.Datauploaded = false
-            model.projectID = self.prejectID
             var alertText = ""
-            if(self.NetWork == "wifi的网络" || self.NetWork == "2G,3G,4G...的网络"){
-                UploadProject.Uploadshared.UploadProjectdata(self.prejectID! ,model: model)
-                alertText = "Upload And Save data Success !"
-                if(self.NetWork == "wifi的网络"){
-                    let projectinformation = ProjectInformation()
-                    projectinformation.setValue(self.prejectID, forKey: "ProjectName")
-                    ProjectListViewController.ProjectInformationList.addEntries(from: [self.prejectID:projectinformation])
-                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID!, model: model)
+            
+            if(self.NetWork == "2G,3G,4G...的网络"){
+                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, completion: { issuccess in
                     
-                    alertText = "Upload And Save data And Img Success !"
-                }
+                })
+                alertText = "Upload And Save data Success !"
                 
+            }else if (self.NetWork == "wifi的网络" ){
+                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, completion: { issuccess in
+                    if issuccess == true {
+                        let projectinformation = ProjectInformation()
+                        projectinformation.setValue(self.prejectID, forKey: "ProjectName")
+                        ProjectListViewController.ProjectInformationList.addEntries(from: [self.prejectID:projectinformation])
+                        UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID!)
+                        alertText = "Upload And Save data And Img Success !"
+                    }
+                })
             }else{
                 alertText = "Only Save Success !"
             }
@@ -74,7 +75,6 @@ class ProjectResultViewController: UIViewController {
             //两秒钟后自动消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
                 self.presentedViewController?.dismiss(animated: false, completion: nil)
-                self.presentingViewController!.dismiss(animated: true, completion: nil)
             }
         }else {
             self.dismiss(animated: true, completion: nil)

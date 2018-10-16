@@ -37,7 +37,7 @@ class ProjectListViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Dispose of any resources that can be recreated.
+        
         print("PlistList:\(PlistList)")
         loadWithdata()
         ProjectListView.tableFooterView = UIView()
@@ -69,6 +69,13 @@ class ProjectListViewController: UIViewController{
                 let projectInformation = ProjectListViewController.ProjectInformationList[key] as! ProjectInformation
                 projectInformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
                 
+                for i in 0..<PlistList.count {
+                    let model:HistoyDto = PlistList[i];
+                    if model.projectID == key as? String {
+                        model.status = .Uploading
+                        break
+                    }
+                }
             }
         }
     }
@@ -96,6 +103,9 @@ class ProjectListViewController: UIViewController{
                 case 3:
                     model.status = .Incomplete
                     break
+                case 4:
+                    model.status = .uploadFailed
+                    break
                 default : break
                     
                 }
@@ -108,13 +118,28 @@ class ProjectListViewController: UIViewController{
     ///
     /// - Parameter ProjectName: 问卷ID
     fileprivate func updateProjectName(ProjectName: String , model:HistoyDto) {
-        let projectinformation = ProjectInformation()
-        projectinformation.setValue(ProjectName, forKey: "ProjectName")
-        projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
-        ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
-        UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,model: model)
-        model.status = .Uploading
-        self.UpdateTableViewUI(ProjectName)
+        if model.Datauploaded == false {
+            UploadProject.Uploadshared.UploadProjectdata(ProjectName) { IsSucess in
+                if  IsSucess == true {
+                    let projectinformation = ProjectInformation()
+                    projectinformation.setValue(ProjectName, forKey: "ProjectName")
+                    projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
+                    ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName)
+                    model.status = .Uploading
+                    self.UpdateTableViewUI(ProjectName)
+                }
+            }
+        }else{
+            let projectinformation = ProjectInformation()
+            projectinformation.setValue(ProjectName, forKey: "ProjectName")
+            projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
+            ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
+            UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName)
+            model.status = .Uploading
+            self.UpdateTableViewUI(ProjectName)
+        }
+       
     }
     // 更新上传进度
     fileprivate func UpdateTableViewUI(_ ProjectId:String){
@@ -160,21 +185,20 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                 if(model.projectID == "\(key)"){
                     let projectInformation = ProjectListViewController.ProjectInformationList[key] as! ProjectInformation
                     if (projectInformation.Total == 0){
-                        cell.title.text = "\(model.projectID!).plist (正在上传) 进度: 0%"
+                        cell.title.text = "\(model.projectID!)(正在上传) 进度: 0%"
                     }else{
-                        cell.title.text = "\(model.projectID!).plist (正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
-                        if(projectInformation.schedule*100/projectInformation.Total == 100){
-                            
+                        cell.title.text = "\(model.projectID!)(正在上传) 进度: \(projectInformation.schedule * 100/projectInformation.Total)%"
+                        if projectInformation.schedule >= projectInformation.Total {
                             model.status = .Completed
                             tableView.reloadRows(at: [indexPath], with: .automatic)
-                            cell.title.text = "\(cell.title.text!) (上传完成)"
+                            cell.title.text = "\(model.projectID ?? "") (上传完成)"
                         }
                     }
                 }
             }
         }else{
             model.uploaded = true
-            cell.title.text = "\(cell.title.text!) (上传完成)"
+            cell.title.text = "\(model.projectID ?? "") (上传完成)"
         }
         cell.delegate = self
         return cell
@@ -290,8 +314,6 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
     func didWithUpdate(cell: ProjectListTableViewCell, type: UpdateStatusType?) {
         let indexp:IndexPath = ProjectListView.indexPath(for: cell)!
         let model:HistoyDto = PlistList[indexp.row]
-        model.uploaded = false
-        model.Datauploaded = false
         if type == .Incomplete {
             pushAddPreject(model: model)
         }else{
@@ -317,26 +339,13 @@ extension ProjectListViewController : ProjectListTableViewCellDelagate
             let ProjectName = model.projectID?.replacingOccurrences(of: ".plist", with: "")
             let filePath:String = NSHomeDirectory() + "/Documents/\(ProjectName!).plist"
             
-            var ProjectInformation :NSDictionary
-            ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "").plist")!
+         //   var ProjectInformation :NSDictionary
+          //  ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(model.projectID ?? "").plist")!
             
             let Manager = FileManager.default
             try! Manager.removeItem(atPath: filePath)
             let Folder:String = NSHomeDirectory() + "/Documents/\(ProjectName!)"
             let fileArray = Manager.subpaths(atPath: Folder)
-            
-            //let ImgDic:[String:Any] = ProjectInformation["Img"] as! [String :Any];
-//            for imgItem in ImgDic["MeterPhotoCheckList"] as! [Any] {
-//
-//            }
-//
-//            for imgItem in ImgDic["MainBreakerPhotoCheckList"] as! [Any] {
-//
-//            }
-//            for imgItem in ImgDic["TrussType"] as! [Any] {
-//
-//            }
-
             for fn in fileArray!{
                 try! Manager.removeItem(atPath: Folder + "/\(fn)")
             }

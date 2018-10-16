@@ -35,7 +35,7 @@ class ProjectListTableViewCell: UITableViewCell {
     
     var model:HistoyDto? {
         didSet{
-            title.text = "\(model?.projectID ?? "").plist"
+            title.text = model?.projectID
             switch model?.status {
             case .Completed?:
                 self.status.text = "Completed"
@@ -49,12 +49,12 @@ class ProjectListTableViewCell: UITableViewCell {
                 self.status.text = "Uploading"
                 self.status.textColor = UIColor.black
                 self.item.setTitle("delete", for: .normal)
-                self.update.setTitle("Uploading", for: .normal);
+                self.update.setTitle("upload", for: .normal);
                 self.item.isEnabled = false;
                 self.update.isEnabled = false;
                 break
             case .Pending?:
-                self.status.text = "Update"
+                self.status.text = "Pending"
                 self.item.setTitle("delete", for: .normal)
                 self.status.textColor = UIColor.black
                 self.update.setTitle("Upload", for: .normal);
@@ -63,15 +63,16 @@ class ProjectListTableViewCell: UITableViewCell {
                 break
             case .Incomplete?:
                 self.status.text = "Incomplete"
-                self.item.setTitle("Continue", for: .normal)
-                self.update.setTitle("Upload", for: .normal);
-                self.item.isEnabled = true;
-                self.update.isEnabled = false;
+                self.item.setTitle("delete", for: .normal)
+                self.update.setTitle("continue", for: .normal);
+                self.item.isEnabled = false;
+                self.update.isEnabled = true;
                 self.status.textColor = UIColor.red
                 break
             case .uploadFailed?:
                 self.status.text = "UploadFailed"
-                self.item.setTitle("Upload", for: .normal)
+                self.item.setTitle("delete", for: .normal)
+                self.update.setTitle("upload", for: .normal);
                 self.status.textColor = UIColor.red
                 self.item.isEnabled = false;
                 self.update.isEnabled = true;

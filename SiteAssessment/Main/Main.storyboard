@@ -292,20 +292,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bic-su-m7m">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
-                                <items>
-                                    <navigationItem title="Site Assessment" id="ZdP-ux-Iuw">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" id="DaS-Re-j9k">
-                                            <connections>
-                                                <action selector="BackOn_Click:" destination="u8L-mI-jye" id="sbe-FK-Lyy"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cTl-WE-kk6">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="1346"/>
+                                <rect key="frame" x="0.0" y="70" width="1024" height="1296"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProjectListTableViewCell" rowHeight="59" id="MuS-m4-b2q" customClass="ProjectListTableViewCell" customModule="SiteAssessment" customModuleProvider="target">
@@ -385,12 +373,24 @@
                                     <outlet property="delegate" destination="u8L-mI-jye" id="rfN-zE-BPP"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bic-su-m7m">
+                                <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
+                                <items>
+                                    <navigationItem title="Site Assessment" id="ZdP-ux-Iuw">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="DaS-Re-j9k">
+                                            <connections>
+                                                <action selector="BackOn_Click:" destination="u8L-mI-jye" id="sbe-FK-Lyy"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cTl-WE-kk6" firstAttribute="top" secondItem="Vyj-H2-73w" secondAttribute="top" id="2Eo-fb-7ms"/>
                             <constraint firstItem="cTl-WE-kk6" firstAttribute="trailing" secondItem="Vyj-H2-73w" secondAttribute="trailing" id="EXR-S3-6XU"/>
                             <constraint firstItem="cTl-WE-kk6" firstAttribute="leading" secondItem="Vyj-H2-73w" secondAttribute="leading" id="Kz3-St-WzU"/>
+                            <constraint firstItem="cTl-WE-kk6" firstAttribute="top" secondItem="bic-su-m7m" secondAttribute="bottom" id="MUp-HU-zJR"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="leading" secondItem="Vyj-H2-73w" secondAttribute="leading" id="Mds-ac-l7b"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="trailing" secondItem="Vyj-H2-73w" secondAttribute="trailing" id="MvT-eP-PQn"/>
                             <constraint firstItem="bic-su-m7m" firstAttribute="top" secondItem="Vyj-H2-73w" secondAttribute="top" id="gja-HV-Ib0"/>
@@ -408,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eoe-k1-NRv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1822" y="-784"/>
+            <point key="canvasLocation" x="1821.6796874999998" y="-784.04099560761347"/>
         </scene>
     </scenes>
 </document>

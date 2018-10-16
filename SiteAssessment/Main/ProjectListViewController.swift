@@ -93,7 +93,7 @@ class ProjectListViewController: UIViewController{
                 model.projectID = i.replacingOccurrences(of: ".plist", with: "")
                 model.uploaded  = ProjectInformation["uploaded"] as! Bool
                 model.Datauploaded  = ProjectInformation["Datauploaded"] as! Bool
-                model.project_id_id = ProjectInformation["projectID"] as! String
+                model.project_id_id = ProjectInformation["projectID"] as? String
                 switch ProjectInformation["ststus"] as! Int {
                 case 1:
                     model.status = .Completed

@@ -321,16 +321,16 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSD-x4-Mox">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSD-x4-Mox">
                                                     <rect key="frame" x="88" y="19" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kGu-11-3qs">
-                                                    <rect key="frame" x="904" y="0.0" width="100" height="58.5"/>
+                                                    <rect key="frame" x="914" y="0.0" width="90" height="58.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="ilz-QA-ksa"/>
+                                                        <constraint firstAttribute="width" constant="90" id="ilz-QA-ksa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <state key="normal" title="Deleta">
@@ -344,7 +344,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOu-eP-sMn">
-                                                    <rect key="frame" x="794" y="0.0" width="100" height="58.5"/>
+                                                    <rect key="frame" x="824" y="0.0" width="90" height="58.5"/>
                                                     <state key="normal" title="Update">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -358,12 +358,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="qSD-x4-Mox" firstAttribute="centerY" secondItem="bZ0-dC-Arb" secondAttribute="centerY" id="JKo-bW-7jy"/>
+                                                <constraint firstItem="zOu-eP-sMn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qSD-x4-Mox" secondAttribute="trailing" constant="10" id="K9Q-Fm-vZl"/>
                                                 <constraint firstItem="zOu-eP-sMn" firstAttribute="height" secondItem="kGu-11-3qs" secondAttribute="height" id="MHY-tj-Oa4"/>
                                                 <constraint firstItem="zOu-eP-sMn" firstAttribute="centerY" secondItem="kGu-11-3qs" secondAttribute="centerY" id="U4G-2N-whI"/>
                                                 <constraint firstItem="zOu-eP-sMn" firstAttribute="width" secondItem="kGu-11-3qs" secondAttribute="width" id="V47-Vb-7TX"/>
                                                 <constraint firstItem="bZ0-dC-Arb" firstAttribute="leading" secondItem="eAj-O2-TcV" secondAttribute="leading" constant="20" id="Y8e-rO-W2U"/>
                                                 <constraint firstAttribute="trailing" secondItem="kGu-11-3qs" secondAttribute="trailing" constant="20" id="jqs-7p-QjG"/>
-                                                <constraint firstItem="kGu-11-3qs" firstAttribute="leading" secondItem="zOu-eP-sMn" secondAttribute="trailing" constant="10" id="kTa-fG-XAw"/>
+                                                <constraint firstItem="kGu-11-3qs" firstAttribute="leading" secondItem="zOu-eP-sMn" secondAttribute="trailing" id="kTa-fG-XAw"/>
                                                 <constraint firstItem="qSD-x4-Mox" firstAttribute="leading" secondItem="bZ0-dC-Arb" secondAttribute="trailing" constant="20" id="rCU-Ie-NgJ"/>
                                                 <constraint firstItem="kGu-11-3qs" firstAttribute="top" secondItem="eAj-O2-TcV" secondAttribute="top" id="rVr-ib-O7T"/>
                                                 <constraint firstAttribute="bottom" secondItem="kGu-11-3qs" secondAttribute="bottom" id="uCv-rk-Unw"/>

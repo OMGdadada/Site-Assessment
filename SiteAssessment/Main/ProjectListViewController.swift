@@ -93,6 +93,7 @@ class ProjectListViewController: UIViewController{
                 model.projectID = i.replacingOccurrences(of: ".plist", with: "")
                 model.uploaded  = ProjectInformation["uploaded"] as! Bool
                 model.Datauploaded  = ProjectInformation["Datauploaded"] as! Bool
+                model.project_id_id = ProjectInformation["projectID"] as! String
                 switch ProjectInformation["ststus"] as! Int {
                 case 1:
                     model.status = .Completed
@@ -119,13 +120,13 @@ class ProjectListViewController: UIViewController{
     /// - Parameter ProjectName: 问卷ID
     fileprivate func updateProjectName(ProjectName: String , model:HistoyDto) {
         if model.Datauploaded == false {
-            UploadProject.Uploadshared.UploadProjectdata(ProjectName) { IsSucess in
+            UploadProject.Uploadshared.UploadProjectdata(ProjectName ,project_id_id:model.project_id_id! ) { IsSucess in
                 if  IsSucess == true {
                     let projectinformation = ProjectInformation()
                     projectinformation.setValue(ProjectName, forKey: "ProjectName")
                     projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
                     ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
-                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName)
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id!)
                     model.status = .Uploading
                     self.UpdateTableViewUI(ProjectName)
                 }
@@ -135,7 +136,7 @@ class ProjectListViewController: UIViewController{
             projectinformation.setValue(ProjectName, forKey: "ProjectName")
             projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
             ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
-            UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName)
+            UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id!)
             model.status = .Uploading
             self.UpdateTableViewUI(ProjectName)
         }

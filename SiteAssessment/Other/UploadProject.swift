@@ -20,8 +20,8 @@ class UploadProject{
         drive = UploadGoogleDrive(service)
     }
     static let Uploadshared = UploadProject()
-    func UploadProjectdata(_ Project_Id:String , completion:@escaping ((_ issuccess:Bool?) -> Void)){
-        _ = makePostCall(Project_Id, completion: { isSuccess in
+    func UploadProjectdata(_ Project_Id:String ,project_id_id:String, completion:@escaping ((_ issuccess:Bool?) -> Void)){
+        makePostCall(Project_Id, project_id_id:project_id_id, completion: { isSuccess in
             completion(isSuccess)
         })
     }
@@ -66,12 +66,12 @@ class UploadProject{
         }
     }
     
-    func UploadProjectToGoogleDrive(_ Project_Id:String){
+    func UploadProjectToGoogleDrive(_ Project_Id:String ,project_id_id:String){
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
         
         if(ProjectInformation["Datauploaded"] as! Bool == false){
-            makePostCall(Project_Id , completion: { isSuccess in
+            makePostCall(Project_Id , project_id_id: project_id_id ,completion: { isSuccess in
                 
             })
         }else if(ProjectInformation["uploaded"] as! Bool == false){
@@ -117,36 +117,36 @@ class UploadProject{
                                             print("上传图片\(ImgName!)")
                                             let testFilePath = documentsDir.appendingPathComponent("\(Project_Id)/\(ImgName!).jpg").path
                                             print(testFilePath)
-                                            self.drive?.uploadIntoFolder(Subfolder, filePath: testFilePath, MIMEType: "image/jpeg") { (fileID, error) in
-                                                if let err = error {
-                                                    print("Error: \(err.localizedDescription)")
-                                                }
-                                                if let fid = fileID {
-                                                    print("Upload file ID: \(fid)")
-                                                    print("上传文件完成")
-                                                    ImgInformation["uploaded"] = true
-                                                    ImgInformationList[i] = ImgInformation
-                                                    ImgList[key] = ImgInformationList
-                                                    ProjectInformation["Img"] = ImgList
-                                                    
-                                                    let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-                                                    NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
-                                                    
-                                                    print(filePath)
-                                                    ProjectImg_schedule += 1
-                                                   
-                                                    DispatchQueue.main.async(execute: {
-                                                         porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
-                                                    })
-                                                    if(ProjectImg_Total == ProjectImg_schedule){
-                                                        print("项目上传完成")
-                                                        ProjectInformation["uploaded"] = true
-                                                        ProjectInformation["ststus"] = 1
-                                                        let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-                                                        self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
-                                                        self.scheduleNotification(itemID: Project_Id )
+                                            self.drive?.uploadIntoFolder(Subfolder, filePath: testFilePath, MIMEType: "image/jpg") { (fileID, error) in
+                                                DispatchQueue.main.async(execute: {
+                                                    if let err = error {
+                                                        print("Error: \(err.localizedDescription)")
                                                     }
-                                                }
+                                                    if let fid = fileID {
+                                                        print("Upload file ID: \(fid)")
+                                                        print("上传文件完成")
+                                                        ImgInformation["uploaded"] = true
+                                                        ImgInformationList[i] = ImgInformation
+                                                        ImgList[key] = ImgInformationList
+                                                        ProjectInformation["Img"] = ImgList
+                                                        
+                                                        let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
+                                                        NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
+                                                        
+                                                        print(filePath)
+                                                        ProjectImg_schedule += 1
+                                                        porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                                        
+                                                        if(ProjectImg_Total == ProjectImg_schedule){
+                                                            print("项目上传完成")
+                                                            ProjectInformation["uploaded"] = true
+                                                            ProjectInformation["ststus"] = 1
+                                                            let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
+                                                            self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
+                                                            self.scheduleNotification(itemID: Project_Id )
+                                                        }
+                                                    } 
+                                                })
                                             }
                                         }
                                     }else{
@@ -216,7 +216,7 @@ class UploadProject{
     }
     
     
-    func makePostCall(_ Project_Id:String  , completion: @escaping ((_ isSuccess:Bool) -> Void)) {
+    func makePostCall(_ Project_Id:String ,project_id_id:String , completion: @escaping ((_ isSuccess:Bool) -> Void)) {
         guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/add?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi") else {
             print("Error: cannot create URL")
             return
@@ -229,7 +229,7 @@ class UploadProject{
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
         print(NSHomeDirectory()+"/Documents/\(Project_Id).plist")
-        let SENDDATA: [String: String] = addAnswer(Project_Id) as! [String : String]
+        let SENDDATA: [String: String] = addAnswer(Project_Id , Project_Id_id: project_id_id) as! [String : String]
         let sendData: [String: String] = SENDDATA
         print(sendData)
         /* --------------------------- */
@@ -321,10 +321,11 @@ class UploadProject{
         return nil
     }
     
-    fileprivate func addAnswer(_ Project_Id:String) -> [String : Any?] {
+    fileprivate func addAnswer(_ Project_Id:String ,Project_Id_id:String) -> [String : Any?] {
         
         var answer:[String:String] = [:]
-        answer["sa_prj"] = Project_Id  
+        answer["sa_prj"] = Project_Id_id  
+        answer["sa_projectAddress"] = Project_Id 
         var ProjectInformation :NSDictionary
         ProjectInformation = NSDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
         var dataSoure:NSMutableArray = NSMutableArray()

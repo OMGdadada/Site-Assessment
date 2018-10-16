@@ -47,18 +47,18 @@ class ProjectResultViewController: UIViewController {
             var alertText = ""
             
             if(self.NetWork == "2G,3G,4G...的网络"){
-                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, completion: { issuccess in
+                UploadProject.Uploadshared.UploadProjectdata(self.prejectID,project_id_id: Project_Id_id, completion: { issuccess in
                     
                 })
                 alertText = "Upload And Save data Success !"
                 
             }else if (self.NetWork == "wifi的网络" ){
-                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, completion: { issuccess in
+                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, project_id_id: Project_Id_id, completion: { issuccess in
                     if issuccess == true {
                         let projectinformation = ProjectInformation()
                         projectinformation.setValue(self.prejectID, forKey: "ProjectName")
                         ProjectListViewController.ProjectInformationList.addEntries(from: [self.prejectID:projectinformation])
-                        UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID!)
+                        UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID! ,project_id_id: self.Project_Id_id)
                         alertText = "Upload And Save data And Img Success !"
                     }
                 })
@@ -106,12 +106,13 @@ class ProjectResultViewController: UIViewController {
             "ststus":num,
             "uploaded":false,
             "Datauploaded":false,
+            "projectID":Project_Id_id!,
             "Img":imgDic,
             "questionList":SiteRootModel.mj_keyValuesArray(withObjectArray: dataSoure as? [Any])
             ] as [String : Any]
         //两秒钟后自动消失
         savePlistData(project: self.prejectID!, dic: PorjectList as NSDictionary)
-       
+        proID = nil
     }
     
     override func didReceiveMemoryWarning() {

@@ -65,6 +65,7 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
         let storybard:UIStoryboard = UIStoryboard.init(name:"Main", bundle: nil)
         let vc:ProjectResultViewController = storybard.instantiateViewController(withIdentifier: "ProjectResultViewController") as! ProjectResultViewController
         vc.prejectID = Project_Id
+        vc.Project_Id_id = Project_Id_id
         vc.dataSoure = dataSoure
         var dic:[String : Any] = [:]
 

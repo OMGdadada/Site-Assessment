@@ -20,6 +20,7 @@ class HistoyDto: NSObject {
     var projectID : String? = ""
     var uploaded:Bool = false
     var Datauploaded = false
+    var project_id_id:String? = ""
     
     
     

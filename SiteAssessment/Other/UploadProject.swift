@@ -59,7 +59,6 @@ class UploadProject{
                     return
                 }
                 completion(string as String)
-                print(string)
             }
             
             task.resume()

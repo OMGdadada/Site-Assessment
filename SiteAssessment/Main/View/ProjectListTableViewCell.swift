@@ -38,41 +38,41 @@ class ProjectListTableViewCell: UITableViewCell {
             title.text = model?.projectID
             switch model?.status {
             case .Completed?:
-                self.status.text = "Completed"
-                self.item.setTitle("delete", for: .normal)
+                self.status.text = "\u{ea10}"
+                self.item.setTitle("\u{ea0f}", for: .normal)
                 self.status.textColor = UIColor.black
-                self.update.setTitle("upload", for: .normal);
+                self.update.setTitle("\u{ea32}", for: .normal);
                 self.item.isEnabled = true;
                 self.update.isEnabled = true;
                 break
             case .Uploading?:
-                self.status.text = "Uploading"
+                self.status.text = "\u{e97c}"
                 self.status.textColor = UIColor.black
-                self.item.setTitle("delete", for: .normal)
-                self.update.setTitle("upload", for: .normal);
+                self.item.setTitle("\u{ea0f}", for: .normal)
+                self.update.setTitle("\u{ea32}", for: .normal);
                 self.item.isEnabled = false;
                 self.update.isEnabled = false;
                 break
             case .Pending?:
-                self.status.text = "Pending"
-                self.item.setTitle("delete", for: .normal)
+                self.status.text = "\u{e9c3}"
+                self.item.setTitle("\u{ea0f}", for: .normal)
                 self.status.textColor = UIColor.black
-                self.update.setTitle("Upload", for: .normal);
+                self.update.setTitle("\u{ea32}", for: .normal);
                 self.item.isEnabled = false;
                 self.update.isEnabled = true;
                 break
             case .Incomplete?:
-                self.status.text = "Incomplete"
-                self.item.setTitle("delete", for: .normal)
-                self.update.setTitle("continue", for: .normal);
+                self.status.text = "\u{ea08}"
+                self.item.setTitle("\u{ea0f}", for: .normal)
+                self.update.setTitle("\u{e984}", for: .normal);
                 self.item.isEnabled = false;
                 self.update.isEnabled = true;
                 self.status.textColor = UIColor.red
                 break
             case .uploadFailed?:
-                self.status.text = "UploadFailed"
-                self.item.setTitle("delete", for: .normal)
-                self.update.setTitle("upload", for: .normal);
+                self.status.text = "\u{ea07}"
+                self.item.setTitle("\u{ea0f}", for: .normal)
+                self.update.setTitle("\u{e984}", for: .normal);
                 self.status.textColor = UIColor.red
                 self.item.isEnabled = false;
                 self.update.isEnabled = true;

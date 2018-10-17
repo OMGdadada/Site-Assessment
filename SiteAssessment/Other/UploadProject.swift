@@ -122,7 +122,7 @@ class UploadProject{
                                                         print("Error: \(err.localizedDescription)")
                                                     }
                                                     print("Upload ID ID: \(fid)")
-                                                    print("Upload ID ID: \(fileID)")
+                                                    print("Upload ID ID: \(fileID ?? "")")
                                                     completion(true)
                                                     if let fid = fileID {
                                                         print("Upload file ID: \(fid)")

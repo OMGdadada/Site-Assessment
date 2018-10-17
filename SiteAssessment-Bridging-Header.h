@@ -11,5 +11,7 @@
 #import <GTMSessionFetcher/GTMSessionFetcherLogging.h>
 #import <MJExtension/MJExtension.h>
 #import "SiteRootModel.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+
 
 #endif /* GoogleDriveSample_Bridging_Header_h */

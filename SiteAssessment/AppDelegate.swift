@@ -26,10 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         manager.shouldResignOnTouchOutside = true
         manager.shouldToolbarUsesTextFieldTintColor = true
         manager.isEnableAutoToolbar = false
-        
-        FIRApp.init(named: "SignIn")
-        FIRApp.configure()
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
+      
+        FirebaseApp.app(name: "SignIn")
+        FirebaseApp.configure()
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Thread.sleep(forTimeInterval: 3.0)
         let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound],
                                                   categories: nil)

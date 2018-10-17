@@ -16,7 +16,9 @@ let ico_expand:UIImage = UIImage(named: "icon_mr")!
 let ico_expand1:UIImage = UIImage(named: "icon_xl")!
 let Kappdelegate = UIApplication.shared.delegate as! AppDelegate
 
-var  proID:String? = nil
+var  projectid:String? = nil
+var  projectid_id:String? = nil
+var  iswifi:Bool = false
 
 //保存数据
 func savePlistData(project:String ,dic:NSDictionary) {

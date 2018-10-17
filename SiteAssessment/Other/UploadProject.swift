@@ -66,10 +66,9 @@ class UploadProject{
         }
     }
     
-    func UploadProjectToGoogleDrive(_ Project_Id:String ,project_id_id:String){
+    func UploadProjectToGoogleDrive(_ Project_Id:String ,project_id_id:String , completion: @escaping ((_ isSuccess:Bool) -> Void)){
         var ProjectInformation :NSMutableDictionary
         ProjectInformation = NSMutableDictionary(contentsOfFile: NSHomeDirectory()+"/Documents/\(Project_Id).plist")!
-        
         if(ProjectInformation["Datauploaded"] as! Bool == false){
             makePostCall(Project_Id , project_id_id: project_id_id ,completion: { isSuccess in
                 
@@ -87,7 +86,7 @@ class UploadProject{
             let porjectinformation = ProjectListViewController.ProjectInformationList["\(Project_Id)"] as! ProjectInformation
             porjectinformation.setValue(ProjectImg_Total, forKey: "Total")
             
-            drive?.uploadParentFolder("\(Project_Id)", onCompleted: { (folderID, error) in
+            drive?.uploadParentFolder("\(project_id_id)", onCompleted: { (folderID, error) in
                 if let err = error {
                     print("Error: \(err.localizedDescription)")
                 }
@@ -97,7 +96,7 @@ class UploadProject{
                     for (offset: _ ,element: (key: key,value: _)) in ImgList.enumerated(){
                         //print("\(key)===\(value)")
                         
-                        self.drive?.uploadFile("\(Project_Id)/\(key)", onCompleted: { (fileID, error) in
+                        self.drive?.uploadFile("\(project_id_id)/\(key)", onCompleted: { (fileID, error) in
                             if let err = error {
                                 print("Error: \(err.localizedDescription)")
                             }
@@ -122,6 +121,9 @@ class UploadProject{
                                                     if let err = error {
                                                         print("Error: \(err.localizedDescription)")
                                                     }
+                                                    print("Upload ID ID: \(fid)")
+                                                    print("Upload ID ID: \(fileID)")
+                                                    completion(true)
                                                     if let fid = fileID {
                                                         print("Upload file ID: \(fid)")
                                                         print("上传文件完成")
@@ -217,7 +219,8 @@ class UploadProject{
     
     
     func makePostCall(_ Project_Id:String ,project_id_id:String , completion: @escaping ((_ isSuccess:Bool) -> Void)) {
-        guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/add?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi") else {
+        let criteria = "criteria=(sa_prj=\(project_id_id)"
+        guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/update?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi\(criteria)") else {
             print("Error: cannot create URL")
             return
         }
@@ -236,7 +239,6 @@ class UploadProject{
         let urlParams = sendData.compactMap ({ (key ,value) -> String in
             return "\(key)=\(value)"
         }).joined(separator: "&")
-        
         
         urlRequest.httpBody = urlParams.data(using: .utf8)
         
@@ -264,11 +266,11 @@ class UploadProject{
                     return
                 }
                 print("responseData = \(string)")
-                completion(true)
                 ProjectInformation["Datauploaded"] = true
                 let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
                  print("responseData = \(filePath)")
                 self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
+                completion(true)
             })
         }
         task.resume()

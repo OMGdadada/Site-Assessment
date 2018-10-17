@@ -43,7 +43,7 @@ class ProjectListTableViewCell: UITableViewCell {
                 self.status.textColor = UIColor.black
                 self.update.setTitle("upload", for: .normal);
                 self.item.isEnabled = true;
-                self.update.isEnabled = false;
+                self.update.isEnabled = true;
                 break
             case .Uploading?:
                 self.status.text = "Uploading"

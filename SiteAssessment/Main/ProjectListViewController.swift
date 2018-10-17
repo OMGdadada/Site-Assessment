@@ -126,7 +126,10 @@ class ProjectListViewController: UIViewController{
                     projectinformation.setValue(ProjectName, forKey: "ProjectName")
                     projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
                     ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
-                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id!)
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id! ,completion: { isSuccess in
+                        model.status = .Completed
+                        self.UpdateTableViewUI(ProjectName)
+                    })
                     model.status = .Uploading
                     self.UpdateTableViewUI(ProjectName)
                 }
@@ -136,7 +139,10 @@ class ProjectListViewController: UIViewController{
             projectinformation.setValue(ProjectName, forKey: "ProjectName")
             projectinformation.addObserver(self, forKeyPath: "schedule", options: [.new,.old], context: nil)
             ProjectListViewController.ProjectInformationList.addEntries(from: [ProjectName:projectinformation])
-            UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id!)
+            UploadProject.Uploadshared.UploadProjectToGoogleDrive(ProjectName ,project_id_id: model.project_id_id! ,completion: { isSuccess in
+                model.status = .Completed
+                self.UpdateTableViewUI(ProjectName)
+            })
             model.status = .Uploading
             self.UpdateTableViewUI(ProjectName)
         }
@@ -179,8 +185,9 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
         let cell: ProjectListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProjectListTableViewCell", for: indexPath) as! ProjectListTableViewCell
     
         cell.model = model
-        
-        if(model.uploaded == false){
+        if model.status == .Completed {
+            cell.title.text = "\(model.projectID ?? "") (上传完成)"
+        }else{
             cell.title.text = "\(cell.title.text!) (暂未上传完成) \n点击上传"
             for (offset: _ ,element: (key: key,value: _)) in ProjectListViewController.ProjectInformationList.enumerated(){
                 if(model.projectID == "\(key)"){
@@ -197,9 +204,6 @@ extension ProjectListViewController : UITableViewDelegate , UITableViewDataSourc
                     }
                 }
             }
-        }else{
-            model.uploaded = true
-            cell.title.text = "\(model.projectID ?? "") (上传完成)"
         }
         cell.delegate = self
         return cell

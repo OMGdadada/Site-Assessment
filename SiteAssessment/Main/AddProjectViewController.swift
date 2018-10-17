@@ -70,16 +70,16 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
         var dic:[String : Any] = [:]
 
         let Meterarrs :NSMutableArray = []
-        Meterarrs.addingObjects(from: MeterPhotoCheckList.copy() as! [Any])
-        Meterarrs.addingObjects(from: MeterPhotoCheckList1.copy()  as! [Any])
-        Meterarrs.addingObjects(from: MeterPhotoCheckList2.copy()  as! [Any])
+        Meterarrs.addObjects(from: MeterPhotoCheckList.copy() as! [Any])
+        Meterarrs.addObjects(from: MeterPhotoCheckList1.copy()  as! [Any])
+        Meterarrs.addObjects(from: MeterPhotoCheckList2.copy()  as! [Any])
         
-        dic["MeterPhotoCheckList"]       = Meterarrs
+        dic["MeterPhotoCheckList"]       = MeterPhotoCheckList
         dic["MainBreakerPhotoCheckList"] = MainBreakerPhotoCheckList
         
-        let types :NSMutableArray = []
-        types.addingObjects(from: TrussType.copy() as! [Any])
-        types.addingObjects(from:TrussType1.copy() as! [Any])
+        let types:NSMutableArray = []
+        types.addObjects(from:TrussType.copy() as! [Any])
+        types.addObjects(from:TrussType1.copy() as! [Any])
         dic["TrussType"]                 = types
         vc.imgDic = dic
         vc.saveResultBlock = { 
@@ -634,7 +634,7 @@ extension AddProjectViewController : TCheckBoxTableViewCellDelagate
         let indexPath:IndexPath = tableView.indexPath(for: cell)!
         let dto:SiteRootModel = dataSoure[indexPath.section] as! SiteRootModel
         let modle:QuestionModel = dto.questionList[indexPath.row]
-        if modle.item == "36" {
+        if modle.item == "36" || modle.item == "16" || modle.item == "22" {
            
            modle.textStr = textFiedstr ?? ""
         }else{
@@ -683,7 +683,7 @@ extension AddProjectViewController : TCheckBoxTableViewCellDelagate
             }
             
             // 设置多选处理
-            if modle.item == "36" {
+            if modle.item == "36" || modle.item == "16" || modle.item == "22" {
                 if item.isSelected {
                     if itemStr != "Other" {
                         modle.other = "\(modle.other ?? ""),\(itemStr ?? "")"

@@ -17,6 +17,9 @@ class ProductListViewController: UIViewController {
     fileprivate let service = GTLRDriveService()
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 通知
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(update), name: NSNotification.Name(rawValue:"update"), object: nil)
         //设置头像和昵称
         ProductListViewController.userList = user
         let HandImg:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
@@ -82,6 +85,26 @@ class ProductListViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //   实现通知监听方法
+    @objc func update(){
+        if iswifi == true{
+            UploadProject.Uploadshared.UploadProjectdata(projectid!, project_id_id: projectid_id!, completion: { issuccess in
+                if issuccess == true {
+                    let projectinformation = ProjectInformation()
+                    projectinformation.setValue(projectid!, forKey: "ProjectName")
+                    ProjectListViewController.ProjectInformationList.addEntries(from: [projectid!:projectinformation])
+                    UploadProject.Uploadshared.UploadProjectToGoogleDrive(projectid! ,project_id_id: projectid_id! ,completion: { isSuccess in
+                        SVProgressHUD.showInfo(withStatus: "Upload And Save data And Img Success !");
+                    })
+                }
+            }) 
+            
+        }else{
+            UploadProject.Uploadshared.UploadProjectdata(projectid!,project_id_id: projectid_id!, completion: { issuccess in
+                SVProgressHUD.showInfo(withStatus: "Upload And Save data Success !");
+            }) 
+        }
+    }
     
     
     /*
@@ -115,40 +138,6 @@ class ProductListViewController: UIViewController {
                 Kappdelegate.window?.addSubview(vw)
             })
         }
-        //        return;
-        //        let alertController = UIAlertController(title: "Build a new project",
-        //                                                message: "Please enter new project id", preferredStyle: .alert)
-        //        alertController.addTextField {
-        //            (textField: UITextField!) -> Void in
-        //            textField.keyboardType = UIKeyboardType.numberPad;
-        //            textField.placeholder = "Project Id"
-        //        }
-        //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        //        let okAction = UIAlertAction(title: "OK", style: .default, handler: {
-        //            action in
-        //            //也可以用下标的形式获取textField let login = alertController.textFields![0]
-        //            let Project_Id =  alertController.textFields!.first!
-        //            let Project_Id_Pattern = "^[0-9]{19}$"
-        //            let pred = NSPredicate(format: "SELF MATCHES %@", Project_Id_Pattern)
-        //            let isMatch:Bool = pred.evaluate(with: Project_Id.text!)
-        //            print("Project Id is Match ?:\(isMatch)")
-        //            if(isMatch){
-        //                
-        //            }else{
-        //                let alertController = UIAlertController(title: "Enter the correct project ID (19-bit pure number)",
-        //                                                        message: nil, preferredStyle: .alert)
-        //                //显示提示框
-        //                self.present(alertController, animated: true, completion: nil)
-        //                //两秒钟后自动消失
-        //                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-        //                    self.presentedViewController?.dismiss(animated: false, completion: nil)
-        //                }
-        //            }
-        //            
-        //        })
-        //        alertController.addAction(cancelAction)
-        //        alertController.addAction(okAction)
-        //        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func SignOut(_ button:UIButton){
@@ -166,6 +155,11 @@ class ProductListViewController: UIViewController {
             controller.user = sender as? GIDGoogleUser
         }
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("update"), object: nil)
+    }
+    
 }
 extension ProductListViewController :NewProjectListViewDelagate
 {

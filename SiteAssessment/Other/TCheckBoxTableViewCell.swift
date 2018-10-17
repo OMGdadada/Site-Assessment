@@ -198,7 +198,7 @@ extension TCheckBoxTableViewCell {
                 btn.setImage(radio_N, for: .normal)
                 btn.setImage(radio_Y, for: .selected)
                 
-                if model.item == "36" {
+                if model.item == "36" || model.item == "16" || model.item == "22" {
                     if model.defaultValue.contains(btn.currentTitle!){
                         btn.isSelected = true
                     }else{

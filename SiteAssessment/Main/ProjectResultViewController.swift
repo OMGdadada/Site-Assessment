@@ -44,38 +44,23 @@ class ProjectResultViewController: UIViewController {
     @IBAction func update(_ sender: Any) {
         if count == 0 {
             saveQuestion()
-            var alertText = ""
-            
-            if(self.NetWork == "2G,3G,4G...的网络"){
-                UploadProject.Uploadshared.UploadProjectdata(self.prejectID,project_id_id: Project_Id_id, completion: { issuccess in
-                    
-                })
-                alertText = "Upload And Save data Success !"
-                
-            }else if (self.NetWork == "wifi的网络" ){
-                UploadProject.Uploadshared.UploadProjectdata(self.prejectID, project_id_id: Project_Id_id, completion: { issuccess in
-                    if issuccess == true {
-                        let projectinformation = ProjectInformation()
-                        projectinformation.setValue(self.prejectID, forKey: "ProjectName")
-                        ProjectListViewController.ProjectInformationList.addEntries(from: [self.prejectID:projectinformation])
-                        UploadProject.Uploadshared.UploadProjectToGoogleDrive(self.prejectID! ,project_id_id: self.Project_Id_id)
-                        alertText = "Upload And Save data And Img Success !"
-                    }
-                })
-            }else{
-                alertText = "Only Save Success !"
-            }
-            if (self.saveResultBlock != nil)  {
-                self.saveResultBlock!()
-            }
-            let alertController = UIAlertController(title: alertText,
-                                                    message: nil, preferredStyle: .alert)
-            //显示提示框
-            self.present(alertController, animated: true, completion: nil)
             //两秒钟后自动消失
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
-                self.presentedViewController?.dismiss(animated: false, completion: nil)
+                projectid = self.prejectID
+                projectid_id = self.Project_Id_id
+                if(self.NetWork == "2G,3G,4G...的网络"){
+                    
+                    iswifi = false
+                }else if (self.NetWork == "wifi的网络" ){
+                    iswifi = true
+                }
+                if (self.saveResultBlock != nil)  {
+                    self.saveResultBlock!()
+                }
+                NotificationCenter.default.post(name: NSNotification.Name("update"), object: nil)
             }
+          
+            
         }else {
             self.dismiss(animated: true, completion: nil)
         }
@@ -112,7 +97,6 @@ class ProjectResultViewController: UIViewController {
             ] as [String : Any]
         //两秒钟后自动消失
         savePlistData(project: self.prejectID!, dic: PorjectList as NSDictionary)
-        proID = nil
     }
     
     override func didReceiveMemoryWarning() {

@@ -122,7 +122,7 @@ class UploadProject{
                                                     }
                                                     print("Upload ID ID: \(fid)")
                                                     print("Upload ID ID: \(fileID ?? "")")
-                                                    completion(true)
+                                                    
                                                   //  if let fid = fileID {
                                                         print("Upload file ID: \(fid)")
                                                         print("上传文件完成")
@@ -147,6 +147,7 @@ class UploadProject{
                                                             self.scheduleNotification(itemID: Project_Id )
                                                         }
                                                     NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
+                                                    completion(true)
                                                    // } 
                                                 })
                                             }

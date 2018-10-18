@@ -76,6 +76,7 @@
 		5ED483952152434400401A5F /* TCheckBoxTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED483942152434400401A5F /* TCheckBoxTableViewCell.swift */; };
 		5ED48397215253B600401A5F /* TDiagramTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED48396215253B600401A5F /* TDiagramTableViewCell.swift */; };
 		9283352471F27ADC5055DF48 /* Pods_SiteAssessment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C8F0CD99A2057F549487B /* Pods_SiteAssessment.framework */; };
+		DD078E522177C81100316588 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD078E512177C81100316588 /* icomoon.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +155,7 @@
 		5ED48396215253B600401A5F /* TDiagramTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDiagramTableViewCell.swift; sourceTree = "<group>"; };
 		69311E3415F9FD31998AB7EC /* Pods-SiteAssessment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.debug.xcconfig"; sourceTree = "<group>"; };
 		BCD8C41195D9EF290CA279DE /* Pods-SiteAssessment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SiteAssessment.release.xcconfig"; path = "Pods/Target Support Files/Pods-SiteAssessment/Pods-SiteAssessment.release.xcconfig"; sourceTree = "<group>"; };
+		DD078E512177C81100316588 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = icomoon.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 		08CA588B2109ACC100AF4059 /* SiteAssessment */ = {
 			isa = PBXGroup;
 			children = (
+				DD078E502177C7FC00316588 /* Fonts */,
 				1647115D21315D0C0044BB0F /* Thirdlibary */,
 				1647113021315B7D0044BB0F /* HGimage */,
 				0860F5A121186B9200E6B5CD /* Object */,
@@ -403,6 +406,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DD078E502177C7FC00316588 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DD078E512177C81100316588 /* icomoon.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		DE36767CF8755A603D267520 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,6 +505,7 @@
 				08CA58DC2109F92A00AF4059 /* newdelete_a@2x.png in Resources */,
 				08CA58D72109F92A00AF4059 /* up_b@3x.png in Resources */,
 				08CA58C02109F92300AF4059 /* radio_Y.png in Resources */,
+				DD078E522177C81100316588 /* icomoon.ttf in Resources */,
 				08CA58C32109F92300AF4059 /* icon_mr.png in Resources */,
 				08CA58D82109F92A00AF4059 /* up_b@2x.png in Resources */,
 				08CA58972109ACC300AF4059 /* Assets.xcassets in Resources */,
@@ -760,7 +772,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QSR8TSX4AA;
+				DEVELOPMENT_TEAM = BN4H5C83Z9;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -781,7 +793,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QSR8TSX4AA;
+				DEVELOPMENT_TEAM = BN4H5C83Z9;
 				INFOPLIST_FILE = SiteAssessment/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

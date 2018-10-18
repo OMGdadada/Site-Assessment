@@ -78,7 +78,19 @@ class ProjectListViewController: UIViewController{
                 }
             }
         }
+         NotificationCenter.default.addObserver(self, selector: #selector(updateSuccess), name: NSNotification.Name(rawValue:"updateSuccess"), object: nil)
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("updateSuccess"), object: nil)
+    }
+    
+    //   实现通知监听方法
+    @objc func updateSuccess(){
+        loadWithdata()
+        ProjectListView.reloadData()
+    }
+    
     
     fileprivate func loadWithdata() {
         let myDire: String = NSHomeDirectory() + "/Documents"

@@ -147,6 +147,7 @@ class UploadProject{
                                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                                             self.scheduleNotification(itemID: Project_Id )
                                                         }
+                                                    NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
                                                    // } 
                                                 })
                                             }

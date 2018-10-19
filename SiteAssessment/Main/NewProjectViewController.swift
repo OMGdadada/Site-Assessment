@@ -588,7 +588,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(Arr.count)
         var cell = tableView.dequeueReusableCell(withIdentifier: cellIDstr) as? QuestionsCell
         //let cell:UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
         //防止视图加载重叠,删除上一次的控件
@@ -1190,7 +1189,7 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
                 sdwsa = 370
             }
             if(QuestionsCell.OptionSelecred[Int(Item!)!-1] == "Other"){
-                print(QuestionsCell.OptionSelecred[indexPath.row])
+//                print(QuestionsCell.OptionSelecred[indexPath.row])
                 sdwsa = sdwsa + 70 + textlArr[indexPath.row] + 300
             }else{
                 if(Item == "16" || Item == "22" || Item == "36"){
@@ -1392,8 +1391,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //点击展开或收缩
-        print(indexPath.section)
-        
         if let index = selectedCellIndexPaths.index(of: indexPath as NSIndexPath) {
             selectedCellIndexPaths.remove(at: index)
             //selectedCellIndexPaths.removeAtIndex(index)
@@ -1431,7 +1428,6 @@ class NewProjectViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     
     @objc func tapped(_ button:UIButton) {
-        print(button.tag)
         let Nums = button.tag/100
         Pickerimage_Nums = Nums
         let controller = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

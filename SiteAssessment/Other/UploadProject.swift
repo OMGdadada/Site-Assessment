@@ -165,6 +165,8 @@ class UploadProject{
                                         }
                                         DispatchQueue.main.async(execute: {
                                            porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                            NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
+                                            completion(true)
                                         })
                                         
                                     }

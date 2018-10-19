@@ -76,7 +76,7 @@ extension NewProjectListView : UITableViewDelegate , UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let dic:[String :Any?] = dataSoure[indexPath.row] as! [String : Any?];
-        delageta?.didClickWithItem(str: dic["sa_projectAddress"] as? String ,id: dic["ID"] as? String)
+        delageta?.didClickWithItem(str: dic["sa_projectAddress"] as? String ,id: dic["sa_prj"] as? String)
         self.removeFromSuperview()
         bgView.removeFromSuperview()
     }

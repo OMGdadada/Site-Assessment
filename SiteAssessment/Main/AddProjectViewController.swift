@@ -36,6 +36,7 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
     var MainBreakerPhotoCheckList:NSMutableArray = []
     var TrussType:NSMutableArray = []
     var TrussType1:NSMutableArray = []
+    var dic:[String : Any] = [:]
     
 
     var imagePicker:UIImagePickerController = UIImagePickerController()
@@ -67,8 +68,7 @@ class AddProjectViewController: UIViewController ,UIImagePickerControllerDelegat
         vc.prejectID = Project_Id
         vc.Project_Id_id = Project_Id_id
         vc.dataSoure = dataSoure
-        var dic:[String : Any] = [:]
-
+        
         let Meterarrs :NSMutableArray = []
         Meterarrs.addObjects(from: MeterPhotoCheckList.copy() as! [Any])
         Meterarrs.addObjects(from: MeterPhotoCheckList1.copy()  as! [Any])
@@ -128,7 +128,8 @@ extension AddProjectViewController
                     question.isShow = false
                 }
             }
-            let ImgDic:[String:Any] = ProjectInformation["Img"] as! [String :Any];
+            let ImgDic:[String:Any] = ProjectInformation["Img"] as! [String :Any]
+            dic = ImgDic
             MeterPhotoCheckList.add(ImgDic["MeterPhotoCheckList"] as Any)
             MainBreakerPhotoCheckList.add(ImgDic["MainBreakerPhotoCheckList"] as Any)
             TrussType.add(ImgDic["TrussType"] as Any)            
@@ -909,12 +910,12 @@ extension AddProjectViewController : TQuestionTableViewCellDelagate
             print(persent)
         }
         if let imageData = UIImageJPEGRepresentation(tempImage, CGFloat(persent)) as NSData? {
-            let myDire: String = NSHomeDirectory() + "/Documents/\(Project_Id!)"
+            let myDire: String = NSHomeDirectory() + "/Documents/\(Project_Id_id!)"
             let fileManager = FileManager.default
             try! fileManager.createDirectory(atPath: myDire,
                                              withIntermediateDirectories: true, attributes: nil)
             
-            let fullPath = NSHomeDirectory().appending("/Documents/\(Project_Id!)/").appending(ImageName)
+            let fullPath = NSHomeDirectory().appending("/Documents/\(Project_Id_id!)/").appending(ImageName)
             imageData.write(toFile: fullPath, atomically: true)
             print("fullPath=\(fullPath)")
             if modle.item == "58" {

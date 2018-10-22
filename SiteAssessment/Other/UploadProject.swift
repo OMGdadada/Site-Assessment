@@ -28,7 +28,7 @@ class UploadProject{
     
     func getSearchResults(completion:@escaping ((_ str:String?) -> Void)) {
         if var urlComponents = URLComponents(string: "https://creator.zoho.com/api/json/crm/view/Site_Assessment_Report") {
-            urlComponents.query = "authtoken=6be21a290c7115b73ff7df767a84ac34&zc_ownername=mohanwang&scope=creatorapi&raw=true"
+            urlComponents.query = "authtoken=3c46690b5a03cae8814d88cb2bd84aae&zc_ownername=mohanwang&scope=creatorapi&raw=true"
             
             guard let url = urlComponents.url else { 
                 completion(nil)
@@ -89,6 +89,21 @@ class UploadProject{
                 if let err = error {
                     print("Error: \(err.localizedDescription)")
                 }
+                // 上传date文件
+                self.drive?.uploadFile("\(project_id_id)/\("Date")", onCompleted: { (fileID, error) in
+                    if let err = error {
+                        print("Error: \(err.localizedDescription)")
+                    }
+                    if let Subfolder = fileID {
+                        print("Upload Subfolder ID: \(Subfolder)")
+                    }
+                    self.drive?.uploadIntoFolder(fileID!, filePath: ProjectInformation["date"] as! String, MIMEType: "application/json", onCompleted: { (fileID, error) in
+                        if let err = error {
+                            print("Error: \(err.localizedDescription)")
+                        }
+                        print("Upload ID ID: \(fileID ?? "")")
+                    })
+                })
                 if let fid = folderID {
                     print("Upload file ID: \(fid)")
                     var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
@@ -123,7 +138,7 @@ class UploadProject{
                                                     print("Upload ID ID: \(fid)")
                                                     print("Upload ID ID: \(fileID ?? "")")
                                                     
-                                                  //  if let fid = fileID {
+                                                    if let fid = fileID {
                                                         print("Upload file ID: \(fid)")
                                                         print("上传文件完成")
                                                         ImgInformation["uploaded"] = true
@@ -142,13 +157,14 @@ class UploadProject{
                                                             print("项目上传完成")
                                                             ProjectInformation["uploaded"] = true
                                                             ProjectInformation["ststus"] = 1
-                                                            let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
+                                                            let filePath:String = NSHomeDirectory() +  
+                                                            "/Documents/\(Project_Id).plist"
                                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                                             self.scheduleNotification(itemID: Project_Id )
                                                         }
                                                     NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
                                                     completion(true)
-                                                   // } 
+                                                    } 
                                                 })
                                             }
                                         }
@@ -186,51 +202,12 @@ class UploadProject{
             })
             return
         }
-        
-        
-        
-        /*
-         
-         var RoofShinglePhotoCheckList = ImgList["RoofShinglePhotoCheckList"] as! NSMutableArray
-         for i in 0...RoofShinglePhotoCheckList.count{
-         if(i == RoofShinglePhotoCheckList.count){
-         break
-         }
-         var ImgInformation = RoofShinglePhotoCheckList[i] as! Dictionary<String,Any>
-         if(ImgInformation["uploaded"] as? Bool == false){
-         if let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last {
-         
-         let ImgName = ImgInformation["ImgName"] as? String
-         print("上传图片\(ImgName!)")
-         let testFilePath = documentsDir.appendingPathComponent("\(Project_Id)/\(ImgName!).jpg").path
-         print(testFilePath)
-         drive?.uploadFile("\(Project_Id)/RoofShinglePhotoCheckList", filePath: testFilePath, MIMEType: "image/jpeg") { (fileID, error) in
-         if let err = error {
-         print("Error: \(err.localizedDescription)")
-         }
-         if let fid = fileID {
-         print("Upload file ID: \(fid)")
-         print("上传文件完成")
-         ImgInformation["uploaded"] = true
-         RoofShinglePhotoCheckList[i] = ImgInformation
-         ImgList["RoofShinglePhotoCheckList"] = RoofShinglePhotoCheckList
-         ProjectInformation["Img"] = ImgList
-         
-         let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
-         NSDictionary(dictionary: ProjectInformation).write(toFile: filePath, atomically: true)
-         print(filePath)
-         }
-         }
-         }
-         }
-         }
-         */
     }
     
     
     func makePostCall(_ Project_Id:String ,project_id_id:String , completion: @escaping ((_ isSuccess:Bool) -> Void)) {
-        let criteria = "criteria=(sa_prj=\(project_id_id)"
-        guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/update?authtoken=6be21a290c7115b73ff7df767a84ac34&scope=creatorapi\(criteria)") else {
+        let criteria = "&criteria=sa_prj=\(project_id_id)"
+        guard let url = URL(string: "https://creator.zoho.com/api/mohanwang/json/crm/form/Site_Assessment/record/update?authtoken=3c46690b5a03cae8814d88cb2bd84aae&scope=creatorapi\(criteria)") else {
             print("Error: cannot create URL")
             return
         }
@@ -275,6 +252,8 @@ class UploadProject{
                     completion(false)
                     return
                 }
+                
+                ProjectInformation["date"] = self.getJSONStringFromDictionary(dictionary: SENDDATA as NSDictionary)
                 print("responseData = \(string)")
                 ProjectInformation["Datauploaded"] = true
                 let filePath:String = NSHomeDirectory() + "/Documents/\(Project_Id).plist"
@@ -628,6 +607,33 @@ class UploadProject{
             }
         }
         return answer
+    }
+    
+    // MARK: 字符串转字典
+    fileprivate  func stringValueDic(_ str: String) -> [String : Any]?{
+        let data = str.data(using: String.Encoding.utf8)
+        if let dict = try? JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : Any] {
+            return dict
+        }
+        return nil
+    }
+    
+    /**
+     字典转换为JSONString
+     
+     - parameter dictionary: 字典参数
+     
+     - returns: JSONString
+     */
+    fileprivate func getJSONStringFromDictionary(dictionary:NSDictionary) -> String {
+        if (!JSONSerialization.isValidJSONObject(dictionary)) {
+            print("无法解析出JSONString")
+            return ""
+        }
+        let data : NSData = try! JSONSerialization.data(withJSONObject: dictionary, options: []) as NSData
+        let JSONString = NSString(data:data as Data,encoding: String.Encoding.utf8.rawValue)
+        return JSONString! as String
+        
     }
 }
 

@@ -72,6 +72,9 @@ class ProjectListViewController: UIViewController{
                 for i in 0..<PlistList.count {
                     let model:HistoyDto = PlistList[i];
                     if model.projectID == key as? String {
+                        if model.status == .Completed {
+                            return
+                        }
                         model.status = .Uploading
                         break
                     }
@@ -93,6 +96,7 @@ class ProjectListViewController: UIViewController{
     
     
     fileprivate func loadWithdata() {
+        PlistList.removeAll()
         let myDire: String = NSHomeDirectory() + "/Documents"
         let manager = FileManager.default
         let ArrayList = try! manager.contentsOfDirectory(atPath: myDire)

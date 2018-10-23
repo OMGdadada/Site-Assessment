@@ -90,7 +90,7 @@ class UploadProject{
                     print("Error: \(err.localizedDescription)")
                 }
                 // 上传date文件
-                self.drive?.uploadFile("\(project_id_id)/\("Date")", onCompleted: { (fileID, error) in
+                self.drive?.uploadFile("\(project_id_id)/\("Data")", onCompleted: { (fileID, error) in
                     if let err = error {
                         print("Error: \(err.localizedDescription)")
                     }
@@ -128,7 +128,7 @@ class UploadProject{
                                             
                                             let ImgName = ImgInformation["ImgName"] as? String
                                             print("上传图片\(ImgName!)")
-                                            let testFilePath = documentsDir.appendingPathComponent("\(Project_Id)/\(ImgName!).jpg").path
+                                            let testFilePath = documentsDir.appendingPathComponent("\(project_id_id)/\(ImgName!).jpg").path
                                             print(testFilePath)
                                             self.drive?.uploadIntoFolder(Subfolder, filePath: testFilePath, MIMEType: "image/jpg") { (fileID, error) in
                                                 DispatchQueue.main.async(execute: {
@@ -152,7 +152,8 @@ class UploadProject{
                                                         print(filePath)
                                                         ProjectImg_schedule += 1
                                                         porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
-                                                        
+                                                        print("ProjectImg_schedule: \(ProjectImg_schedule)")
+
                                                         if(ProjectImg_Total == ProjectImg_schedule){
                                                             print("项目上传完成")
                                                             ProjectInformation["uploaded"] = true
@@ -161,9 +162,10 @@ class UploadProject{
                                                             "/Documents/\(Project_Id).plist"
                                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                                             self.scheduleNotification(itemID: Project_Id )
+                                                            NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
+                                                            completion(true)
                                                         }
-                                                    NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
-                                                    completion(true)
+                                                    
                                                     } 
                                                 })
                                             }
@@ -178,20 +180,19 @@ class UploadProject{
                                             
                                             self.saveFile(dic: ProjectInformation, filepath: filePath ,projectID: Project_Id)
                                             self.scheduleNotification(itemID: Project_Id )
+                                            DispatchQueue.main.async(execute: {
+                                                //<<<<<<< HEAD
+                                                porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                                NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
+                                                completion(true)
+                                                //=======
+                                                porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
+                                                NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
+                                                completion(true)
+                                                
+                                                //>>>>>>> af31a5f684510d053612a087132f29127fa62c59
+                                            })
                                         }
-                                        DispatchQueue.main.async(execute: {
-//<<<<<<< HEAD
-                                           porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
-                                            NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
-                                            completion(true)
-//=======
-                                            porjectinformation.setValue(ProjectImg_schedule, forKey: "schedule")
-                                            NotificationCenter.default.post(name: NSNotification.Name("updateSuccess"), object: Project_Id)
-                                            completion(true)
-
-//>>>>>>> af31a5f684510d053612a087132f29127fa62c59
-                                        })
-                                        
                                     }
                                 }
                             }

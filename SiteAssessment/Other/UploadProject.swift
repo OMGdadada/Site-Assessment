@@ -89,22 +89,26 @@ class UploadProject{
                 if let err = error {
                     print("Error: \(err.localizedDescription)")
                 }
-                // 上传date文件
-                self.drive?.uploadFile("\(project_id_id)/\("Data")", onCompleted: { (fileID, error) in
-                    if let err = error {
-                        print("Error: \(err.localizedDescription)")
-                    }
-                    if let Subfolder = fileID {
-                        print("Upload Subfolder ID: \(Subfolder)")
-                    }
-                    self.drive?.uploadIntoFolder(fileID!, filePath: ProjectInformation["date"] as! String, MIMEType: "application/json", onCompleted: { (fileID, error) in
+                if let fid = folderID {
+                    
+                    // 上传date文件
+                    self.drive?.uploadFile("\(project_id_id)/\("Data")", onCompleted: { (fileID, error) in
                         if let err = error {
                             print("Error: \(err.localizedDescription)")
                         }
-                        print("Upload ID ID: \(fileID ?? "")")
+                        if let Subfolder = fileID {
+                            print("Upload Subfolder ID: \(Subfolder)")
+                        }
+                        print(ProjectInformation["date"] as! String)
+                        self.drive?.uploadIntoFolder(fileID!, filePath: NSHomeDirectory()+"/Documents/\(Project_Id).plist", MIMEType: "application/x-plist", onCompleted: { (fileID, error) in
+                            if let err = error {
+                                print("Error: \(err.localizedDescription)")
+                            }
+                            print("Upload ID ID: \(fileID ?? "")")
+                        })
                     })
-                })
-                if let fid = folderID {
+                    
+                    
                     print("Upload file ID: \(fid)")
                     var ImgList:[String: Any] = (ProjectInformation["Img"] as? Dictionary)!
                     for (offset: _ ,element: (key: key,value: _)) in ImgList.enumerated(){
